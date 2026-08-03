@@ -44,8 +44,8 @@
   {
     "route": "/business/ai-training/online/",
     "canonical": "https://codecamp.jp/business/ai-training/online/",
-    "robots": "index,follow",
-    "status": "approved",
+    "robots": "noindex,follow",
+    "status": "candidate",
     "type": "static-facet"
   },
   {

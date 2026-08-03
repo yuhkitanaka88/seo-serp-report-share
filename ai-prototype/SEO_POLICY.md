@@ -5,7 +5,8 @@
 - ユーザー向けナビの探索入口は **「研修を探す」1本**（`/business/training/`）。「AI研修」を並立ナビにしない。
 - 通常のファセット操作は同一ページ内のJavaScript絞り込みです。
 - `?theme=...` / `?languages=AI` のようなクエリURLは生成しません。
-- インデックスしたい条件は **ディレクトリ型の静的パス** で表現します（例: `/business/ai-training/`、`/business/ai-training/online/`）。
+- インデックスしたい条件は **ディレクトリ型の静的パス** で表現します（例: `/business/ai-training/`）。
+- ファセット掛け合わせLP（例: `/business/ai-training/online/`）は案Aの幹構造ではなく、ホワイトリスト候補として別管理します。
 - 承認済み静的ページは `index,follow` と自己参照canonicalです。
 - 候補ページは要件を満たすまで `noindex,follow` と自己参照canonicalです。
 - 0件条件の静的ページは作成せず、本番では404を返します。
@@ -18,11 +19,10 @@ UX参考: [Trends 研修検索のファセット](https://trends.codecamp.jp/app
 |---|---|---|
 | 研修を探す（全件） | `/business/training/` | マスター一覧。クエリなし |
 | 研修を探す（言語・ツール=AI） | `/business/ai-training/` | 同じ一覧UX。タイトルは「AI研修を探す」。AI選択のディレクトリ表現 |
-| さらに需要のある条件 | `/business/ai-training/online/` など | ホワイトリストの下層ディレクトリ |
 
 - 一覧で「言語・ツール = AI」を選ぶ → タイトルを「AI研修を探す」にし、正規URLとして `/business/ai-training/` へ遷移（`?languages=AI` は使わない）。
 - `/business/ai-training/` は別ナビの「もう一つの一覧」ではなく、**同じ「研修を探す」のAI条件をディレクトリ化したページ**。
-- その他の組み合わせも、需要と独自内容が揃ったものだけ下層ディレクトリ化。それ以外は `/business/training/` 上のJS絞り込みのみ。
+- AI×オンライン等の掛け合わせは幹構造に載せない。ホワイトリスト候補として保持し、根拠が揃ってから昇格。
 
 ## index対象条件
 

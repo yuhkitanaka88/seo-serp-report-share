@@ -37,19 +37,21 @@ CodeCamp 法人向け AI 研修のサイト構造プロトタイプ（案A）と
 
 1. **ナビは「研修を探す」1本**。「AI研修」を並立させない  
 2. 一覧で言語・ツール=AIを選ぶとタイトルが **「AI研修を探す」** になる  
-3. その条件の正規URLはクエリではなく **ディレクトリ** `/business/ai-training/`（下層例: `/business/ai-training/online/`）
+3. その条件の正規URLはクエリではなく **ディレクトリ** `/business/ai-training/`
 
 | 画面 | URL | 扱い |
 |------|-----|------|
 | 研修を探す | `/business/training/` | 唯一の一覧ナビ入口 |
 | 同UX・AI条件 | `/business/ai-training/` | AI選択のディレクトリ表現（並立ナビではない） |
 
+ファセット掛け合わせ（AI×オンライン等）は案A幹構造に含めず、ホワイトリスト**候補**として別管理。
+
 UX参考: [Trends 研修検索](https://trends.codecamp.jp/apps/training-search/)
 
 ### 3.2 制作前に揃える論点
 
-1. **要件とホワイトリストの矛盾**  
-   要件は「AI研修 オンラインは初期は静的化しない」一方、`seo-whitelist.json` では `/business/ai-training/online/` が approved / index。どちらかに揃える。
+1. **ファセット掛け合わせLPは幹構造外**  
+   `/business/ai-training/online/` 等はホワイトリスト**候補**（noindex）でよい。案Aサイトマップの幹には載せない（要件とも一致）。
 2. **比較・選定ページの受け皿**  
    「AI研修 おすすめ」等はハブと分離する方針だが、専用 URL が未確定。
 3. **ハブタイトルの詰め込み**  

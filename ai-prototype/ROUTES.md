@@ -50,11 +50,13 @@
 - `/open/ai-editor-coding-intensive/`
 - `/open/engineer-foundation-camp/`
 
-## AI静的ファセットLP（ホワイトリスト）
+## AI静的ファセットLP（ホワイトリスト・案A幹構造外）
+
+案Aのページ構造（サイトマップの幹）には含めません。需要と独自内容が揃うまで候補扱いです。
 
 | URL | robots | canonical | 状態 |
 |---|---|---|---|
-| `/business/ai-training/online/` | `index,follow` | `https://codecamp.jp/business/ai-training/online/` | 承認済み |
+| `/business/ai-training/online/` | `noindex,follow` | `https://codecamp.jp/business/ai-training/online/` | 候補 |
 | `/business/ai-training/for-engineers/` | `noindex,follow` | `https://codecamp.jp/business/ai-training/for-engineers/` | 候補 |
 | `/business/ai-training/for-all-employees/` | `noindex,follow` | `https://codecamp.jp/business/ai-training/for-all-employees/` | 候補 |
 | `/business/ai-training/for-new-employees/` | `noindex,follow` | `https://codecamp.jp/business/ai-training/for-new-employees/` | 候補 |
@@ -66,8 +68,7 @@
 - `/business/site-map/` — 案Aのリンク付きサイトマップ（プロトタイプ確認用・noindex）
 - `/requirements/` — 法人向けAI研修 サイト構造・キーワード要件書
 
-### AI研修ハブ内のアンカー
+### AI条件のディレクトリ
 
 - `/business/ai-training/` は「研修を探す」で言語・ツール=AIを選んだときのディレクトリ表現です（並立ナビ項目ではない）。
-- 下層の静的LP例: `/business/ai-training/online/` など（ホワイトリスト）。
-- プロトタイプ上のアンカー `#facet-*` / `#ai-training-grid` は同一ページ内の絞り込みUI向けです。
+- ファセット掛け合わせLP（online 等）は幹構造外のホワイトリスト候補。

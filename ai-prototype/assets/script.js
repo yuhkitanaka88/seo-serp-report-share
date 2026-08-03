@@ -70,12 +70,12 @@
       title: "オンラインAI研修",
       shortTitle: "オンライン",
       keyword: "AI研修 オンライン",
-      description: "オンラインで実施できる法人向けAI研修を、対象者・目的・ツール別に比較します。",
+      description: "オンラインで実施できる法人向けAI研修を、対象者・目的・ツール別に比較する候補ページです。",
       filters: { formats: ["オンライン"] },
-      indexable: true,
+      indexable: false,
       canonical: "https://codecamp.jp/business/ai-training/online/",
-      status: "approved",
-      reason: "検索需要が確認でき、オンライン固有の実施方法・支援・事例・FAQを掲載する前提で承認する静的LP。"
+      status: "candidate",
+      reason: "案Aの幹構造には含めない。SVは限定的で実施形式属性のため、独自内容・広告根拠が揃うまでnoindex候補。"
     },
     {
       route: "/business/ai-training/for-engineers/",
@@ -704,7 +704,7 @@
           <nav class="dialog-tree" aria-label="案Aサイトマップ">
             <a class="dialog-tree-root" href="${href('/business/')}"><strong>/business トップ</strong><span>法人向け研修全体</span></a>
             <div class="dialog-tree-branches">
-              <section><h3>研修を探す</h3><a href="${href('/business/training/')}">全研修一覧</a><a href="${href('/business/ai-training/')}">言語・ツール=AI（/business/ai-training/）</a><a href="${href('/business/ai-training/online/')}">AI × オンライン</a><a href="${href('/business/lag-list/')}">言語・ツール別</a><a href="${href('/business/hie-list/')}">階層別</a><a href="${href('/business/thm-list/')}">テーマ別</a><a href="${href('/business/occ-list/')}">職種別</a></section>
+              <section><h3>研修を探す</h3><a href="${href('/business/training/')}">全研修一覧</a><a href="${href('/business/ai-training/')}">言語・ツール=AI（/business/ai-training/）</a><a href="${href('/business/lag-list/')}">言語・ツール別</a><a href="${href('/business/hie-list/')}">階層別</a><a href="${href('/business/thm-list/')}">テーマ別</a><a href="${href('/business/occ-list/')}">職種別</a></section>
               <section><h3>4カテゴリ</h3>${Object.values(categoryPages).map((item) => `<a href="${href(item.route)}">${escapeHtml(item.title)}</a>`).join("")}</section>
               <section><h3>3研修形態</h3>${Object.values(deliveryPages).map((item) => `<a href="${href(item.route)}">${escapeHtml(item.title)}</a>`).join("")}</section>
               <section><h3>主要研修詳細</h3><a href="${href('/business/lag-generative-ai-chatgpt/')}">生成AI研修</a><a href="${href('/business/lag-ai-chatgpt/')}">ChatGPT研修</a><a href="${href('/business/claude/')}">Claude研修</a><a href="${href('/business/thm-ai-data-analysis/')}">AI・データ分析研修</a></section>
@@ -859,7 +859,7 @@
       <section class="section"><div class="container"><div class="plan-a-tree" aria-label="案Aのサイトマップ">
         <a class="plan-a-root" href="${href('/business/')}"><span class="map-node-label">ROOT</span><strong>/business トップ</strong><small>法人向け研修全体、固定・信頼ページ、研修の入口</small></a>
         <div class="plan-a-columns">
-          <article class="plan-a-branch plan-a-branch-feature"><div class="branch-head"><span>01</span><div><h2>研修を探す</h2><code>/business/training/</code></div></div><p>唯一の一覧ナビ。Trends風ファセットで絞り込み。言語・ツール=AIを選ぶとタイトルが「AI研修を探す」になり、ディレクトリ <code>/business/ai-training/</code> へ遷移します。</p><a class="branch-primary-link" href="${href('/business/training/')}">研修を探すを開く →</a><div class="branch-links"><a href="${href('/business/ai-training/')}"><strong>言語・ツール=AI</strong><span>/business/ai-training/（ディレクトリ表現）</span></a><a href="${href('/business/ai-training/online/')}"><strong>AI × オンライン</strong><span>/business/ai-training/online/</span></a><a href="${href('/business/ai-training/for-engineers/')}"><strong>AI × エンジニア</strong><span>候補ディレクトリ（要件充足待ち）</span></a></div></article>
+          <article class="plan-a-branch plan-a-branch-feature"><div class="branch-head"><span>01</span><div><h2>研修を探す</h2><code>/business/training/</code></div></div><p>唯一の一覧ナビ。Trends風ファセットで絞り込み。言語・ツール=AIを選ぶとタイトルが「AI研修を探す」になり、ディレクトリ <code>/business/ai-training/</code> へ遷移します。ファセット掛け合わせの静的LPは案Aの幹構造には含めず、ホワイトリスト候補として別管理します。</p><a class="branch-primary-link" href="${href('/business/training/')}">研修を探すを開く →</a><div class="branch-links"><a href="${href('/business/ai-training/')}"><strong>言語・ツール=AI</strong><span>/business/ai-training/（ディレクトリ表現）</span></a></div></article>
           <article class="plan-a-branch"><div class="branch-head"><span>02</span><div><h2>4カテゴリ</h2><small>研修の発見経路</small></div></div><p>同じ研修を、言語・ツール、階層、テーマ、職種の異なる視点から探します。</p><div class="branch-links">${Object.values(categoryPages).map((item) => `<a href="${href(item.route)}"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.description)}</span></a>`).join("")}</div></article>
           <article class="plan-a-branch"><div class="branch-head"><span>03</span><div><h2>3研修形態</h2><small>導入・参加方法</small></div></div><p>カリキュラムの種類ではなく、企業がどの方式で導入・参加するかを示します。</p><div class="branch-links">${Object.values(deliveryPages).map((item) => `<a href="${href(item.route)}"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.summary)}</span></a>`).join("")}</div></article>
           <article class="plan-a-branch"><div class="branch-head"><span>04</span><div><h2>研修詳細</h2><small>/business直下の個別商品ページ</small></div></div><p>総称語「AI研修」はディレクトリ化した一覧条件、商品・技術固有語は個別の研修詳細が受け持ちます。</p><div class="branch-links">${details.map(([label, route, keyword]) => `<a href="${href(route)}"><strong>${escapeHtml(label)}</strong><span>主な狙い：${escapeHtml(keyword)}</span></a>`).join("")}</div></article>
