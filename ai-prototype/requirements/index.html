@@ -1,0 +1,1339 @@
+<!doctype html>
+<html lang="ja" data-theme="light">
+<head>
+  <meta name="robots" content="noindex,nofollow">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="CodeCamp法人向けAI研修サイトの情報設計、SEO・LLMO、キーワード設計、ファセット制御をまとめた要件書。">
+  <title>CodeCamp 法人向けAI研修｜サイト構造・キーワード要件書</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <div class="reading-progress" aria-hidden="true"><span id="readingProgress"></span></div>
+  <header class="topbar">
+    <button class="icon-button mobile-only" id="menuButton" aria-label="目次を開く" aria-expanded="false">☰</button>
+    <div class="brand-block">
+      <p class="eyebrow">CODECAMP / REQUIREMENTS DOCUMENT</p>
+      <p class="document-title">法人向けAI研修 サイト構造・キーワード要件書</p>
+    </div>
+    <div class="top-actions">
+      <a class="button button-outline integration-link" href="../business/index.html">視覚プロトタイプ</a>
+      <a class="button button-outline integration-link" href="../business/site-map/index.html">案Aサイトマップ</a>
+      <button class="button button-subtle" id="themeButton" aria-label="表示テーマを切り替える">表示切替</button>
+      <button class="button button-subtle" id="expandButton">詳細をすべて開く</button>
+      <button class="button button-primary" id="startTour">ガイドで読む</button>
+    </div>
+  </header>
+  <div class="integration-banner"><strong>第2成果物と統合済み</strong><span>サイトマップや各画面イメージは「視覚プロトタイプ」から確認できます。</span><a href="../business/site-map/index.html">案Aサイトマップを見る →</a></div>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-inner">
+        <label class="search-box">
+          <span class="sr-only">文書内検索</span>
+          <input id="documentSearch" type="search" placeholder="要件書を検索" autocomplete="off">
+          <kbd>⌘ K</kbd>
+        </label>
+        <div class="completion-card">
+          <div><strong id="completionPercent">0%</strong><span>閲覧済み</span></div>
+          <div class="mini-progress"><span id="completionBar"></span></div>
+        </div>
+        <nav class="toc" aria-label="要件書の目次">
+          <p class="toc-label">読み進める順序</p>
+          <a href="#decision" data-nav="decision"><span>1</span>結論と判断</a>
+          <a href="#current-structure" data-nav="current-structure"><span>2</span>現行構造</a>
+          <a href="#options" data-nav="options"><span>3</span>案A・B・C</a>
+          <a href="#seo-controls" data-nav="seo-controls"><span>4</span>SEO・ファセット</a>
+          <a href="#keywords" data-nav="keywords"><span>5</span>キーワード設計</a>
+          <a href="#implementation" data-nav="implementation"><span>6</span>実装・ロードマップ</a>
+          <a href="#appendices" data-nav="appendices"><span>+</span>詳細原文</a>
+        </nav>
+        <div class="sidebar-note">
+          <strong>確定方針</strong>
+          <p>案Aを採用。検索需要と独自内容がある組み合わせのみ、ホワイトリスト方式で静的ページ化。</p>
+        </div>
+      </div>
+    </aside>
+    <div class="sidebar-backdrop" id="sidebarBackdrop" hidden></div>
+
+    <main class="document" id="document">
+      <section class="hero tour-target" id="decision" data-stage="1">
+        <div class="hero-copy">
+          <p class="kicker">DECISION / 2026</p>
+          <h1>既存の法人研修基盤に、<br><em>AI横断ハブ</em>を重ねる</h1>
+          <p class="hero-lead">CodeCampが保有する4カテゴリ、3研修形態、研修詳細、公開講座、事例、FAQを壊さず、AIという戦略テーマで横断的に束ねる要件書です。</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#current-structure">前提から読む</a>
+            <a class="button button-outline" href="#keywords">キーワードを見る</a>
+          </div>
+        </div>
+        <div class="decision-card">
+          <span class="decision-badge">推奨：案A</span>
+          <code>/business/ai-training</code>
+          <p>物理的な親ディレクトリではなく、複数のカテゴリ・対象者・研修形態を横断する編集型・商用型ハブ。</p>
+          <ul class="check-list">
+            <li>既存詳細URLは原則維持</li>
+            <li>4カテゴリページも原則維持・動的化</li>
+            <li>通常のファセット結果は非インデックス</li>
+            <li>価値のある組み合わせのみ静的化</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section-card key-decisions tour-target" aria-labelledby="key-decisions-title">
+        <div class="section-heading">
+          <div><p class="section-number">最初に確認</p><h2 id="key-decisions-title">この要件書で確定すること</h2></div>
+        </div>
+        <div class="decision-grid">
+          <article><span>01</span><h3>AIは第5カテゴリではない</h3><p>AIは言語・ツール、テーマ、職種、階層、提供形態を横断する戦略テーマです。</p></article>
+          <article><span>02</span><h3>案Aを採用する</h3><p>既存URLと構造を活かし、<code>/business/ai-training</code>を横断ハブとして新設します。</p></article>
+          <article><span>03</span><h3>URLより役割を先に決める</h3><p>総称語はハブ、商品・技術語は詳細、比較語は情報コンテンツ、属性語はファセットが所有します。</p></article>
+          <article><span>04</span><h3>静的化はホワイトリスト</h3><p>検索需要、独自カリキュラム、事例、FAQ、営業差がある組み合わせだけをindex可能にします。</p></article>
+        </div>
+      </section>
+
+      <section class="section-card tour-target" id="current-structure" data-stage="2">
+        <div class="section-heading">
+          <div><p class="section-number">STEP 2</p><h2>CodeCampの現行構造を正しく捉える</h2></div>
+          <button class="copy-section button button-subtle" data-copy-link="current-structure">リンクをコピー</button>
+        </div>
+        <p class="section-intro">現行サイトは単純な親子ツリーではなく、研修詳細を中心に複数の発見軸と提供軸が交差するマトリクスです。</p>
+        <div class="layer-stack">
+          <article class="layer"><span class="layer-index">L1</span><div><h3>法人研修全体・信頼資産</h3><p><code>/business</code>、about、voice、faq、CodeCamp Insight</p></div></article>
+          <article class="layer"><span class="layer-index">L2</span><div><h3>研修形態</h3><p>カスタマイズ、パッケージ、公開講座。何を学ぶかではなく、どう導入・受講するか。</p></div></article>
+          <article class="layer"><span class="layer-index">L3</span><div><h3>カリキュラムを探す4カテゴリ</h3><p>言語・ツール、階層、テーマ、職種。研修を一意に所属させる箱ではなく、発見経路。</p></div></article>
+          <article class="layer"><span class="layer-index">L4</span><div><h3>研修詳細</h3><p><code>/business</code>直下。接頭辞は物理階層ではなく主分類の命名規則。</p></div></article>
+        </div>
+        <div class="concept-split">
+          <article><p class="label">研修形態</p><h3>どう提供・契約するか</h3><div class="chip-row"><span>カスタマイズ</span><span>パッケージ</span><span>公開講座</span></div></article>
+          <article><p class="label">実施形式</p><h3>どこで・どう受講するか</h3><div class="chip-row"><span>オンライン</span><span>現地</span><span>ハイブリッド</span></div></article>
+        </div>
+        <div class="matrix-diagram" aria-label="研修詳細を中心としたマトリクス構造">
+          <div class="matrix-center">研修詳細ページ</div>
+          <div class="matrix-node node-top">4カテゴリ</div>
+          <div class="matrix-node node-right">3研修形態</div>
+          <div class="matrix-node node-bottom">対象者・目的・レベル</div>
+          <div class="matrix-node node-left">実施形式・期間</div>
+        </div>
+        <aside class="callout callout-warning"><strong>避けるべき理解</strong><p>「カテゴリ → その配下の詳細」という物理階層として捉えること。AI専用ディレクトリへの一括移行は、現行の発見軸と提供軸を崩します。</p></aside>
+      </section>
+
+      <section class="section-card tour-target" id="options" data-stage="3">
+        <div class="section-heading">
+          <div><p class="section-number">STEP 3</p><h2>案A・案B・案Cの比較</h2></div>
+          <div class="segmented" role="group" aria-label="表示する案">
+            <button class="is-active" data-option-filter="all">全案</button><button data-option-filter="A">A</button><button data-option-filter="B">B</button><button data-option-filter="C">C</button>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table class="comparison-table">
+            <thead><tr><th>評価項目</th><th class="option-a">案A</th><th class="option-b">案B</th><th class="option-c">案C</th></tr></thead>
+            <tbody>
+              <tr><th>基本構造</th><td>現行構造＋AI横断ハブ</td><td>法人研修内のAI専用サブサイト</td><td>独立AI事業ポータル</td></tr>
+              <tr><th>AIハブ</th><td><code>/business/ai-training</code></td><td><code>/business/ai</code></td><td><code>/ai</code>／<code>/ai/training</code></td></tr>
+              <tr><th>4カテゴリとの整合</th><td><b class="score good">◎</b></td><td><b class="score mid">△</b></td><td><b class="score bad">×</b></td></tr>
+              <tr><th>3研修形態との連携</th><td><b class="score good">◎</b></td><td><b class="score okay">○</b></td><td><b class="score mid">△</b></td></tr>
+              <tr><th>既存URL維持</th><td><b class="score good">◎</b></td><td><b class="score mid">△</b></td><td><b class="score bad">×</b></td></tr>
+              <tr><th>CMS複雑性</th><td>小</td><td>中</td><td>大</td></tr>
+              <tr><th>カニバリリスク</th><td>小</td><td>中</td><td>大</td></tr>
+              <tr><th>現時点の判断</th><td><span class="status adopted">採用</span></td><td><span class="status conditional">条件付き</span></td><td><span class="status rejected">不採用</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="option-cards">
+          <article class="option-card option-a" data-option="A">
+            <div class="option-head"><span>A</span><div><p>推奨</p><h3>現行構造にAIハブを重ねる</h3></div></div>
+            <code>/business/ai-training</code>
+            <p>既存URLを維持し、AI関連の研修、カテゴリ、提供形態、事例を横断的に束ねます。</p>
+            <ul><li>既存資産をそのまま利用</li><li>移行リスクが最小</li><li>同じデータ基盤でSEO・広告・ファセットに対応</li></ul>
+          </article>
+          <article class="option-card option-b" data-option="B">
+            <div class="option-head"><span>B</span><div><p>条件付き</p><h3>法人研修内にAI専用階層</h3></div></div>
+            <code>/business/ai/...</code>
+            <p>AI関連ページを専用階層へ集約。AI専任組織と独立商品群がある場合に成立します。</p>
+            <ul><li>URLの一貫性は高い</li><li>AIだけ現行ルールの例外になる</li><li>301移行コストに対するSEO利益が限定的</li></ul>
+          </article>
+          <article class="option-card option-c" data-option="C">
+            <div class="option-head"><span>C</span><div><p>非推奨</p><h3>ルート直下に独立AI事業</h3></div></div>
+            <code>/ai/...</code>
+            <p>研修だけでなく、AI導入、開発、コンサルティングまで含む事業ポータルです。</p>
+            <ul><li>独立ブランドとしては強い</li><li>法人研修の信頼資産から分断</li><li>継続投資・移行・カニバリ管理が最大</li></ul>
+          </article>
+        </div>
+        <aside class="callout callout-info"><strong>判断基準</strong><p>案BはAI研修を独立商品群として大規模運営する段階、案Cは研修を超えたAI導入・開発・コンサル事業を正式展開する段階で再評価します。</p></aside>
+      </section>
+
+      <section class="section-card tour-target" id="seo-controls" data-stage="4">
+        <div class="section-heading"><div><p class="section-number">STEP 4</p><h2>SEO・ファセット・インデックス制御</h2></div></div>
+        <div class="policy-banner"><strong>原則</strong><span>通常の絞り込み結果は非インデックス。価値が証明された組み合わせのみ、ホワイトリストで静的ページへ昇格。</span></div>
+        <div class="flow">
+          <article><span>1</span><h3>属性として保持</h3><p>カテゴリ、対象者、目的、研修形態、実施形式、レベル、期間、技術などを研修データに付与。</p></article>
+          <i>→</i>
+          <article><span>2</span><h3>ファセットで探索</h3><p><code>?theme=ai&amp;format=online</code>などはユーザーの絞り込みに利用。</p></article>
+          <i>→</i>
+          <article><span>3</span><h3>需要を検証</h3><p>検索、広告、商談、事例、商品差を確認。</p></article>
+          <i>→</i>
+          <article><span>4</span><h3>静的ページへ昇格</h3><p>独自内容が成立する条件だけ正規URL・自己参照canonical・サイトマップ掲載。</p></article>
+        </div>
+        <div class="two-column">
+          <div>
+            <h3>静的化の必須条件</h3>
+            <ol class="number-list"><li>検索需要がある</li><li>既存ページと意図が異なる</li><li>専用カリキュラムがある</li><li>独自事例・FAQ・到達目標がある</li><li>営業・広告上も別商品である</li></ol>
+          </div>
+          <div>
+            <h3>通常ファセットの扱い</h3>
+            <div class="code-samples"><code>/business/training?theme=ai</code><code>/business/training?theme=ai&amp;audience=engineer</code><code>/business/training?theme=ai&amp;format=online</code></div>
+            <p>内部リンクとサイトマップを制限し、原則としてインデックス対象外にします。並び替えや無価値な組み合わせも同様です。</p>
+          </div>
+        </div>
+        <h3>研修詳細に必要なデータ項目</h3>
+        <div class="data-chips"><span>研修ID</span><span>正式名称</span><span>URL</span><span>主・副カテゴリ</span><span>テーマ</span><span>対象者</span><span>階層</span><span>職種</span><span>ツール</span><span>目的</span><span>レベル</span><span>期間</span><span>研修形態</span><span>実施形式</span><span>前提スキル</span><span>到達目標</span><span>関連研修</span><span>事例</span><span>index方針</span><span>パンくず</span></div>
+      </section>
+
+      <section class="section-card tour-target" id="keywords" data-stage="5">
+        <div class="section-heading"><div><p class="section-number">STEP 5</p><h2>カテゴリ・ハブと詳細ページのキーワード設計</h2></div></div>
+        <div class="ownership-rules">
+          <article><span>総称語</span><h3>ハブが所有</h3><p>AI研修、法人向けAI研修、AI講習</p></article>
+          <article><span>商品・技術語</span><h3>研修詳細が所有</h3><p>生成AI研修、ChatGPT研修、Claude研修</p></article>
+          <article><span>比較語</span><h3>情報コンテンツが所有</h3><p>AI研修 おすすめ、比較、研修会社</p></article>
+          <article><span>属性語</span><h3>ファセットが所有</h3><p>オンライン、管理職向け、階層、研修形態</p></article>
+        </div>
+        <div class="keyword-toolbar">
+          <label><span>絞り込み</span><select id="keywordRoleFilter"><option value="all">すべての検索意図</option><option>総称</option><option>商品・テーマ</option><option>ツール</option><option>育成目的</option><option>職種育成</option><option>比較</option><option>属性</option><option>料金</option></select></label>
+          <label><span>優先度</span><select id="keywordPriorityFilter"><option value="all">すべて</option><option>最優先</option><option>高</option><option>中</option><option>補助</option></select></label>
+          <label class="grow"><span>キーワード検索</span><input id="keywordSearch" type="search" placeholder="例：ChatGPT、DX、オンライン"></label>
+        </div>
+        <div class="table-scroll">
+          <table id="keywordTable" class="data-table">
+            <thead><tr><th>キーワード</th><th>月間SV</th><th>CPC</th><th>検索意図</th><th>受け皿</th><th>優先度</th></tr></thead>
+            <tbody><tr data-role="総称" data-priority="最優先" data-owner="A"><td><strong>AI研修</strong></td><td>1,900</td><td>1,581円</td><td>総称</td><td>AI研修総合ハブ</td><td><span class="priority priority-最優先">最優先</span></td></tr>
+<tr data-role="商品・テーマ" data-priority="最優先" data-owner="A"><td><strong>生成AI研修</strong></td><td>1,000</td><td>1,309円</td><td>商品・テーマ</td><td>生成AI研修詳細</td><td><span class="priority priority-最優先">最優先</span></td></tr>
+<tr data-role="総称" data-priority="最優先" data-owner="A"><td><strong>DX研修</strong></td><td>590</td><td>1,116円</td><td>総称</td><td>DX人材育成研修</td><td><span class="priority priority-最優先">最優先</span></td></tr>
+<tr data-role="育成目的" data-priority="最優先" data-owner="A"><td><strong>DX人材育成</strong></td><td>480</td><td>1,956円</td><td>育成目的</td><td>DX人材育成研修</td><td><span class="priority priority-最優先">最優先</span></td></tr>
+<tr data-role="総称" data-priority="高" data-owner="A"><td><strong>AI講習</strong></td><td>320</td><td>735円</td><td>総称</td><td>AI研修総合ハブ</td><td><span class="priority priority-高">高</span></td></tr>
+<tr data-role="比較" data-priority="高" data-owner="CONTENT"><td><strong>AI研修 おすすめ</strong></td><td>320</td><td>1,401円</td><td>比較</td><td>比較・選定コンテンツ</td><td><span class="priority priority-高">高</span></td></tr>
+<tr data-role="比較" data-priority="高" data-owner="CONTENT"><td><strong>DX研修 おすすめ</strong></td><td>170</td><td>1,621円</td><td>比較</td><td>比較・選定コンテンツ</td><td><span class="priority priority-高">高</span></td></tr>
+<tr data-role="ツール" data-priority="高" data-owner="A"><td><strong>ChatGPT研修</strong></td><td>140</td><td>1,309円</td><td>ツール</td><td>ChatGPT研修詳細</td><td><span class="priority priority-高">高</span></td></tr>
+<tr data-role="育成目的" data-priority="中" data-owner="A"><td><strong>DXリスキリング</strong></td><td>140</td><td>1,156円</td><td>育成目的</td><td>DX人材育成研修／解説</td><td><span class="priority priority-中">中</span></td></tr>
+<tr data-role="商品・テーマ" data-priority="高" data-owner="A"><td><strong>AI活用研修</strong></td><td>110</td><td>993円</td><td>商品・テーマ</td><td>生成AI研修詳細</td><td><span class="priority priority-高">高</span></td></tr>
+<tr data-role="商品・テーマ" data-priority="高" data-owner="A"><td><strong>生成AI活用研修</strong></td><td>90</td><td>991円</td><td>商品・テーマ</td><td>生成AI研修詳細</td><td><span class="priority priority-高">高</span></td></tr>
+<tr data-role="ツール" data-priority="高" data-owner="A"><td><strong>Claude研修</strong></td><td>90</td><td>994円</td><td>ツール</td><td>Claude研修詳細</td><td><span class="priority priority-高">高</span></td></tr>
+<tr data-role="育成目的" data-priority="高" data-owner="A"><td><strong>DX人材育成研修</strong></td><td>70</td><td>2,329円</td><td>育成目的</td><td>DX人材育成研修</td><td><span class="priority priority-高">高</span></td></tr>
+<tr data-role="育成目的" data-priority="中" data-owner="A"><td><strong>AI人材研修</strong></td><td>40</td><td>1,941円</td><td>育成目的</td><td>AI研修総合ハブ</td><td><span class="priority priority-中">中</span></td></tr>
+<tr data-role="職種育成" data-priority="高" data-owner="NEW"><td><strong>AIエンジニア研修</strong></td><td>40</td><td>1,549円</td><td>職種育成</td><td>AIエンジニア研修候補</td><td><span class="priority priority-高">高</span></td></tr>
+<tr data-role="属性" data-priority="補助" data-owner="FACET"><td><strong>AI研修 オンライン</strong></td><td>40</td><td>1,415円</td><td>属性</td><td>ハブ内説明／ファセット</td><td><span class="priority priority-補助">補助</span></td></tr>
+<tr data-role="育成目的" data-priority="高" data-owner="A"><td><strong>DX推進研修</strong></td><td>40</td><td>1,195円</td><td>育成目的</td><td>DX人材育成研修</td><td><span class="priority priority-高">高</span></td></tr>
+<tr data-role="テーマ" data-priority="中" data-owner="A"><td><strong>DXリテラシー研修</strong></td><td>40</td><td>792円</td><td>テーマ</td><td>DXページ／詳細候補</td><td><span class="priority priority-中">中</span></td></tr>
+<tr data-role="比較" data-priority="中" data-owner="CONTENT"><td><strong>DX研修会社</strong></td><td>40</td><td>1,076円</td><td>比較</td><td>比較・選定コンテンツ</td><td><span class="priority priority-中">中</span></td></tr>
+<tr data-role="テーマ" data-priority="中" data-owner="A"><td><strong>DX基礎研修</strong></td><td>30</td><td>—</td><td>テーマ</td><td>DXページ／詳細候補</td><td><span class="priority priority-中">中</span></td></tr>
+<tr data-role="料金" data-priority="補助" data-owner="A"><td><strong>DX研修 費用</strong></td><td>10</td><td>397円</td><td>料金</td><td>DXページ内料金・FAQ</td><td><span class="priority priority-補助">補助</span></td></tr></tbody>
+          </table>
+        </div>
+        <p id="keywordCount" class="result-count"></p>
+        <h3>ページ別キーワード所有マップ</h3>
+        <div class="table-scroll">
+          <table class="data-table page-map"><thead><tr><th>ページ</th><th>案AのURL</th><th>主KW</th><th>副KW</th><th>種別</th><th>対応</th></tr></thead><tbody><tr><td><strong>AI研修総合</strong></td><td><code>/business/ai-training</code></td><td>AI研修</td><td>AI講習、法人向けAI研修、企業向けAI研修、AI人材研修</td><td>ハブ</td><td>新設</td></tr>
+<tr><td><strong>DX人材育成</strong></td><td><code>/business/dx</code></td><td>DX研修</td><td>DX人材育成、DX人材育成研修、DX推進研修、DXリスキリング</td><td>ハブ／詳細</td><td>強化</td></tr>
+<tr><td><strong>生成AIビジネス活用</strong></td><td><code>/business/lag-generative-ai-chatgpt</code></td><td>生成AI研修</td><td>AI活用研修、生成AI活用研修、法人向け生成AI研修</td><td>研修詳細</td><td>再定義</td></tr>
+<tr><td><strong>ChatGPT基礎・実践</strong></td><td><code>/business/lag-ai-chatgpt</code></td><td>ChatGPT研修</td><td>ChatGPT活用研修、法人向けChatGPT研修</td><td>研修詳細</td><td>再定義</td></tr>
+<tr><td><strong>Claude実践</strong></td><td><code>/business/claude</code></td><td>Claude研修</td><td>Claude Code研修、Claude活用研修</td><td>研修詳細</td><td>強化</td></tr>
+<tr><td><strong>AI・データ分析</strong></td><td><code>/business/thm-ai-data-analysis</code></td><td>AI・データ分析研修</td><td>機械学習研修、AIデータ分析研修</td><td>研修詳細</td><td>強化</td></tr>
+<tr><td><strong>Pythonデータサイエンス</strong></td><td><code>/business/thm-python-data-science</code></td><td>Pythonデータサイエンス研修</td><td>Pythonデータ分析研修、Python機械学習研修</td><td>研修詳細</td><td>強化</td></tr>
+<tr><td><strong>業務改善・効率化</strong></td><td><code>/business/thm-automation</code></td><td>業務効率化研修</td><td>業務改善研修、自動化研修、AI業務効率化研修</td><td>研修詳細</td><td>強化</td></tr>
+<tr><td><strong>データ人材育成</strong></td><td><code>/business/occ-data-engineer-scientist</code></td><td>データサイエンティスト研修</td><td>データエンジニア研修、データ人材育成研修</td><td>研修詳細</td><td>強化</td></tr>
+<tr><td><strong>AIエンジニア</strong></td><td><code>/business/occ-ai-engineer（候補）</code></td><td>AIエンジニア研修</td><td>AI開発研修、生成AIエンジニア研修</td><td>研修詳細</td><td>条件付き新設</td></tr>
+<tr><td><strong>AIリテラシー</strong></td><td><code>/business/thm-ai-literacy（候補）</code></td><td>AIリテラシー研修</td><td>生成AIリテラシー研修、全社員向けAI研修</td><td>研修詳細</td><td>条件付き新設</td></tr></tbody></table>
+        </div>
+        <aside class="callout callout-warning"><strong>カニバリ防止</strong><p>「AI研修」はハブ、「生成AI研修」は生成AI詳細、「ChatGPT研修」はChatGPT詳細が所有します。表記ゆれだけの別ページや、「おすすめ」を使った自社商品LPは作りません。</p></aside>
+      </section>
+
+      <section class="section-card tour-target" id="implementation" data-stage="6">
+        <div class="section-heading"><div><p class="section-number">STEP 6</p><h2>実装要件とロードマップ</h2></div></div>
+        <div class="roadmap">
+          <article><div class="roadmap-marker">0</div><div><p>Inventory</p><h3>保有ページと分類の再確認</h3><ul><li>全法人研修URLの再クロール</li><li>重複、孤立、404、リダイレクト確認</li><li>主カテゴリ・副カテゴリの決定</li></ul></div></article>
+          <article><div class="roadmap-marker">1</div><div><p>Data model</p><h3>研修データモデルを作る</h3><ul><li>4カテゴリ、3研修形態、3実施形式</li><li>対象、目的、レベル、期間、技術</li><li>ファセットUIより先にデータを整備</li></ul></div></article>
+          <article><div class="roadmap-marker">2</div><div><p>Hub</p><h3>AI研修ハブを新設</h3><ul><li><code>/business/ai-training</code></li><li>研修、形態、公開講座、事例、FAQを接続</li><li>既存詳細URLは変更しない</li></ul></div></article>
+          <article><div class="roadmap-marker">3</div><div><p>Content</p><h3>既存AIページの役割整理</h3><ul><li>生成AI、ChatGPT、Claude</li><li>AI・データ分析、Python、業務効率化、DX</li><li>対象者・到達目標・CTAを分離</li></ul></div></article>
+          <article><div class="roadmap-marker">4</div><div><p>Expansion</p><h3>不足する詳細を条件付き追加</h3><ul><li>AIリテラシー、AIエンジニア</li><li>AIエージェント活用、AI駆動開発</li><li>商品差と需要がある場合のみ</li></ul></div></article>
+          <article><div class="roadmap-marker">5</div><div><p>Facets</p><h3>ファセットとホワイトリストを実装</h3><ul><li><code>/business/training</code>の追加</li><li>通常結果は非インデックス</li><li>正規URLのみサイトマップ掲載</li></ul></div></article>
+        </div>
+        <h3>受け入れ条件</h3>
+        <div class="acceptance-grid">
+          <label><input type="checkbox"> AIを第5カテゴリとして実装していない</label>
+          <label><input type="checkbox"> 3研修形態と3実施形式を別項目で管理できる</label>
+          <label><input type="checkbox"> 1研修に複数カテゴリ・属性を付与できる</label>
+          <label><input type="checkbox"> 既存4カテゴリURLを維持して動的化できる</label>
+          <label><input type="checkbox"> 通常ファセットをサイトマップへ出さない</label>
+          <label><input type="checkbox"> 静的ページをホワイトリストで管理できる</label>
+          <label><input type="checkbox"> 主KWの所有ページが重複していない</label>
+          <label><input type="checkbox"> 公開講座と法人研修のCTAが分離されている</label>
+        </div>
+      </section>
+
+      <section class="section-card appendices" id="appendices">
+        <div class="section-heading"><div><p class="section-number">REFERENCE</p><h2>確定文書の詳細原文</h2></div></div>
+        <p class="section-intro">上の要約・要件化で省略された背景、案B・案Cの詳細、全キーワード境界を確認できます。検索機能の対象にも含まれます。</p>
+        <details class="source-document" id="architecture-source">
+          <summary><span>文書1</span><strong>現行構造を前提としたAI研修サイト設計案</strong><small>案A・B・C、ファセット、パンくず、ロードマップ</small></summary>
+          <div class="source-content"><pre><code>CodeCampの現行構造を前提としたAI研修サイト設計案</code></pre>
+<p>案A・案B・案Cの詳細比較と推奨方針</p>
+<h2 id="architecture-source-0-エグゼクティブサマリ">0. エグゼクティブサマリー<button class="anchor-copy" data-copy-link="architecture-source-0-エグゼクティブサマリ" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<pre><code>CodeCampの法人向け研修サイトは、単純なカテゴリ型サイトではありません。</code></pre>
+<p>現在は、主に次の要素で構成されています。 法人研修事業全体を説明する固定・サービスページ カスタマイズ、パッケージ、公開講座という3つの研修形態 言語・ツール、階層、テーマ、職種という4つのカリキュラム分類</p>
+<pre><code>/business直下に置かれた個別の研修詳細ページ</code></pre>
+<p>オンライン、現地、ハイブリッドという実施形式 導入事例、FAQ、研修管理システムなどの信頼資産 この既存構造を前提とすると、AI研修を単純な「第5カテゴリ」として追加したり、既存の研修詳細をすべてAI専用ディレクトリへ移したりする設計は適切ではありません。 推奨するのは、次の案Aです。</p>
+<pre><code>/business/ai-training</code></pre>
+<p>を法人向けAI研修の横断ハブとして新設し、既存のカリキュラム詳細、4カテゴリ、3研修形態、公開講座、事例、FAQを横断的に接続します。 既存の研修詳細URLは原則として維持します。</p>
+<pre><code>/business/lag-generative-ai-chatgpt
+/business/lag-ai-chatgpt
+/business/thm-ai-data-analysis
+/business/thm-automation
+/business/occ-data-engineer-scientist
+/business/claude
+/business/ai-trainingは、これらの物理的な親ディレクトリではありません。</code></pre>
+<p>複数カテゴリ、複数対象者、複数研修形態にまたがるAI研修を、検索ユーザーや研修担当者が比較・選定するための、編集型・商用型の横断ハブと位置づけます。 また、将来的にファセット検索を実装する場合も、すべての組み合わせをインデックスさせるのではなく、次の条件を満たすものだけをホワイトリスト方式で静的ページ化します。 検索需要がある 既存ページとは検索意図が異なる 独自の研修カリキュラムがある 独自の事例、FAQ、到達目標を掲載できる 広告や営業上も別商品として扱う必要がある 通常の絞り込み結果は、原則としてインデックス対象外とします。</p>
+<h2 id="architecture-source-1-構成案の比較早見表">1. 構成案の比較早見表<button class="anchor-copy" data-copy-link="architecture-source-1-構成案の比較早見表" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>評価項目 案A：現行構造にAIハブを重ねる 案B：/business/ai/を独立階層化 案C：ルート直下に/ai/を新設 現行カテゴリ4種との整合 ◎ △ × 研修形態3種との連携 ◎ ○ △ 既存詳細URLの維持 ◎ △ × 将来のファセット対応 ◎ ○ ○ SEO評価の引き継ぎ ◎ ○ △ AI専門性の見せやすさ ○ ◎ ◎ 運用の一元性 ◎ △ × 重複・カニバリ抑制 ◎ △ × 広告LPとの連携 ◎ ◎ ○ CMS・データ管理の複雑性 小 中 大 実装・移行リスク 小 中～大 大 継続的なコンテンツ投資 中 中～大 大 現時点の総合判断 推奨 条件付き 不採用</p>
+<p>3案の位置づけ 案 基本構造 AIの位置づけ 評価</p>
+<pre><code>案A
+/business/ai-trainingを横断ハブとして追加</code></pre>
+<p>既存の4カテゴリ、3研修形態、研修詳細を横断して束ねる戦略テーマ 最適</p>
+<pre><code>案B
+/business/ai/以下にAI専用階層を作る</code></pre>
+<p>法人研修の中にAI専用のサブサイトを構築 条件付きで成立</p>
+<pre><code>案C</code></pre>
+<p>ルート直下に/ai/を作る 法人研修とは別のAI事業・AIブランドとして構築 現時点では非推奨</p>
+<p>案Bと案Cを採用する場合でも、検索需要と独自内容がある組み合わせだけを静的ページとしてホワイトリスト化し、通常のファセット結果はインデックス対象外とする方針は共通です。 ただし、案Bと案Cでは、AI関連ページが既存カリキュラムのURL体系とは異なる階層へ移るため、URL、パンくず、内部リンク、CMS上の所属、広告LP、公開講座、事例との関係を別途整理する必要があります。</p>
+<h2 id="architecture-source-2-CodeCampの現行構造の正しい捉え方">2. CodeCampの現行構造の正しい捉え方<button class="anchor-copy" data-copy-link="architecture-source-2-CodeCampの現行構造の正しい捉え方" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<pre><code>CodeCampの法人向け研修サイトは、次の4つのレイヤーで構成されています。</code></pre>
+<h3 id="architecture-source-2-1-レイヤ-1-法人研修全体と固定-サ-ビスペ-ジ">2-1. レイヤー1：法人研修全体と固定・サービスページ<button class="anchor-copy" data-copy-link="architecture-source-2-1-レイヤ-1-法人研修全体と固定-サ-ビスペ-ジ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/business
+├── /about
+├── /voice
+├── /faq
+└── /codecamp-insight</code></pre>
+<p>ここでは、CodeCampの法人研修全体、運営体制、導入実績、FAQ、研修管理システムを説明します。 各ページの主な役割は次のとおりです。 URL 役割</p>
+<pre><code>/business</code></pre>
+<p>法人向け研修全体のトップ</p>
+<pre><code>/business/about</code></pre>
+<p>研修事業、提供体制、研修形態、実施形式の説明</p>
+<pre><code>/business/voice</code></pre>
+<p>企業・法人向けIT研修の導入事例</p>
+<pre><code>/business/faq</code></pre>
+<p>研修導入前の疑問・不安の解消</p>
+<pre><code>/business/codecamp-insight</code></pre>
+<p>研修進捗・成果を可視化する管理システム</p>
+<p>これらは特定カリキュラムの詳細ではなく、法人研修事業全体の信頼性や導入判断を支える資産です。</p>
+<h3 id="architecture-source-2-2-レイヤ-2-研修形態">2-2. レイヤー2：研修形態<button class="anchor-copy" data-copy-link="architecture-source-2-2-レイヤ-2-研修形態" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/business/customize
+/business/package-it
+/open</code></pre>
+<p>これは「何を学ぶか」ではなく、どの方式で研修を提供・受講するかを説明する分類です。</p>
+<pre><code>CodeCampには、主に次の3つの研修形態があります。</code></pre>
+<p>カスタマイズ研修 パッケージ研修 公開講座 この3つは、それぞれ異なる契約・提供モデルです。 研修形態 主な特徴 カスタマイズ研修 企業の目的、対象者、期間、内容に合わせて設計 パッケージ研修 標準化された育成人材像やカリキュラムを企業単位で導入 公開講座 開催日や内容が決められた講座に1名単位などで参加</p>
+<p>一方、オンライン、現地、ハイブリッドは研修形態ではありません。 これらは研修の実施形式です。 概念 例 研修形態 カスタマイズ、パッケージ、公開講座 実施形式 オンライン、現地、ハイブリッド</p>
+<p>この2つはデータ上でもページ上でも分離する必要があります。 例えば、「カスタマイズ研修でオンライン実施」や「パッケージ研修をハイブリッド実施」といった組み合わせが存在するためです。</p>
+<h3 id="architecture-source-2-3-レイヤ-3-カリキュラムを探す4つのカテゴリ">2-3. レイヤー3：カリキュラムを探す4つのカテゴリ<button class="anchor-copy" data-copy-link="architecture-source-2-3-レイヤ-3-カリキュラムを探す4つのカテゴリ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/business/lag-list
+/business/hie-list
+/business/thm-list
+/business/occ-list</code></pre>
+<p>これは研修詳細を発見するための分類軸です。 URL 分類軸</p>
+<pre><code>/business/lag-list</code></pre>
+<p>言語・ツール別</p>
+<pre><code>/business/hie-list</code></pre>
+<p>階層別</p>
+<pre><code>/business/thm-list</code></pre>
+<p>テーマ別</p>
+<pre><code>/business/occ-list</code></pre>
+<p>職種別</p>
+<p>ユーザーは、同じ研修を異なる視点から探します。 例えば、生成AI研修は次のように複数の分類軸から見つけられます。 言語・ツール：ChatGPT、Claude テーマ：生成AI、業務効率化 階層：新入社員、一般社員、管理職 職種：エンジニア、人事、営業、企画 したがって、これら4カテゴリは「研修を一意に分類するための箱」ではなく、「ユーザーが目的に応じて研修を探すための入口」です。</p>
+<h3 id="architecture-source-2-4-レイヤ-4-研修詳細">2-4. レイヤー4：研修詳細<button class="anchor-copy" data-copy-link="architecture-source-2-4-レイヤ-4-研修詳細" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/business/lag-python
+/business/thm-security
+/business/occ-project-manager
+/business/shinsotsu
+/business/base</code></pre>
+<p>研修詳細は、カテゴリページのURL配下には配置されていません。 すべて/business直下にあります。</p>
+<pre><code>/business/lag-list
+└── /business/lag-python</code></pre>
+<p>という物理ディレクトリ構造ではありません。 lag-、thm-、occ-などの接頭辞は、物理的な階層ではなく、主分類を示す命名規則として機能しています。 したがって、CodeCampの現行サイトは、次のような単純なツリーではありません。 カテゴリ</p>
+<pre><code>└── 研修詳細</code></pre>
+<p>実態は、次のようなマトリクス構造です。 研修詳細</p>
+<pre><code>├── どのカテゴリから探せるか
+├── どの研修形態で提供できるか
+├── どの実施形式に対応するか
+├── 誰が受講するか
+├── どの職種・階層を対象にするか
+├── どの課題を解決するか
+└── どの関連研修・事例と接続するか</code></pre>
+<p>この現行構造を正しく捉えないままAI研修のURLだけを独立させると、既存カテゴリや研修形態との関係が崩れます。</p>
+<h2 id="architecture-source-3-AI研修を-第5カテゴリ-にしてはいけない">3. AI研修を「第5カテゴリ」にしてはいけない<button class="anchor-copy" data-copy-link="architecture-source-3-AI研修を-第5カテゴリ-にしてはいけない" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>AI研修は、単純な1カテゴリではありません。 例えば、生成AI研修は次のすべてにまたがります。 分類軸 該当例 言語・ツール ChatGPT、Claude、Gemini、Copilot テーマ 生成AI活用、業務効率化、AIリテラシー 職種 エンジニア、営業、人事、企画 階層 新入社員、一般社員、管理職 研修形態 カスタマイズ、パッケージ、公開講座 実施形式 オンライン、現地、ハイブリッド 目的 リテラシー向上、業務活用、開発、DX推進 レベル 入門、基礎、実践、応用</p>
+<p>したがって、次のようにAIを既存4カテゴリと同列に置くのは不適切です。 言語・ツール 階層 テーマ 職種 AI この分類では、AIだけが技術、テーマ、職種、用途、育成目的を横断した概念になってしまいます。 正しい構造は次です。 既存4カテゴリ</p>
+<pre><code>＋</code></pre>
+<p>研修形態3種</p>
+<pre><code>＋</code></pre>
+<p>実施形式</p>
+<pre><code>＋</code></pre>
+<p>既存研修詳細</p>
+<pre><code>        ↑</code></pre>
+<p>AI研修横断ハブ AIは既存カテゴリを置き換える分類軸ではありません。 既存の研修資産を、「AI」という戦略テーマで横断的に束ね直すための編集軸です。</p>
+<h2 id="architecture-source-4-全案に共通する基本方針">4. 全案に共通する基本方針<button class="anchor-copy" data-copy-link="architecture-source-4-全案に共通する基本方針" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>案A、案B、案Cのいずれを選ぶ場合でも、以下の原則は共通です。</p>
+<h3 id="architecture-source-4-1-研修詳細は1カテゴリだけに所属させない">4-1. 研修詳細は1カテゴリだけに所属させない<button class="anchor-copy" data-copy-link="architecture-source-4-1-研修詳細は1カテゴリだけに所属させない" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>各研修詳細ページは、複数の属性を持ちます。 例えば、生成AIビジネス活用研修なら次のように管理します。 正式名称：生成AIビジネス活用研修 主カテゴリ：言語・ツール 副カテゴリ：テーマ テーマ：生成AI、業務効率化 対象者：全社員、非エンジニア 対象階層：新入社員、若手、中堅 対象職種：人事、営業、企画、管理部門 ツール：ChatGPTほか 目的：AIリテラシー、業務効率化 研修形態：カスタマイズ、パッケージ 実施形式：オンライン、現地、ハイブリッド 関連ハブ：AI研修 URL上ではlag-などの主分類を維持しても、CMSやデータベース上では複数のカテゴリ・属性を持たせます。</p>
+<h3 id="architecture-source-4-2-カテゴリペ-ジはファセット化しても必ずしも削除しない">4-2. カテゴリページはファセット化しても必ずしも削除しない<button class="anchor-copy" data-copy-link="architecture-source-4-2-カテゴリペ-ジはファセット化しても必ずしも削除しない" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>将来的にファセット検索を導入する場合でも、次の4カテゴリページを必ず削除する必要はありません。</p>
+<pre><code>/business/lag-list
+/business/hie-list
+/business/thm-list
+/business/occ-list</code></pre>
+<p>これらには、それぞれ独立した検索意図とナビゲーション上の役割があります。 推奨するのは、URLを維持したまま裏側を動的生成へ切り替える方法です。</p>
+<pre><code>/business/lag-list</code></pre>
+<p>→ URL維持 → 動的な言語・ツール一覧に変更</p>
+<pre><code>/business/hie-list</code></pre>
+<p>→ URL維持 → 動的な階層別一覧に変更</p>
+<pre><code>/business/thm-list</code></pre>
+<p>→ URL維持 → 動的なテーマ別一覧に変更</p>
+<pre><code>/business/occ-list</code></pre>
+<p>→ URL維持 → 動的な職種別一覧に変更 この方式には、次の利点があります。 既存URLを維持できる 301リダイレクトが不要 内部リンクを変更しなくてよい カテゴリ固有の導入文を残せる カテゴリ固有のFAQを残せる SEO向けカテゴリLPとファセットUIを共存できる 既存のブックマークや外部リンクを維持できる どうしてもURLを変更する場合は、1対1で移行します。</p>
+<pre><code>/business/lag-list</code></pre>
+<p>→ /business/training/language-tool</p>
+<pre><code>/business/hie-list</code></pre>
+<p>→ /business/training/hierarchy</p>
+<pre><code>/business/thm-list</code></pre>
+<p>→ /business/training/theme</p>
+<pre><code>/business/occ-list</code></pre>
+<p>→ /business/training/occupation 次のように4カテゴリを1ページへまとめてリダイレクトする方法は避けます。</p>
+<pre><code>/business/lag-list
+/business/hie-list
+/business/thm-list
+/business/occ-list
+            ↓
+    /business/training</code></pre>
+<p>4つの異なる検索意図を1つのURLへ統合すると、カテゴリごとの評価と利便性を失うためです。</p>
+<h3 id="architecture-source-4-3-将来のファセット設計">4-3. 将来のファセット設計<button class="anchor-copy" data-copy-link="architecture-source-4-3-将来のファセット設計" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>将来的には、全研修を対象としたマスター一覧を追加します。</p>
+<pre><code>/business/training</code></pre>
+<p>ここで、次の属性を組み合わせて絞り込みます。 軸 値の例 カテゴリ 言語・ツール、階層、テーマ、職種 AIテーマ 生成AI、ChatGPT、Claude、機械学習 対象者 全社員、新入社員、管理職、エンジニア 目的 AIリテラシー、業務効率化、開発、DX推進 研修形態 カスタマイズ、パッケージ、公開講座 実施形式 オンライン、現地、ハイブリッド レベル 入門、基礎、実践、応用 期間 1日、短期、1～3か月、長期 技術 ChatGPT、Claude、Python、RAG、MCP、AIエージェント 業界 製造、金融、IT、自治体など</p>
+<p>通常のファセットURL</p>
+<pre><code>/business/training?theme=ai
+/business/training?theme=ai&amp;audience=engineer
+/business/training?theme=ai&amp;format=online
+/business/training?theme=ai&amp;audience=manager&amp;format=online</code></pre>
+<p>これらは原則としてインデックス対象外とします。 ファセットナビゲーションは組み合わせによってURLが大量に発生し、クロール負荷や重複ページを増やす可能性があるためです。 canonicalだけに依存してすべての組み合わせを公開するのではなく、クロール対象、内部リンク、サイトマップ、インデックス対象を最初から限定します。</p>
+<h3 id="architecture-source-4-4-ホワイトリスト方式で静的化する条件">4-4. ホワイトリスト方式で静的化する条件<button class="anchor-copy" data-copy-link="architecture-source-4-4-ホワイトリスト方式で静的化する条件" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>検索需要と独自内容がある組み合わせだけ、通常のファセット結果から独立した静的ページとして作成します。 例えば次のようなページです。</p>
+<pre><code>/business/ai-training
+/business/thm-ai-literacy
+/business/occ-ai-engineer</code></pre>
+<p>ただし、次のような組み合わせをすべて静的ページにしてはいけません。 AI × 管理職 × オンライン × カスタマイズ 静的ページを作る条件は次のとおりです。 検索需要がある 既存ページと検索意図が異なる 専用カリキュラムが存在する 独自の事例を掲載できる 独自のFAQを掲載できる 独自の到達目標を説明できる 営業提案も既存研修とは異なる 広告グループやLPを分ける必要がある 「オンライン」「管理職」などの属性が付いただけで、研修内容やユーザーの判断材料が変わらない場合は、ファセット結果のまま扱います。</p>
+<h3 id="architecture-source-4-5-研修詳細ペ-ジのデ-タ構造">4-5. 研修詳細ページのデータ構造<button class="anchor-copy" data-copy-link="architecture-source-4-5-研修詳細ペ-ジのデ-タ構造" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>各研修詳細ページに、少なくとも次の情報をデータとして持たせます。 研修ID 正式名称 URL 主カテゴリ 副カテゴリ テーマ 対象者 対象階層 対象職種 言語・ツール 目的 レベル 期間 研修形態 実施形式 前提スキル 到達目標 使用ツール 成果物 関連研修 関連事例 対応する公開講座 インデックス方針 主パンくず 副パンくず 更新日 このデータモデルを先に整備すれば、次の機能を同じデータから生成できます。 4カテゴリ一覧 AI研修横断ハブ 全研修ファセット 関連研修 対象者別一覧 研修形態別一覧 広告LPの出し分け 構造化データ サイト内検索 LLMO向けの明確な事実情報</p>
+<h3 id="architecture-source-4-6-パンくずの基本設計">4-6. パンくずの基本設計<button class="anchor-copy" data-copy-link="architecture-source-4-6-パンくずの基本設計" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>固定ページ</p>
+<pre><code>CodeCamp
+&gt; 法人向け研修
+&gt; CodeCampの研修とは</code></pre>
+<p>研修形態</p>
+<pre><code>CodeCamp
+&gt; 法人向け研修
+&gt; 研修形態
+&gt; カスタマイズ研修</code></pre>
+<p>カテゴリ</p>
+<pre><code>CodeCamp
+&gt; 法人向け研修
+&gt; 研修を探す
+&gt; 言語・ツール別研修</code></pre>
+<p>研修詳細</p>
+<pre><code>CodeCamp
+&gt; 法人向け研修
+&gt; 言語・ツール別研修
+&gt; 生成AIビジネス活用研修</code></pre>
+<p>複数カテゴリに所属する研修でも、画面上では主カテゴリを1つ決めます。 一方、構造化データ上では、複数の発見経路を表現できます。 法人向け研修</p>
+<pre><code>&gt; 言語・ツール別研修
+&gt; 生成AIビジネス活用研修</code></pre>
+<p>法人向け研修</p>
+<pre><code>&gt; AI研修
+&gt; 生成AIビジネス活用研修</code></pre>
+<p>ただし、URLを2つ作るのではありません。 同一URLに対する異なる発見経路として扱います。</p>
+<h2 id="architecture-source-5-案A-現行構造にAI横断ハブを重ねる">5. 案A：現行構造にAI横断ハブを重ねる<button class="anchor-copy" data-copy-link="architecture-source-5-案A-現行構造にAI横断ハブを重ねる" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<h3 id="architecture-source-5-1-案Aの基本的な考え方">5-1. 案Aの基本的な考え方<button class="anchor-copy" data-copy-link="architecture-source-5-1-案Aの基本的な考え方" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>案Aでは、既存の法人研修構造を変更せず、次の横断ハブを追加します。</p>
+<pre><code>/business/ai-training</code></pre>
+<p>既存のAI関連研修詳細は、引き続き/business直下に維持します。</p>
+<pre><code>/business/lag-generative-ai-chatgpt
+/business/lag-ai-chatgpt
+/business/thm-ai-data-analysis
+/business/thm-python-data-science
+/business/thm-automation
+/business/occ-data-engineer-scientist
+/business/dx
+/business/claude
+/business/ai-trainingはこれらの親ディレクトリではありません。</code></pre>
+<p>AI関連研修を検索意図、対象者、目的、技術、研修形態などの観点で横断的に比較・選定できるハブです。</p>
+<h3 id="architecture-source-5-2-案Aの推奨サイト構造">5-2. 案Aの推奨サイト構造<button class="anchor-copy" data-copy-link="architecture-source-5-2-案Aの推奨サイト構造" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/business
+│
+├── 固定・サービスページ
+│   ├── /about
+│   ├── /voice
+│   ├── /faq
+│   └── /codecamp-insight
+│
+├── 研修形態
+│   ├── /customize
+│   ├── /package-it
+│   └── /openへの導線
+│
+├── カテゴリ
+│   ├── /lag-list
+│   ├── /hie-list
+│   ├── /thm-list
+│   └── /occ-list
+│
+├── 横断・編集ハブ
+│   └── /ai-training
+│
+└── 研修詳細
+    ├── /lag-generative-ai-chatgpt
+    ├── /lag-ai-chatgpt
+    ├── /thm-ai-data-analysis
+    ├── /thm-python-data-science
+    ├── /thm-automation
+    ├── /occ-data-engineer-scientist
+    ├── /dx
+    ├── /claude
+    └── 今後追加する研修詳細
+/openはURL上では/businessの外にありますが、サービス上は研修形態の1つとして、/business/about、AIハブ、各研修詳細から連携します。</code></pre>
+<h3 id="architecture-source-5-3-AIハブの役割">5-3. AIハブの役割<button class="anchor-copy" data-copy-link="architecture-source-5-3-AIハブの役割" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/business/ai-training</code></pre>
+<p>は、次のユーザーニーズを解決します。 AI研修には何があるか 自社に合うAI研修はどれか AIリテラシー研修と生成AI活用研修の違い 全社員向けとエンジニア向けの違い ChatGPT研修とClaude研修の違い 生成AI活用とAI開発の違い AI研修とDX研修の違い カスタマイズ、パッケージ、公開講座の違い オンライン、現地、ハイブリッドの対応可否 研修期間、対象者、前提スキル、成果物の違い したがって、AI研修のカードを並べるだけの一覧では不十分です。 次のような比較・選定構造が必要です。 AI研修総合ハブ</p>
+<pre><code>├── 課題から選ぶ
+│   ├── AIリテラシーを高めたい
+│   ├── 業務を効率化したい
+│   ├── AI開発人材を育成したい
+│   └── DX・AI人材を体系的に育成したい
+│
+├── 対象者から選ぶ
+│   ├── 全社員
+│   ├── 新入社員
+│   ├── 管理職
+│   ├── 非エンジニア
+│   └── エンジニア
+│
+├── 技術・ツールから選ぶ
+│   ├── 生成AI
+│   ├── ChatGPT
+│   ├── Claude
+│   ├── Python・データ分析
+│   └── AIエージェント
+│
+├── 研修形態から選ぶ
+│   ├── カスタマイズ
+│   ├── パッケージ
+│   └── 公開講座
+│
+└── 実施形式から選ぶ
+    ├── オンライン
+    ├── 現地
+    └── ハイブリッド</code></pre>
+<h3 id="architecture-source-5-4-AI関連ペ-ジの役割分担">5-4. AI関連ページの役割分担<button class="anchor-copy" data-copy-link="architecture-source-5-4-AI関連ペ-ジの役割分担" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>新設する横断ハブ URL 主キーワード 役割</p>
+<pre><code>/business/ai-training</code></pre>
+<p>AI研修、法人向けAI研修、企業向けAI研修、AI人材育成研修 AI研修全体の比較・選定</p>
+<p>既存ページを強化 URL 主な狙い 役割</p>
+<pre><code>/business/lag-generative-ai-chatgpt</code></pre>
+<p>生成AI研修、生成AI活用研修 ツール横断の生成AI業務活用</p>
+<pre><code>/business/lag-ai-chatgpt</code></pre>
+<p>ChatGPT研修、ChatGPT法人研修 ChatGPT固有の操作、プロンプト、業務活用</p>
+<pre><code>/business/claude</code></pre>
+<p>Claude研修、Claude Code研修 Claudeによる業務活用、AI駆動開発</p>
+<pre><code>/business/thm-ai-data-analysis</code></pre>
+<p>AI・データ分析研修 機械学習、統計、データ分析</p>
+<pre><code>/business/thm-python-data-science</code></pre>
+<p>Pythonデータサイエンス研修 Pythonによるデータ分析実践</p>
+<pre><code>/business/thm-automation</code></pre>
+<p>業務効率化研修、自動化研修 AIを含む業務効率化・自動化</p>
+<pre><code>/business/occ-data-engineer-scientist</code></pre>
+<p>データエンジニア研修、データサイエンティスト研修 職種育成</p>
+<pre><code>/business/dx</code></pre>
+<p>DX研修、DX人材育成研修 AIより広いDX人材育成</p>
+<p>既存ページ一覧については、公開中のページを再クロールし、/business/claudeのような一覧漏れがないかを確認します。</p>
+<h3 id="architecture-source-5-5-新設候補">5-5. 新設候補<button class="anchor-copy" data-copy-link="architecture-source-5-5-新設候補" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>ページ候補 作成条件 AIリテラシー研修 ITリテラシー研修とは異なるAI固有カリキュラムがある AIエンジニア研修 データサイエンティスト研修とは異なる到達目標がある AIエージェント活用研修 非エンジニア向けの独自カリキュラムがある AI駆動開発研修 Claude研修の一部ではなく、ツール横断の商品として成立する AIエージェント開発研修 AI駆動開発とは異なる設計・実装カリキュラムがある</p>
+<p>AI駆動開発、AIエージェント開発、AIエージェント活用は、名称が異なるだけで機械的に3ページへ分割してはいけません。 次の要素が異なる場合のみ分けます。 対象者 前提スキル 到達目標 カリキュラム 演習成果物 導入部門 営業提案 広告検索語句 問い合わせ内容</p>
+<h3 id="architecture-source-5-6-研修形態との接続">5-6. 研修形態との接続<button class="anchor-copy" data-copy-link="architecture-source-5-6-研修形態との接続" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>AIハブや研修詳細ページは、研修形態を内包しません。 それぞれのページから、対応する研修形態へ接続します。 AI研修ハブ</p>
+<pre><code>├── カスタマイズで導入
+├── パッケージで導入
+└── 公開講座に参加</code></pre>
+<p>各研修詳細にも、次の共通項目を設けます。 この研修の提供方法</p>
+<pre><code>├── カスタマイズ研修：対応可
+├── パッケージ研修：対応可／不可
+├── 公開講座：対応講座あり／なし
+└── 実施形式：オンライン／現地／ハイブリッド</code></pre>
+<p>公開講座に同テーマの講座がある場合は、法人研修詳細と公開講座詳細を相互リンクします。 法人研修詳細 公開講座詳細 企業単位で導入を検討 1名単位で参加を検討 カスタマイズ可能 開催日・定員が決まっている 対象者・期間を調整 標準化された講座 問い合わせ・資料請求 申込・日程確認</p>
+<p>同じAIテーマであっても、検索意図、契約形態、CTAが異なるため、重複ページではありません。</p>
+<h3 id="architecture-source-5-7-案Aのパンくず">5-7. 案Aのパンくず<button class="anchor-copy" data-copy-link="architecture-source-5-7-案Aのパンくず" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>AIハブ</p>
+<pre><code>CodeCamp
+&gt; 法人向け研修
+&gt; AI研修</code></pre>
+<p>生成AI研修詳細</p>
+<pre><code>CodeCamp
+&gt; 法人向け研修
+&gt; 言語・ツール別研修
+&gt; 生成AIビジネス活用研修</code></pre>
+<p>構造化データ上では、次の経路も持たせられます。</p>
+<pre><code>CodeCamp
+&gt; 法人向け研修
+&gt; AI研修
+&gt; 生成AIビジネス活用研修</code></pre>
+<h3 id="architecture-source-5-8-案Aの広告運用">5-8. 案Aの広告運用<button class="anchor-copy" data-copy-link="architecture-source-5-8-案Aの広告運用" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>広告キャンペーンはカテゴリ単位ではなく、検索意図と研修詳細の単位で分けます。 広告グループ LP AI研修一般</p>
+<pre><code>/business/ai-training</code></pre>
+<p>生成AI研修</p>
+<pre><code>/business/lag-generative-ai-chatgpt</code></pre>
+<p>ChatGPT研修</p>
+<pre><code>/business/lag-ai-chatgpt</code></pre>
+<p>Claude研修</p>
+<pre><code>/business/claude</code></pre>
+<p>AI・データ分析研修</p>
+<pre><code>/business/thm-ai-data-analysis</code></pre>
+<p>AIエンジニア研修 該当する研修詳細 AI研修 オンライン 該当研修詳細またはnoindex広告LP</p>
+<p>「オンライン」は研修商品ではなく実施形式なので、原則として独立した研修詳細ページにはしません。 AIハブや各詳細ページで対応形式を明確にし、広告で明確なCVR差が確認できた場合だけ、専用LPを用意します。</p>
+<h3 id="architecture-source-5-9-案Aのメリット">5-9. 案Aのメリット<button class="anchor-copy" data-copy-link="architecture-source-5-9-案Aのメリット" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>既存の4カテゴリを維持できる 既存の3研修形態をそのまま活用できる 既存詳細URLの移行が不要 既存の導入事例、FAQ、CodeCamp Insightと自然に連携できる AI関連ページだけを例外的なURLルールにしなくてよい 検索評価、広告URL、営業資料への影響が小さい AIとDX、データ分析、業務効率化の重複を増やさない 将来のファセット実装に対応できる 案B・案Cへの将来的な移行を妨げない</p>
+<h3 id="architecture-source-5-10-案Aの弱点">5-10. 案Aの弱点<button class="anchor-copy" data-copy-link="architecture-source-5-10-案Aの弱点" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>案AはAIを独立事業として見せる構造ではないため、URLだけを見たときのAI専門性は案B・案Cより弱くなります。 ただし、次の要素を整備すれば、専門性は十分に表現できます。 AI専用ハブ AI関連研修の比較表 AI事例 AI専門講師 AIカリキュラムの体系図 AI研修に関するFAQ AI領域の内部リンク AI関連構造化データ AI広告キャンペーン AI研修の成果・更新情報 URL階層だけで専門性が決まるわけではありません。</p>
+<h2 id="architecture-source-6-案B-business-ai-をAI専用階層として構築する">6. 案B：/business/ai/をAI専用階層として構築する<button class="anchor-copy" data-copy-link="architecture-source-6-案B-business-ai-をAI専用階層として構築する" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<h3 id="architecture-source-6-1-案Bの基本的な考え方">6-1. 案Bの基本的な考え方<button class="anchor-copy" data-copy-link="architecture-source-6-1-案Bの基本的な考え方" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>案Bでは、法人向け研修の配下にAI専用のサブサイトを作ります。</p>
+<pre><code>/business
+│
+├── 固定ページ
+│   ├── /about
+│   ├── /voice
+│   ├── /faq
+│   └── /codecamp-insight
+│
+├── 研修形態
+│   ├── /customize
+│   ├── /package-it
+│   └── /openへの導線
+│
+├── 既存カテゴリ
+│   ├── /lag-list
+│   ├── /hie-list
+│   ├── /thm-list
+│   └── /occ-list
+│
+├── AI専用階層
+│   └── /ai
+│       ├── /training
+│       ├── /generative-ai
+│       ├── /chatgpt
+│       ├── /claude
+│       ├── /ai-literacy
+│       ├── /ai-utilization
+│       ├── /ai-engineer
+│       ├── /ai-development
+│       └── /ai-agent
+│
+└── AI以外の既存研修詳細
+    ├── /lag-python
+    ├── /lag-java
+    ├── /thm-security
+    └── /occ-project-manager</code></pre>
+<p>案Aとの違いは、AIページを既存の研修詳細群の一部として扱うのではなく、AI関連ページだけを独立したURL階層へ集約することです。</p>
+<h3 id="architecture-source-6-2-案BのAI総合トップ">6-2. 案BのAI総合トップ<button class="anchor-copy" data-copy-link="architecture-source-6-2-案BのAI総合トップ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/business/ai
+CodeCampの法人向けAI研修全体を説明する、AI領域トップです。</code></pre>
+<p>主な対象キーワードは次のとおりです。 AI研修 法人向けAI研修 企業向けAI研修 AI人材育成研修 AI講習 AI教育 社内AI研修</p>
+<h3 id="architecture-source-6-3-案BのAI研修一覧-検索">6-3. 案BのAI研修一覧・検索<button class="anchor-copy" data-copy-link="architecture-source-6-3-案BのAI研修一覧-検索" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/business/ai/training</code></pre>
+<p>AI研修だけを対象とした検索・絞り込みページです。 軸 値の例 目的 AIリテラシー、業務活用、開発、データ分析 対象者 全社員、新入社員、管理職、エンジニア ツール ChatGPT、Claude、Gemini、Copilot 技術 プロンプト、RAG、MCP、AIエージェント レベル 入門、基礎、実践、応用 研修形態 カスタマイズ、パッケージ、公開講座 実施形式 オンライン、現地、ハイブリッド</p>
+<h3 id="architecture-source-6-4-案BのAIテ-マ別ペ-ジ">6-4. 案BのAIテーマ別ページ<button class="anchor-copy" data-copy-link="architecture-source-6-4-案BのAIテ-マ別ペ-ジ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/business/ai/generative-ai
+/business/ai/ai-literacy
+/business/ai/ai-utilization
+/business/ai/ai-development
+/business/ai/ai-agent
+/business/ai/data-analysis</code></pre>
+<p>これらはAI専用階層内のテーマページです。</p>
+<h3 id="architecture-source-6-5-案BのAIツ-ル別-カリキュラム詳細">6-5. 案BのAIツール別・カリキュラム詳細<button class="anchor-copy" data-copy-link="architecture-source-6-5-案BのAIツ-ル別-カリキュラム詳細" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/business/ai/chatgpt
+/business/ai/claude
+/business/ai/gemini
+/business/ai/copilot</code></pre>
+<p>ツール固有の研修商品を提供できる場合に詳細ページを設けます。</p>
+<h3 id="architecture-source-6-6-案Bの対象者別静的ペ-ジ">6-6. 案Bの対象者別静的ページ<button class="anchor-copy" data-copy-link="architecture-source-6-6-案Bの対象者別静的ペ-ジ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>検索需要と独自内容があるものだけ静的化します。</p>
+<pre><code>/business/ai/for-all-employees
+/business/ai/for-new-employees
+/business/ai/for-managers
+/business/ai/for-engineers</code></pre>
+<p>例えば「管理職向けAI研修」の独自カリキュラム、事例、到達目標、FAQがなく、通常のAI研修と内容がほぼ同じなら、静的ページにはしません。</p>
+<h3 id="architecture-source-6-7-案Bにおける既存ペ-ジの扱い">6-7. 案Bにおける既存ページの扱い<button class="anchor-copy" data-copy-link="architecture-source-6-7-案Bにおける既存ペ-ジの扱い" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>案Bでは、既存AI関連URLをどう扱うかが最大の論点です。 パターンB-1：既存URLを維持する</p>
+<pre><code>/business/ai</code></pre>
+<p>↓リンク</p>
+<pre><code>/business/lag-generative-ai-chatgpt
+/business/lag-ai-chatgpt
+/business/thm-ai-data-analysis
+/business/claude</code></pre>
+<p>AI専用階層にはハブやカテゴリだけを置き、詳細ページは既存URLのまま残します。 メリット 既存URLを維持できる 301移行が不要 検索評価や広告URLを失いにくい 現行CMSへの影響が小さい 営業資料や外部リンクの変更が少ない デメリット</p>
+<pre><code>/business/ai/の階層が見た目だけになる</code></pre>
+<p>AI詳細ページがAI階層外に存在する パンくずとURLの整合が弱い ユーザーから見るとAI専用サイトとしての一貫性がない URL構造上のメリットがほとんど得られない このパターンを採るなら、案Aの/business/ai-trainingで十分です。 パターンB-2：AI詳細ページを移行する</p>
+<pre><code>/business/lag-generative-ai-chatgpt</code></pre>
+<p>→ /business/ai/generative-ai</p>
+<pre><code>/business/lag-ai-chatgpt</code></pre>
+<p>→ /business/ai/chatgpt</p>
+<pre><code>/business/claude</code></pre>
+<p>→ /business/ai/claude</p>
+<pre><code>/business/thm-ai-data-analysis</code></pre>
+<p>→ /business/ai/data-analysis AI関連詳細をすべてAI専用階層へ移します。 メリット URLだけでAI領域の構造を理解できる パンくずとURLが一致する AI専門サイトとしての一貫性が高い AI関連ページの管理・分析がしやすい</p>
+<pre><code>/business/ai/以下のセッション、CV、検索流入を集計しやすい</code></pre>
+<p>広告キャンペーンとURL構造を合わせやすい デメリット 既存URLの301移行が必要 一時的な順位変動が起こり得る 広告、資料、メール、営業資料のURL変更が必要 既存のlag、thm、occ分類との関係が薄れる AIだけが異なるURLルールになる 他のテーマでも専用階層を作る要求が出やすい CMSやサイトマップに例外処理が必要になる 案Bを本当に採るなら、B-2まで実施しなければ構造上のメリットは限定的です。</p>
+<h3 id="architecture-source-6-8-案Bにおける既存4カテゴリとの関係">6-8. 案Bにおける既存4カテゴリとの関係<button class="anchor-copy" data-copy-link="architecture-source-6-8-案Bにおける既存4カテゴリとの関係" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>AI関連研修を/business/ai/へ移しても、既存4カテゴリから探せる必要があります。 例えばChatGPT研修は次の複数カテゴリに所属します。 言語・ツール別 → ChatGPT研修 → /business/ai/chatgpt</p>
+<p>テーマ別 → 生成AI・業務活用 → /business/ai/chatgpt</p>
+<p>階層別 → 全社員向けAI研修 → /business/ai/chatgpt カテゴリページはAI詳細ページの物理的な親ではなく、AI詳細ページへの発見経路になります。 CMS上では次のように管理します。 URL：/business/ai/chatgpt 主カテゴリ：言語・ツール 副カテゴリ：テーマ 対象階層：全社員、新入社員、若手、中堅 対象職種：非エンジニア、企画、人事、営業 研修形態：カスタマイズ、パッケージ 実施形式：オンライン、現地、ハイブリッド 案Bでも、1ページを1カテゴリだけに所属させてはいけません。</p>
+<h3 id="architecture-source-6-9-案Bにおける研修形態3種との連携">6-9. 案Bにおける研修形態3種との連携<button class="anchor-copy" data-copy-link="architecture-source-6-9-案Bにおける研修形態3種との連携" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>AI専用階層の中に、既存の研修形態ページを重複して作るべきではありません。 避けるべき構成は次です。</p>
+<pre><code>/business/ai/customize
+/business/ai/package
+/business/ai/open</code></pre>
+<p>既存の研修形態ページと役割が重複するためです。 正しくは、AI詳細ページから既存の研修形態へ接続します。</p>
+<pre><code>/business/ai/chatgpt
+├── カスタマイズ研修で導入
+│   └── /business/customize
+├── パッケージ研修で導入
+│   └── /business/package-it
+└── 公開講座に参加
+    └── /open/generative-ai-for-business</code></pre>
+<p>AI専用階層は「何を学ぶか」を扱い、研修形態ページは「どう導入するか」を扱います。</p>
+<h3 id="architecture-source-6-10-案Bのパンくず">6-10. 案Bのパンくず<button class="anchor-copy" data-copy-link="architecture-source-6-10-案Bのパンくず" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>AI総合ページ</p>
+<pre><code>CodeCamp
+&gt; 法人向け研修
+&gt; AI研修</code></pre>
+<p>AIテーマページ</p>
+<pre><code>CodeCamp
+&gt; 法人向け研修
+&gt; AI研修
+&gt; 生成AI研修</code></pre>
+<p>AI詳細ページ</p>
+<pre><code>CodeCamp
+&gt; 法人向け研修
+&gt; AI研修
+&gt; ChatGPT研修</code></pre>
+<p>カテゴリからの発見経路も構造化データで表現します。</p>
+<pre><code>CodeCamp
+&gt; 法人向け研修
+&gt; 言語・ツール別研修
+&gt; ChatGPT研修</code></pre>
+<p>同一ページに複数のパンくず経路を持たせても、URL自体は1つです。</p>
+<h3 id="architecture-source-6-11-案Bのファセットと静的ペ-ジ">6-11. 案Bのファセットと静的ページ<button class="anchor-copy" data-copy-link="architecture-source-6-11-案Bのファセットと静的ペ-ジ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>通常の非インデックスファセット</p>
+<pre><code>/business/ai/training?audience=engineer
+/business/ai/training?tool=chatgpt
+/business/ai/training?format=online
+/business/ai/training?tool=chatgpt&amp;format=online</code></pre>
+<p>これらは原則としてクロール・インデックス対象外です。 ホワイトリストで静的化するページ</p>
+<pre><code>/business/ai/ai-literacy
+/business/ai/ai-utilization
+/business/ai/ai-engineer
+/business/ai/chatgpt
+/business/ai/claude</code></pre>
+<p>次の条件を満たす場合のみ作成します。 検索需要がある 既存ページと検索意図が異なる 独自カリキュラムがある 独自の事例、FAQ、到達目標がある 広告・営業上も別商品として扱える</p>
+<h3 id="architecture-source-6-12-案Bの広告運用">6-12. 案Bの広告運用<button class="anchor-copy" data-copy-link="architecture-source-6-12-案Bの広告運用" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>広告グループ LP AI研修一般</p>
+<pre><code>/business/ai</code></pre>
+<p>生成AI研修</p>
+<pre><code>/business/ai/generative-ai</code></pre>
+<p>ChatGPT研修</p>
+<pre><code>/business/ai/chatgpt</code></pre>
+<p>Claude研修</p>
+<pre><code>/business/ai/claude</code></pre>
+<p>AIエンジニア研修</p>
+<pre><code>/business/ai/ai-engineer</code></pre>
+<p>AI活用研修</p>
+<pre><code>/business/ai/ai-utilization</code></pre>
+<p>広告の構造とURL階層が一致するため、広告担当者には分かりやすい設計です。 一方、既存AI研修URLを広告LPとして利用している場合は、次の引き継ぎが必要です。 広告リンク コンバージョン計測 オーディエンス 過去実績 UTM設計 LP別の品質評価 営業資料やメール内のリンク</p>
+<h3 id="architecture-source-6-13-案Bのロ-ドマップ">6-13. 案Bのロードマップ<button class="anchor-copy" data-copy-link="architecture-source-6-13-案Bのロ-ドマップ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<h4>フェーズ1：AI専用階層の設計</h4>
+<p>AI関連の正式なページ一覧 AIハブ、テーマ、詳細の役割定義 既存URLの維持・移行判定 パンくずと内部リンク設計 CMS属性設計 301移行計画</p>
+<h4>フェーズ2：AIトップと一覧を公開</h4>
+<pre><code>/business/ai
+/business/ai/training</code></pre>
+<p>を先に公開します。</p>
+<h4>フェーズ3：既存ページを段階移行</h4>
+<p>生成AI ChatGPT Claude AI・データ分析 の順に移行します。 移行時は1対1の301を設定し、旧URLと新URLを長期間並存させません。</p>
+<h4>フェーズ4：新規詳細を追加</h4>
+<p>AIリテラシー AI活用 AIエンジニア AI駆動開発 AIエージェント のうち、検索需要と商品差があるものだけ追加します。</p>
+<h4>フェーズ5：AI専用ファセットを実装</h4>
+<p>通常の絞り込みは非インデックスとし、承認した条件だけを静的URL化します。</p>
+<h3 id="architecture-source-6-14-案Bが案Aより劣るポイント">6-14. 案Bが案Aより劣るポイント<button class="anchor-copy" data-copy-link="architecture-source-6-14-案Bが案Aより劣るポイント" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<h2 id="architecture-source-1-現行の分類ル-ルをAIだけ例外化する">1. 現行の分類ルールをAIだけ例外化する<button class="anchor-copy" data-copy-link="architecture-source-1-現行の分類ル-ルをAIだけ例外化する" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>現在は研修詳細が/business直下にあり、lag-、thm-、occ-などで主分類を示しています。 案BではAIだけが次の階層へ移ります。</p>
+<pre><code>/business/ai/...</code></pre>
+<p>そのため、URLルールが二重になります。 Python研修 → /business/lag-python</p>
+<p>ChatGPT研修 → /business/ai/chatgpt 利用者に大きな問題がなくても、CMS、運用、分析、サイトマップ管理では例外処理が増えます。</p>
+<h2 id="architecture-source-2-AIが既存4カテゴリから独立して見える">2. AIが既存4カテゴリから独立して見える<button class="anchor-copy" data-copy-link="architecture-source-2-AIが既存4カテゴリから独立して見える" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>AI研修は、言語・ツール、テーマ、職種、階層にまたがるものです。 AI専用階層を強くすると、AIが既存4カテゴリと同列または上位の分類に見えます。 分類軸によるカテゴリ</p>
+<pre><code>＋</code></pre>
+<p>戦略テーマによる専用サイト という異なる考え方が混在します。 案AではAIは横断ハブなので、この混乱が起こりません。</p>
+<h2 id="architecture-source-3-既存URL移行の負荷とリスクがある">3. 既存URL移行の負荷とリスクがある<button class="anchor-copy" data-copy-link="architecture-source-3-既存URL移行の負荷とリスクがある" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>案Bの構造的なメリットを得るには、既存AIページを新階層へ移す必要があります。 移行には次の作業が伴います。 301設定 内部リンク変更 広告URL変更 営業資料の変更 サイトマップ変更 Search Consoleでの監視 構造化データの修正 外部リンクの更新依頼 アクセス解析設定の変更 案Aでは既存URLを維持できるため、この負荷がありません。</p>
+<h2 id="architecture-source-4-他領域も独立階層化する要求が生まれる">4. 他領域も独立階層化する要求が生まれる<button class="anchor-copy" data-copy-link="architecture-source-4-他領域も独立階層化する要求が生まれる" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>AIだけを専用階層にすると、次に以下の要求が出る可能性があります。</p>
+<pre><code>/business/dx/
+/business/security/
+/business/cloud/
+/business/data/</code></pre>
+<p>結果として、現在の4カテゴリと複数のテーマ別サブサイトが混在し、サイト構造が複雑になります。</p>
+<h2 id="architecture-source-5-案Aと比べてSEO上の追加利益が限定的">5. 案Aと比べてSEO上の追加利益が限定的<button class="anchor-copy" data-copy-link="architecture-source-5-案Aと比べてSEO上の追加利益が限定的" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>案Bのメリットは主に次の点です。 URLが整理される AI領域の一貫性が見える 分析しやすい 広告構造と合わせやすい 一方、案AでもAIハブ、内部リンク、パンくず、カテゴリ導線、構造化データを整備すれば、同じトピッククラスターを構築できます。 移行コストに対してSEO上の追加利益が小さいことが、案Bの最大の弱点です。</p>
+<h2 id="architecture-source-7-案C-ル-ト直下に-ai-を構築する">7. 案C：ルート直下に/ai/を構築する<button class="anchor-copy" data-copy-link="architecture-source-7-案C-ル-ト直下に-ai-を構築する" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<h3 id="architecture-source-7-1-案Cの基本的な考え方">7-1. 案Cの基本的な考え方<button class="anchor-copy" data-copy-link="architecture-source-7-1-案Cの基本的な考え方" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>案Cでは、AIを法人研修の一分野ではなく、CodeCampの独立したAI事業・AIブランドとして扱います。</p>
+<pre><code>/
+├── /business
+├── /open
+├── /ai
+└── その他既存領域</code></pre>
+<p>想定構造は次のとおりです。</p>
+<pre><code>/ai
+│
+├── /training
+│   ├── /generative-ai
+│   ├── /chatgpt
+│   ├── /claude
+│   ├── /ai-literacy
+│   ├── /ai-utilization
+│   ├── /ai-engineer
+│   ├── /ai-development
+│   └── /ai-agent
+│
+├── /courses
+│   └── 公開講座への導線
+│
+├── /case
+│   └── AI導入・研修事例
+│
+├── /knowledge
+│   └── AI記事・ガイド
+│
+└── /contact</code></pre>
+<p>これはAI研修サイトというより、AI事業ポータルです。</p>
+<h3 id="architecture-source-7-2-案Cが成立する事業条件">7-2. 案Cが成立する事業条件<button class="anchor-copy" data-copy-link="architecture-source-7-2-案Cが成立する事業条件" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>案Cが合理的になるのは、CodeCampが次のような事業を正式に展開する場合です。 法人向けAI研修 AI人材育成コンサルティング AI導入支援 生成AIガバナンス支援 AIアプリ・AIエージェント開発 AI人材アセスメント AIラボ・研究 AIメディア AIコミュニティ AIイベント 個人向けAI教育 この場合は、AI研修を/businessの中だけに置くより、/aiを独立したAI事業トップにする意味があります。 一方、中心商品が法人向けAI研修である限り、/aiを独立させる必要性は低くなります。</p>
+<h3 id="architecture-source-7-3-案CのAI事業トップ">7-3. 案CのAI事業トップ<button class="anchor-copy" data-copy-link="architecture-source-7-3-案CのAI事業トップ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/ai</code></pre>
+<p>対象キーワードはAI研修に限定しません。</p>
+<pre><code>CodeCamp AI</code></pre>
+<p>AI人材育成 生成AI活用支援 法人向けAIサービス AI導入支援 AI開発支援</p>
+<h3 id="architecture-source-7-4-案CのAI研修トップ">7-4. 案CのAI研修トップ<button class="anchor-copy" data-copy-link="architecture-source-7-4-案CのAI研修トップ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/ai/training</code></pre>
+<p>対象キーワードは次のとおりです。 AI研修 法人向けAI研修 企業向けAI研修 AI人材育成研修 AI講習</p>
+<h3 id="architecture-source-7-5-案CのAIテ-マ-詳細ペ-ジ">7-5. 案CのAIテーマ・詳細ページ<button class="anchor-copy" data-copy-link="architecture-source-7-5-案CのAIテ-マ-詳細ペ-ジ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>AIテーマページ</p>
+<pre><code>/ai/training/generative-ai
+/ai/training/ai-literacy
+/ai/training/ai-utilization
+/ai/training/ai-engineer
+/ai/training/ai-development
+/ai/training/ai-agent</code></pre>
+<p>AIツール別詳細</p>
+<pre><code>/ai/training/chatgpt
+/ai/training/claude
+/ai/training/gemini
+/ai/training/copilot</code></pre>
+<p>AI事例</p>
+<pre><code>/ai/case
+/ai/case/manufacturing
+/ai/case/it</code></pre>
+<p>ただし、事例数が少ない状態で業界別URLを量産してはいけません。 AIナレッジ</p>
+<pre><code>/ai/knowledge
+/ai/knowledge/how-to-choose-ai-training
+/ai/knowledge/generative-ai-guideline</code></pre>
+<p>AI研修の選び方や導入に関する情報コンテンツを置きます。</p>
+<h3 id="architecture-source-7-6-案Cにおける既存-businessとの関係">7-6. 案Cにおける既存/businessとの関係<button class="anchor-copy" data-copy-link="architecture-source-7-6-案Cにおける既存-businessとの関係" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>案Cでは、法人向けAI研修が/businessの外へ出ます。</p>
+<pre><code>/business</code></pre>
+<p>→ 法人向けIT・プログラミング研修全体</p>
+<pre><code>/ai</code></pre>
+<p>→ AI事業全体</p>
+<pre><code>/ai/training</code></pre>
+<p>→ 法人向けAI研修 問題は、AI研修が法人研修でもあるため、両方の領域に所属する点です。 方法C-1：AI研修を完全に/aiへ移す</p>
+<pre><code>/business/lag-generative-ai-chatgpt</code></pre>
+<p>→ /ai/training/generative-ai</p>
+<pre><code>/business/lag-ai-chatgpt</code></pre>
+<p>→ /ai/training/chatgpt</p>
+<pre><code>/business/claude</code></pre>
+<p>→ /ai/training/claude</p>
+<pre><code>/businessのカテゴリページからは、/ai/training/...へリンクします。</code></pre>
+<p>方法C-2：/businessと/aiに別ページを持つ</p>
+<pre><code>/business/lag-ai-chatgpt
+/ai/training/chatgpt</code></pre>
+<p>これは原則として避けます。 同じ商品を説明するページが二重に存在すると、次の問題が起こります。 カニバリゼーション canonical管理 コンテンツ同期 広告LPの選定 内部リンク評価の分散 ユーザーの混乱 更新漏れ 問い合わせ計測の分散 したがって、案Cを採るなら、AI研修詳細の正規URLは原則として/ai/training/側へ統一する必要があります。</p>
+<h3 id="architecture-source-7-7-案Cにおける4カテゴリとの関係">7-7. 案Cにおける4カテゴリとの関係<button class="anchor-copy" data-copy-link="architecture-source-7-7-案Cにおける4カテゴリとの関係" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>AI研修が/aiへ移動しても、法人向け研修の4カテゴリから探せるようにします。</p>
+<pre><code>/business/lag-list</code></pre>
+<p>→ ChatGPT研修 → /ai/training/chatgpt</p>
+<pre><code>/business/thm-list</code></pre>
+<p>→ 生成AI活用研修 → /ai/training/generative-ai</p>
+<pre><code>/business/occ-list</code></pre>
+<p>→ AIエンジニア研修 → /ai/training/ai-engineer</p>
+<pre><code>/business/hie-list</code></pre>
+<p>→ 新入社員向けAI研修 → /ai/training/ai-literacy ただし、URL上では/businessから/aiへ遷移します。 同一ドメイン内なので技術的には致命的ではありませんが、ユーザーから見ると「法人研修サイトからAIサイトへ移動した」ように感じる可能性があります。 グローバルナビゲーション、デザイン、パンくず、CTA、問い合わせ導線を統一しなければ、別サイト感が強くなります。</p>
+<h3 id="architecture-source-7-8-案Cにおける研修形態3種との関係">7-8. 案Cにおける研修形態3種との関係<button class="anchor-copy" data-copy-link="architecture-source-7-8-案Cにおける研修形態3種との関係" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>既存の研修形態ページは維持します。</p>
+<pre><code>/business/customize
+/business/package-it
+/open</code></pre>
+<p>AI研修詳細から、これらへリンクします。</p>
+<pre><code>/ai/training/chatgpt
+├── カスタマイズ研修
+│   └── /business/customize
+├── パッケージ研修
+│   └── /business/package-it
+└── 公開講座
+    └── /open/generative-ai-for-business</code></pre>
+<p>ただし、ユーザーの移動は次のようになります。</p>
+<pre><code>/ai</code></pre>
+<p>→ /ai/training/chatgpt → /business/customize → /business/voice URLのトップ階層が頻繁に変わるため、情報設計上のまとまりが弱くなります。 案Aでは、すべてが法人研修の文脈でつながるため、この問題は起こりません。</p>
+<h3 id="architecture-source-7-9-案Cのパンくず">7-9. 案Cのパンくず<button class="anchor-copy" data-copy-link="architecture-source-7-9-案Cのパンくず" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>AI事業トップ</p>
+<pre><code>CodeCamp
+&gt; AI</code></pre>
+<p>AI研修トップ</p>
+<pre><code>CodeCamp
+&gt; AI
+&gt; AI研修</code></pre>
+<p>AI研修詳細</p>
+<pre><code>CodeCamp
+&gt; AI
+&gt; AI研修
+&gt; ChatGPT研修</code></pre>
+<p>法人研修カテゴリからの経路も構造化できます。</p>
+<pre><code>CodeCamp
+&gt; 法人向け研修
+&gt; 言語・ツール別研修
+&gt; ChatGPT研修</code></pre>
+<p>しかし、表示上の主パンくずをどちらにするか決める必要があります。 AI事業を主とするなら：AI &gt; AI研修 法人研修を主とするなら：法人向け研修 &gt; 言語・ツール別 ここが曖昧だと、ページの主たる事業所属も曖昧になります。</p>
+<h3 id="architecture-source-7-10-案Cのファセットと静的ペ-ジ">7-10. 案Cのファセットと静的ページ<button class="anchor-copy" data-copy-link="architecture-source-7-10-案Cのファセットと静的ペ-ジ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>通常ファセット</p>
+<pre><code>/ai/training?audience=engineer
+/ai/training?purpose=business-utilization
+/ai/training?format=online</code></pre>
+<p>原則としてインデックスさせません。 静的ページ候補</p>
+<pre><code>/ai/training/generative-ai
+/ai/training/chatgpt
+/ai/training/claude
+/ai/training/ai-literacy
+/ai/training/ai-engineer</code></pre>
+<p>静的化の条件は案A・案Bと同じです。 検索需要 独自内容 商品差 専用事例 専用FAQ 独自の到達目標 広告・営業上の独立性 AI領域を独立させても、ファセットURLを自由にインデックスさせてよいわけではありません。</p>
+<h3 id="architecture-source-7-11-案Cの広告運用">7-11. 案Cの広告運用<button class="anchor-copy" data-copy-link="architecture-source-7-11-案Cの広告運用" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>案Cは、AI広告を独立した事業として管理する場合には分かりやすい構成です。 キャンペーン LP AI事業一般</p>
+<pre><code>/ai</code></pre>
+<p>AI研修一般</p>
+<pre><code>/ai/training</code></pre>
+<p>生成AI研修</p>
+<pre><code>/ai/training/generative-ai</code></pre>
+<p>ChatGPT研修</p>
+<pre><code>/ai/training/chatgpt</code></pre>
+<p>Claude研修</p>
+<pre><code>/ai/training/claude</code></pre>
+<p>AIエンジニア研修</p>
+<pre><code>/ai/training/ai-engineer</code></pre>
+<p>広告担当者は、/ai/配下だけを見ればAI施策の成果を確認できます。 一方、問い合わせ後の営業プロセスは法人研修事業と共通するため、CRMや計測上で次を正しく統合する必要があります。 AI事業経由 法人研修経由 公開講座経由</p>
+<h3 id="architecture-source-7-12-案Cのロ-ドマップ">7-12. 案Cのロードマップ<button class="anchor-copy" data-copy-link="architecture-source-7-12-案Cのロ-ドマップ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<h4>フェーズ1：AI事業定義</h4>
+<p>最初に、/aiが何を表すのかを決めます。 AI研修だけか AI人材育成全体か AI導入・開発支援まで含むか 個人向けAI教育も含むか ここが決まらないまま/aiを作ると、単なるAI研修LPになります。</p>
+<h4>フェーズ2：AIブランド・ナビゲーション設計</h4>
+<p>AI事業名 AI事業トップ グローバルナビゲーション デザインルール 法人研修との関係 問い合わせ窓口 事例の所属 営業責任範囲 を定義します。</p>
+<h4>フェーズ3：既存AIページの移行</h4>
+<p>既存ページを/ai/training/へ301移行します。</p>
+<h4>フェーズ4：AIコンテンツ群を追加</h4>
+<p>AI研修 AI事例 AIガイド AI導入支援 AI開発 AIイベント AIガバナンス AI専門家情報 などを追加します。</p>
+<h4>フェーズ5：AI専用ファセットと広告基盤</h4>
+<p>AI領域だけの検索、広告、LLMO、計測基盤を整備します。</p>
+<h3 id="architecture-source-7-13-案Cが案Aより劣るポイント">7-13. 案Cが案Aより劣るポイント<button class="anchor-copy" data-copy-link="architecture-source-7-13-案Cが案Aより劣るポイント" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<h2 id="architecture-source-1-現在の商品が法人研修中心なら-階層を分ける理由がない">1. 現在の商品が法人研修中心なら、階層を分ける理由がない<button class="anchor-copy" data-copy-link="architecture-source-1-現在の商品が法人研修中心なら-階層を分ける理由がない" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>現時点でAI施策の中心が法人向けAI研修であるなら、自然な所属先は/businessです。</p>
+<pre><code>/aiへ移すと、次の不一致が起こります。</code></pre>
+<p>実態：法人研修のAI分野 構造：独立したAI事業</p>
+<h2 id="architecture-source-2-法人研修の信頼資産から距離ができる">2. 法人研修の信頼資産から距離ができる<button class="anchor-copy" data-copy-link="architecture-source-2-法人研修の信頼資産から距離ができる" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>AI研修の検討者が確認するのは、研修内容だけではありません。 法人研修の運営体制 導入事例 FAQ</p>
+<pre><code>CodeCamp Insight</code></pre>
+<p>カスタマイズ対応 パッケージ研修 講師・サポート体制 これらは現在/business配下にあります。 案CではAIページから/businessへ何度も移動する必要があり、AI研修と法人研修の信頼資産が分断されて見えます。</p>
+<h2 id="architecture-source-3-URL移行範囲が案Bより大きい">3. URL移行範囲が案Bより大きい<button class="anchor-copy" data-copy-link="architecture-source-3-URL移行範囲が案Bより大きい" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>案Bは/business内での移行ですが、案Cはトップ階層自体が変わります。</p>
+<pre><code>/business/lag-ai-chatgpt</code></pre>
+<p>→ /ai/training/chatgpt 影響範囲は次のとおりです。 パンくず グローバルナビ サイト内検索 CMSテンプレート サイトマップ デザイン 広告 営業資料 アクセス解析 コンバージョン導線</p>
+<h2 id="architecture-source-4-4カテゴリとの所属関係がさらに弱くなる">4. 4カテゴリとの所属関係がさらに弱くなる<button class="anchor-copy" data-copy-link="architecture-source-4-4カテゴリとの所属関係がさらに弱くなる" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>案BではAI専用階層も/business内にあります。 案Cでは、4カテゴリから別トップ階層の/aiへリンクします。</p>
+<pre><code>/business/lag-list</code></pre>
+<p>→ /ai/training/chatgpt 情報設計上は成立しますが、現在のカテゴリ体系とURL体系が一致しなくなります。</p>
+<h2 id="architecture-source-5-openとの関係も分散する">5. /openとの関係も分散する<button class="anchor-copy" data-copy-link="architecture-source-5-openとの関係も分散する" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>公開講座は/open、法人向け詳細は/ai/training、カスタマイズは/business/customizeとなります。</p>
+<pre><code>/ai
+/business
+/open</code></pre>
+<p>の3領域を横断して1つのAI研修商品を説明することになります。 案Aなら、法人研修ハブから3研修形態を説明できるため、より単純です。</p>
+<h2 id="architecture-source-6-AIブランドへの継続投資が必要">6. AIブランドへの継続投資が必要<button class="anchor-copy" data-copy-link="architecture-source-6-AIブランドへの継続投資が必要" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<pre><code>/aiを作るなら、研修ページ数枚だけでは弱い構造になります。</code></pre>
+<p>継続的に必要になるものは次のとおりです。 AI事例 AIガイド AIニュース・更新情報 AI専門家情報 AIイベント AI導入ノウハウ AIガバナンス AI開発・コンサルティング情報 これらを継続できない場合、/aiは薄い独立サイトとなり、案Aより専門性が高く見えるとは限りません。</p>
+<h2 id="architecture-source-7-案Aよりもカニバリ管理が難しい">7. 案Aよりもカニバリ管理が難しい<button class="anchor-copy" data-copy-link="architecture-source-7-案Aよりもカニバリ管理が難しい" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<pre><code>/businessには既存のDX、AI・データ分析、業務効率化、Python、データサイエンスなどのページがあります。
+/ai側にも近いテーマを作ると、次の境界が曖昧になります。</code></pre>
+<p>AI人材育成とDX人材育成 AIデータ分析とPythonデータサイエンス AI業務活用と業務効率化 AIエンジニアとデータサイエンティスト 案Aは既存ページを横断的に束ねるため、重複を増やしません。</p>
+<h2 id="architecture-source-8-案A-案B-案Cの決定的な違い">8. 案A・案B・案Cの決定的な違い<button class="anchor-copy" data-copy-link="architecture-source-8-案A-案B-案Cの決定的な違い" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<pre><code>案A</code></pre>
+<p>既存の法人研修構造</p>
+<pre><code>＋</code></pre>
+<p>AI横断ハブ AIは戦略テーマです。 既存カテゴリ、研修形態、研修詳細を変更せず、横断して束ねます。</p>
+<pre><code>案B</code></pre>
+<p>既存の法人研修構造</p>
+<pre><code>＋</code></pre>
+<p>法人研修内のAI専用サブサイト AIは法人研修内の独立領域です。 AIだけURLルールと管理階層が変わります。</p>
+<pre><code>案C</code></pre>
+<p>既存の法人研修事業</p>
+<pre><code>＋</code></pre>
+<p>独立したAI事業 AIは法人研修と並ぶ事業領域です。 研修以外のAI事業まで広げる前提が必要です。</p>
+<h2 id="architecture-source-9-最終比較">9. 最終比較<button class="anchor-copy" data-copy-link="architecture-source-9-最終比較" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>比較観点</p>
+<pre><code>案A
+案B
+案C</code></pre>
+<p>AIの扱い 横断テーマ 法人研修内の専用領域 独立AI事業 AIハブ</p>
+<pre><code>/business/ai-training
+/business/ai
+/ai</code></pre>
+<p>AI詳細URL 既存URLを維持</p>
+<pre><code>/business/ai/...へ移行
+/ai/training/...へ移行</code></pre>
+<p>既存4カテゴリ 維持し直接連携 維持するがAI詳細は別階層 維持するが別トップ階層へリンク 研修形態3種 自然に連携 連携可能 複数トップ階層を横断 既存URL移行 原則不要 必要 大規模に必要 AI専門性 十分表現可能 高い 最も高く見せられる CMS複雑性 小 中 大 カニバリリスク 小 中 大 継続コンテンツ要求 中 中～大 大 適する事業状態 法人AI研修を拡大 AI研修を独立事業部的に運営 AI研修・開発・コンサルを総合展開 現時点の推奨度 ◎ △ ×</p>
+<h2 id="architecture-source-10-採用判断">10. 採用判断<button class="anchor-copy" data-copy-link="architecture-source-10-採用判断" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<h3 id="architecture-source-10-1-案Bを採用してよい条件">10-1. 案Bを採用してよい条件<button class="anchor-copy" data-copy-link="architecture-source-10-1-案Bを採用してよい条件" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>次の条件を満たすなら、案Bは検討できます。 AI研修を独立した商品群として継続的に10件以上展開する AI専任の企画・マーケティング・運用体制がある 既存AI関連URLの移行コストを受け入れられる AI専用のカテゴリ、事例、FAQ、広告を継続運用する AIだけURLルールが異なることを許容する 案Aでは達成できない事業上の目的がある 案Aで達成できない目的が明確でなければ、案Bを選ぶ必要はありません。</p>
+<h3 id="architecture-source-10-2-案Cを採用してよい条件">10-2. 案Cを採用してよい条件<button class="anchor-copy" data-copy-link="architecture-source-10-2-案Cを採用してよい条件" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>次の条件を満たす場合に限り、案Cが合理的になります。 AI研修以外のAI事業を正式に展開する AI事業をCodeCampの独立した成長事業として扱う AI専用ブランド、事業責任者、予算がある AI事例、ナレッジ、サービスを継続的に拡充する 法人研修事業との顧客導線と営業体制を再設計できる AI導入支援、開発、コンサルティングなどを提供する AI研修のSEO強化だけを目的に/aiを作るのは過剰です。</p>
+<h2 id="architecture-source-11-推奨する実施ロ-ドマップ">11. 推奨する実施ロードマップ<button class="anchor-copy" data-copy-link="architecture-source-11-推奨する実施ロ-ドマップ" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>現時点では案Aを前提として進めます。</p>
+<h4>フェーズ0：保有ページと分類の再確認</h4>
+<p>現在公開中の全法人研修URLを再クロール 提示された一覧との差分確認</p>
+<pre><code>/business/claudeなど一覧漏れの追加</code></pre>
+<p>重複ページの確認 孤立ページの確認 404、リダイレクトの確認 各詳細ページの主カテゴリと副カテゴリを決定 既存AIページの検索意図を整理</p>
+<h4>フェーズ1：研修データモデルを作る</h4>
+<p>各研修へ次の属性を付与します。 4カテゴリ 3研修形態 3実施形式 対象者 対象階層 対象職種 目的 レベル 期間 AI技術・ツール 関連事例 関連公開講座 インデックス方針 ファセットUIより先に、データモデルを作る必要があります。</p>
+<h4>フェーズ2：AI研修ハブを新設</h4>
+<pre><code>/business/ai-training</code></pre>
+<p>を新設し、次の資産を接続します。 既存AI関連研修 カスタマイズ研修 パッケージ研修 公開講座 導入事例 FAQ</p>
+<pre><code>CodeCamp Insight</code></pre>
+<p>対象者別導線 目的別導線 技術・ツール別導線 この段階では既存詳細URLを変更しません。</p>
+<h4>フェーズ3：既存AIページの役割を整理</h4>
+<p>次のページ間の重複と役割を整理します。 生成AIビジネス活用研修 ChatGPT基礎・実践研修 Claude研修 AI・データ分析研修 Pythonデータサイエンス研修 業務効率化・自動化研修 DX人材育成研修 データエンジニア・データサイエンティスト研修 各ページについて、次を明確にします。 主キーワード 対象者 到達目標 カリキュラム 使用ツール 成果物 研修形態 CTA 関連研修 関連事例</p>
+<h4>フェーズ4：不足する研修詳細を追加</h4>
+<p>商品として実在し、検索意図が異なるものだけ新設します。 候補は次のとおりです。 AIリテラシー研修 AIエンジニア研修 AIエージェント活用研修 AI駆動開発研修 AIエージェント開発研修 ただし、キーワード名が異なるだけでは新設しません。 検索需要、商品差、営業提案、事例、カリキュラムの違いを確認します。</p>
+<h4>フェーズ5：ファセット実装</h4>
+<pre><code>/business/training</code></pre>
+<p>を全研修のマスター一覧として追加します。 実施内容は次のとおりです。 属性による絞り込み 通常の絞り込みURLはクロール・インデックス対象外 SEO対象の組み合わせだけ静的URL化 結果0件は適切に404または検索結果なしとして処理 サイトマップには正規URLのみ掲載 ファセット結果を無制限に内部リンクしない 並び替えURLをインデックスさせない ホワイトリスト対象を管理画面で制御する</p>
+<h4>フェーズ6：カテゴリURLの扱いを判断</h4>
+<p>カテゴリページは、まずURLを維持したまま動的化します。</p>
+<pre><code>/business/lag-list
+/business/hie-list
+/business/thm-list
+/business/occ-list</code></pre>
+<p>どうしても移行が必要な場合だけ、次のデータを確認します。 Search Console 被リンク 自然検索流入 問い合わせ CV 内部リンク 外部参照 広告利用実績 そのうえで1対1の301を実施します。</p>
+<h4>フェーズ7：案B・案Cへの移行条件を定期評価</h4>
+<p>案Aを採用した後も、次の指標を定期的に確認します。 AI研修の商品数 AI関連自然検索流入 AI経由問い合わせ数 AI経由売上 AI専任チームの有無 AI導入事例数 AIナレッジコンテンツ数 AI研修以外のサービス展開 AIブランドの認知 AI広告予算 AI研修の数、流入、問い合わせ、売上、事例、コンテンツ量が一定規模を超えた場合に、案Bへの移行を再評価します。 研修以外のAI導入支援、開発、コンサルティングなどが事業化された場合に、案Cを再評価します。</p>
+<h2 id="architecture-source-12-最終判断">12. 最終判断<button class="anchor-copy" data-copy-link="architecture-source-12-最終判断" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>現状のCodeCampで作るべき構造は、AI専用サイトでも、AI専用の独立カテゴリツリーでもありません。 既存の法人研修基盤</p>
+<pre><code>├── カテゴリ4種
+├── 研修形態3種
+├── 実施形式
+├── 研修詳細
+├── 固定・サービスページ
+└── AI横断ハブ</code></pre>
+<p>という構造です。 AIは、既存カテゴリや研修形態を置き換えるものではありません。 既存のカリキュラム資産を、AIという戦略テーマで横断的に束ね直すものです。 最優先で実施すべきことは、次のとおりです。</p>
+<pre><code>/business/ai-trainingを横断ハブとして作る</code></pre>
+<p>既存詳細URLは原則として維持する 各研修に複数カテゴリ、研修形態、実施形式を属性として持たせる 4カテゴリページは安易に削除せず、動的化を優先する ファセットURLは原則として非インデックスにする 検索需要と独自内容がある組み合わせだけ静的ページ化する 検索意図と商品差が明確なAI研修だけ詳細ページを追加する AIハブ、研修詳細、研修形態、公開講座、事例、FAQを相互接続する 現状の優先順位は次のとおりです。 第1選択：案A</p>
+<pre><code>/business/ai-trainingを横断ハブとして追加</code></pre>
+<p>第2選択：案B AI研修を独立商品群として大規模運営する場合のみ</p>
+<p>第3選択：案C 研修を超えた独立AI事業を展開する場合のみ 案Aが優れている理由は、単に移行負荷が小さいからではありません。</p>
+<pre><code>CodeCampがすでに保有している、4カテゴリ、3研修形態、固定ページ、研修詳細、公開講座、事例、FAQ、CodeCamp Insightという資産を、そのままAI施策に利用できるからです。</code></pre>
+<p>案Bと案Cは、AIを独立して見せる力は強くなりますが、その代わりに既存構造との接続コスト、URL移行、CMS例外処理、カニバリ管理、継続的なコンテンツ投資が増えます。 したがって、現在は案Aを採用し、将来AI事業の規模が拡大した段階で、次のように発展させるのが最も安全です。</p>
+<pre><code>案A</code></pre>
+<p>→ 必要条件を満たした場合に案B → AI事業が研修を超えた場合に案C 案Aは、将来の案B・案Cへの移行を妨げません。 まず/business/ai-trainingを横断ハブとして育て、AI研修の数、流入、問い合わせ、売上、事例、コンテンツ量が一定規模を超えた時点で、独立階層化の必要性を再評価することが最適です。</p></div>
+        </details>
+        <details class="source-document" id="keyword-source">
+          <summary><span>文書2</span><strong>カテゴリ・ハブと研修詳細のキーワード設計案</strong><small>市場、SV・CPC、所有ページ、カニバリ境界</small></summary>
+          <div class="source-content"><pre><code>CodeCamp法人向けAI研修</code></pre>
+<p>カテゴリ・ハブページと研修詳細ページのキーワード設計案</p>
+<h2 id="keyword-source-0-結論">0. 結論<button class="anchor-copy" data-copy-link="keyword-source-0-結論" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>案A・B・Cのいずれを採用しても、狙うべきキーワード群は基本的に同じです。 ページの役割 狙うキーワードの種類 AI研修総合ハブ AI研修、法人向けAI研修、AI講習などの総称語 生成AI研修詳細 生成AI研修、生成AI活用研修などの商品・テーマ語 ChatGPT研修詳細 ChatGPT研修などのツール固有語 Claude研修詳細 Claude研修、Claude Code研修などのツール固有語 AI・データ分析研修詳細 AI・データ分析研修、機械学習研修などの技術・テーマ語 AIエンジニア研修詳細 AIエンジニア研修などの職種育成語 比較・選定コンテンツ AI研修 おすすめ、AI研修 比較、AI研修会社など ファセット オンライン、対象者、階層、研修形態などの属性語</p>
+<p>もっとも重要な方針は、次の4つです。 「AI研修」は総合ハブが受け持つ 「生成AI研修」「ChatGPT研修」「Claude研修」はそれぞれの詳細ページが受け持つ 「AI研修 おすすめ」は商用サービスページではなく比較・選定コンテンツが受け持つ 「オンライン」「管理職向け」などは原則ファセットとし、独自内容があるものだけ静的ページ化する 添付レポートでは、「AI・生成AI」領域は20キーワード、合計SV9,300に対し、CodeCampのTop10獲得数が0と集計されています。ページ自体が存在しないのではなく、総称語・テーマ語・ツール語の受け皿と役割分担が十分でない状態と考えられます。</p>
+<h2 id="keyword-source-1-添付レポ-トから見える主要市場">1. 添付レポートから見える主要市場<button class="anchor-copy" data-copy-link="keyword-source-1-添付レポ-トから見える主要市場" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>添付レポートの主要キーワードを、検索意図に沿って整理すると次のようになります。</p>
+<h3 id="keyword-source-1-1-AI研修の総称-カテゴリ需要">1-1. AI研修の総称・カテゴリ需要<button class="anchor-copy" data-copy-link="keyword-source-1-1-AI研修の総称-カテゴリ需要" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>キーワード 月間SV CPC 推奨する受け皿 AI研修 1,900 1,581円 AI研修総合ハブ AI講習 320 735円 AI研修総合ハブ AI人材研修 40 1,941円 AI研修総合ハブ AI研修 オンライン 40 1,415円 ハブ内の形式説明・ファセット AI研修 おすすめ 320 1,401円 比較・選定コンテンツ AIエンジニア研修 40 1,549円 独立研修詳細候補</p>
+<p>「AI研修」のクラスタには36キーワードが含まれ、ハブキーワードの「AI研修」はSV1,900、CPC1,581円です。同クラスタには「生成AI研修」「AI活用研修」「AI人材研修」に加えてDX関連語も含まれています。 ただし、これはSERP上位ドメインの重複による機械的なクラスタです。 AI研修とDX研修を1ページに統合するという意味ではありません。AI研修はAIハブ、DX研修は既存の/business/dxに分けるべきです。</p>
+<h3 id="keyword-source-1-2-生成AI-ツ-ル固有需要">1-2. 生成AI・ツール固有需要<button class="anchor-copy" data-copy-link="keyword-source-1-2-生成AI-ツ-ル固有需要" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>キーワード 月間SV CPC 推奨する受け皿 生成AI研修 1,000 1,309円 生成AI研修詳細 AI活用研修 110 993円 生成AI研修詳細 生成AI活用研修 90 991円 生成AI研修詳細 ChatGPT研修 140 1,309円 ChatGPT研修詳細 Claude研修 90 994円 Claude研修詳細</p>
+<p>「生成AI研修」はSV1,000、CPC1,309円、「ChatGPT研修」はSV140、CPC1,309円です。検索語と上位サイトも完全には同一ではないため、生成AI研修とChatGPT研修は別ページで受け持つのが妥当です。 Claude研修もSV90、CPC994円で独立した検索結果を形成しています。</p>
+<h3 id="keyword-source-1-3-DX領域の需要">1-3. DX領域の需要<button class="anchor-copy" data-copy-link="keyword-source-1-3-DX領域の需要" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>キーワード 月間SV CPC 推奨する受け皿 DX研修 590 1,116円</p>
+<pre><code>/business/dx</code></pre>
+<p>DX人材育成 480 1,956円</p>
+<pre><code>/business/dx</code></pre>
+<p>DX人材育成研修 70 2,329円</p>
+<pre><code>/business/dx</code></pre>
+<p>DXリスキリング 140 1,156円</p>
+<pre><code>/business/dxまたは解説コンテンツ</code></pre>
+<p>DX推進研修 40 1,195円</p>
+<pre><code>/business/dx</code></pre>
+<p>DXリテラシー研修 40 792円</p>
+<pre><code>/business/dxまたは詳細候補</code></pre>
+<p>DX基礎研修 30 データなし</p>
+<pre><code>/business/dxまたは詳細候補</code></pre>
+<p>DX研修 おすすめ 170 1,621円 比較・選定コンテンツ DX研修会社 40 1,076円 比較・選定コンテンツ DX研修 費用 10 397円</p>
+<pre><code>/business/dx内の料金・FAQ</code></pre>
+<pre><code>CodeCampの現在の/business/dxは、DX人材育成、DX推進、リスキリング、業務効率化、IT・AIの基礎などを包括するページです。したがって、AI総合ハブに統合せず、DX領域の主ページとして残すのが妥当です。</code></pre>
+<h2 id="keyword-source-2-URL案A-B-Cとキ-ワ-ドの対応">2. URL案A・B・Cとキーワードの対応<button class="anchor-copy" data-copy-link="keyword-source-2-URL案A-B-Cとキ-ワ-ドの対応" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>キーワードの担当ページは変えず、URLだけを案ごとに変えます。 ページ概念</p>
+<pre><code>案A
+案B
+案C</code></pre>
+<p>AI研修総合</p>
+<pre><code>/business/ai-training
+/business/ai
+/ai/training</code></pre>
+<p>生成AI研修</p>
+<pre><code>/business/lag-generative-ai-chatgpt
+/business/ai/generative-ai
+/ai/training/generative-ai</code></pre>
+<p>ChatGPT研修</p>
+<pre><code>/business/lag-ai-chatgpt
+/business/ai/chatgpt
+/ai/training/chatgpt</code></pre>
+<p>Claude研修</p>
+<pre><code>/business/claude
+/business/ai/claude
+/ai/training/claude</code></pre>
+<p>AI・データ分析</p>
+<pre><code>/business/thm-ai-data-analysis
+/business/ai/data-analysis
+/ai/training/data-analysis</code></pre>
+<p>Pythonデータサイエンス</p>
+<pre><code>/business/thm-python-data-science
+/business/ai/python-data-science
+/ai/training/python-data-science</code></pre>
+<p>AIエンジニア</p>
+<pre><code>/business/occ-ai-engineer候補
+/business/ai/ai-engineer
+/ai/training/ai-engineer</code></pre>
+<p>AIリテラシー</p>
+<pre><code>/business/thm-ai-literacy候補
+/business/ai/ai-literacy
+/ai/training/ai-literacy</code></pre>
+<p>したがって、先に決めるべきなのはURLではなく、次のようなキーワード所有ルールです。 AI研修 → AI研修総合ハブ</p>
+<p>生成AI研修 → 生成AI研修詳細</p>
+<p>ChatGPT研修 → ChatGPT研修詳細</p>
+<p>Claude研修 → Claude研修詳細</p>
+<p>AIエンジニア研修 → AIエンジニア研修詳細</p>
+<p>AI研修 おすすめ → 比較・選定コンテンツ</p>
+<h2 id="keyword-source-3-カテゴリ-ハブペ-ジで狙うキ-ワ-ド">3. カテゴリ・ハブページで狙うキーワード<button class="anchor-copy" data-copy-link="keyword-source-3-カテゴリ-ハブペ-ジで狙うキ-ワ-ド" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<h3 id="keyword-source-3-1-AI研修総合ハブ">3-1. AI研修総合ハブ<button class="anchor-copy" data-copy-link="keyword-source-3-1-AI研修総合ハブ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>案AのURL</p>
+<pre><code>/business/ai-training</code></pre>
+<p>主キーワード 優先度 キーワード SV CPC 最優先 AI研修 1,900 1,581円 高 AI講習 320 735円 高 法人向けAI研修 レポートに直接値なし ― 高 企業向けAI研修 レポートに直接値なし ― 中 AI人材研修 40 1,941円 中 AI人材育成研修 レポートに直接値なし ― 中 社内AI研修 レポートに直接値なし ― 補助 AI研修 オンライン 40 1,415円</p>
+<p>ページが所有すべき検索意図 どのAI研修を選べばよいか</p>
+<pre><code>CodeCampにはどのようなAI研修があるか</code></pre>
+<p>全社員向け、エンジニア向けの違い 生成AI、データ分析、AI開発の違い カスタマイズ、パッケージ、公開講座の違い オンライン、現地、ハイブリッドの対応可否 AI人材をどのように育成するか タイトル案 法人向けAI研修・AI人材育成｜生成AI・ChatGPT・Claude研修｜CodeCamp H1案 企業・法人向けAI研修 ページ内で含める語 AI研修 AI人材育成 AIリテラシー 生成AI活用 AIエンジニア育成 法人研修 企業研修 カスタマイズ研修 パッケージ研修 公開講座 オンライン研修 対面研修 ハイブリッド研修 このページで主対象にしない語 生成AI研修 ChatGPT研修 Claude研修 機械学習研修 AIエンジニア研修 これらはカード、比較表、説明見出しには掲載しますが、主な検索受け皿はそれぞれの研修詳細です。</p>
+<h3 id="keyword-source-3-2-DX研修-DX人材育成ペ-ジ">3-2. DX研修・DX人材育成ページ<button class="anchor-copy" data-copy-link="keyword-source-3-2-DX研修-DX人材育成ペ-ジ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>現在のURL</p>
+<pre><code>/business/dx</code></pre>
+<p>主キーワード 優先度 キーワード SV CPC 最優先 DX研修 590 1,116円 最優先 DX人材育成 480 1,956円 高 DX人材育成研修 70 2,329円 高 DX推進研修 40 1,195円 中 DXリスキリング 140 1,156円 中 DXリテラシー研修 40 792円 中 DX基礎研修 30 ― 補助 デジタル人材育成研修 30 レポート値あり 補助 DX研修 費用 10 397円</p>
+<p>タイトル案 法人向けDX研修・DX人材育成研修｜デジタル人材の育成ならCodeCamp H1案 DX人材育成研修 ページ内で分けるべき章 DX人材育成研修</p>
+<pre><code>├── DX基礎・DXリテラシー
+├── DX推進人材育成
+├── 業務改善・自動化
+├── データ活用
+├── AI・生成AI活用
+└── エンジニア・専門人材育成</code></pre>
+<p>分割を検討する条件 「DXリテラシー研修」や「DX基礎研修」について、次の要素が独立して存在する場合は詳細ページ化を検討します。 独立したカリキュラム 独立した対象者 固有の到達目標 固有の導入事例 固有の広告グループ 一定の問い合わせ実績 現段階では/business/dx内の明確な章として受け持たせる方法が優先です。</p>
+<h3 id="keyword-source-3-3-AI研修の比較-選定ペ-ジ">3-3. AI研修の比較・選定ページ<button class="anchor-copy" data-copy-link="keyword-source-3-3-AI研修の比較-選定ペ-ジ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>主キーワード キーワード SV CPC AI研修 おすすめ 320 1,401円 AI研修 比較 レポートに直接値なし ― AI研修会社 レポートに直接値なし ― AI研修 一覧 レポートに直接値なし ― 法人向けAI研修 比較 レポートに直接値なし ―</p>
+<p>「AI研修 おすすめ」はAI研修総合ハブではなく、第三者比較に近い情報収集意図です。添付レポートでも、上位サイトは比較・メディア系が中心です。 推奨する受け皿</p>
+<pre><code>CodeCampには現在、研修検索・比較領域にAI研修一覧ページがあります。ここではCodeCampだけでなく他社のAI研修も掲載されているため、「AI研修一覧」「AI研修おすすめ」「AI研修比較」の受け皿に向いています。</code></pre>
+<p>推奨構造 比較・選定コンテンツ</p>
+<pre><code>├── 法人向けAI研修の選び方
+├── AI研修会社の比較ポイント
+├── 研修の目的別比較
+├── 料金・期間・形式の比較
+└── CodeCampのAI研修へ誘導</code></pre>
+<p>注意点 比較ページと/business/ai-trainingの両方で「AI研修」を主キーワードにすると、カニバリが起きます。 役割は次のように分けます。 ページ 検索意図</p>
+<pre><code>/business/ai-training
+CodeCampのAI研修を導入したい</code></pre>
+<p>比較・検索コンテンツ AI研修を比較・選定したい</p>
+<h3 id="keyword-source-3-4-DX研修の比較-選定ペ-ジ">3-4. DX研修の比較・選定ページ<button class="anchor-copy" data-copy-link="keyword-source-3-4-DX研修の比較-選定ペ-ジ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>主キーワード キーワード SV CPC DX研修 おすすめ 170 1,621円 DX研修会社 40 1,076円 DX研修 比較 レポートに直接値なし ―</p>
+<p>これも/business/dxではなく、比較・選定コンテンツ側で受け持たせます。 DX研修のおすすめ・比較ページ → /business/dxへ誘導</p>
+<h2 id="keyword-source-4-既存の4カテゴリペ-ジに設定するキ-ワ-ド">4. 既存の4カテゴリページに設定するキーワード<button class="anchor-copy" data-copy-link="keyword-source-4-既存の4カテゴリペ-ジに設定するキ-ワ-ド" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>既存の4カテゴリページには、AI総称語を主キーワードとして設定しません。</p>
+<h3 id="keyword-source-4-1-言語-ツ-ル別研修">4-1. 言語・ツール別研修<button class="anchor-copy" data-copy-link="keyword-source-4-1-言語-ツ-ル別研修" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/business/lag-list</code></pre>
+<p>主キーワード候補 プログラミング言語・ツール別研修 プログラミング言語研修 ITツール研修 法人向けプログラミング研修 企業向けプログラミング研修 AIとの関係 次の研修への発見経路として使います。 生成AIビジネス活用研修 ChatGPT研修 Claude研修 Python研修 現在の言語・ツール別一覧にも、生成AI、ChatGPT、Claude、AI・データ分析などが掲載されています。 ただし、このページ自体で「AI研修」の上位表示を主目的にはしません。</p>
+<h3 id="keyword-source-4-2-テ-マ別研修">4-2. テーマ別研修<button class="anchor-copy" data-copy-link="keyword-source-4-2-テ-マ別研修" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/business/thm-list</code></pre>
+<p>主キーワード候補 テーマ別IT研修 テーマ別法人研修 IT研修テーマ一覧 DX・AI・セキュリティ研修一覧 AIとの関係 AI・データ分析研修 業務効率化・自動化研修 DX人材育成研修 Pythonデータサイエンス研修 への発見経路です。 現在のテーマ別ページは、Webアプリ開発、AI・データ分析、DX推進などをテーマ別に紹介しています。</p>
+<h3 id="keyword-source-4-3-職種別研修">4-3. 職種別研修<button class="anchor-copy" data-copy-link="keyword-source-4-3-職種別研修" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/business/occ-list</code></pre>
+<p>主キーワード候補 職種別IT研修 IT職種別研修 エンジニア職種別研修 IT人材職種別育成 AIとの関係 AIエンジニア データサイエンティスト データエンジニア AI活用人材 AI開発エンジニア への発見経路です。</p>
+<h3 id="keyword-source-4-4-階層別研修">4-4. 階層別研修<button class="anchor-copy" data-copy-link="keyword-source-4-4-階層別研修" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/business/hie-list</code></pre>
+<p>主キーワード キーワード SV 階層別研修 480 階層別研修とは 260</p>
+<p>AIとの関係 新入社員向けAI研修 全社員向けAI研修 管理職向けAI研修 エンジニア向けAI研修 への発見経路になります。 ただし、これらの対象者別AIページをすべて静的化するのではなく、独自内容がある場合のみホワイトリスト化します。</p>
+<h2 id="keyword-source-5-研修詳細ペ-ジで狙うキ-ワ-ド">5. 研修詳細ページで狙うキーワード<button class="anchor-copy" data-copy-link="keyword-source-5-研修詳細ペ-ジで狙うキ-ワ-ド" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<h3 id="keyword-source-5-1-生成AIビジネス活用研修">5-1. 生成AIビジネス活用研修<button class="anchor-copy" data-copy-link="keyword-source-5-1-生成AIビジネス活用研修" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>案AのURL</p>
+<pre><code>/business/lag-generative-ai-chatgpt</code></pre>
+<p>主キーワード 優先度 キーワード SV CPC 最優先 生成AI研修 1,000 1,309円 高 AI活用研修 110 993円 高 生成AI活用研修 90 991円 中 法人向け生成AI研修 レポートに直接値なし ― 中 企業向け生成AI研修 レポートに直接値なし ― 中 生成AI業務活用研修 レポートに直接値なし ― 補助 ビジネス活用のためのAI研修 20 745円</p>
+<p>このページの役割 複数の生成AIツールを業務に活用する 生成AIの基礎を理解する プロンプトを業務へ適用する 業務課題を生成AIで解決する 組織として安全にAIを導入する 現在のページも、ChatGPTをはじめとする生成AIの仕組みと活用方法を学び、業務効率化やビジネス課題解決につなげる内容です。 タイトル案 法人向け生成AI研修・生成AI活用研修｜業務活用を実践的に学ぶ｜CodeCamp H1案 生成AIビジネス活用研修 このページで主対象にしない語 AI研修 ChatGPT研修 Claude研修 AIエンジニア研修 「ChatGPT」は使用ツールとして掲載しても、検索上の主対象は「生成AI研修」です。</p>
+<h3 id="keyword-source-5-2-ChatGPT基礎-実践研修">5-2. ChatGPT基礎・実践研修<button class="anchor-copy" data-copy-link="keyword-source-5-2-ChatGPT基礎-実践研修" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>案AのURL</p>
+<pre><code>/business/lag-ai-chatgpt</code></pre>
+<p>主キーワード 優先度 キーワード SV CPC 最優先 ChatGPT研修 140 1,309円 高 法人向けChatGPT研修 レポートに直接値なし ― 高 企業向けChatGPT研修 レポートに直接値なし ― 中 ChatGPT講習 レポートに直接値なし ― 中 ChatGPT活用研修 レポートに直接値なし ― 補助 ChatGPT研修 オンライン レポートに直接値なし ―</p>
+<p>このページの役割 ChatGPTの基本操作 プロンプト作成 ChatGPTによるタスク自動化 ChatGPTによる業務効率化 ChatGPT固有の機能活用 現在のページも、ChatGPTの基本的な活用方法、タスク自動化、ビジネス効率化を目的としています。 タイトル案 法人向けChatGPT研修｜基礎・プロンプト・業務効率化を実践｜CodeCamp H1案 ChatGPT基礎・実践研修</p>
+<h3 id="keyword-source-5-3-Claude実践研修">5-3. Claude実践研修<button class="anchor-copy" data-copy-link="keyword-source-5-3-Claude実践研修" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>案AのURL</p>
+<pre><code>/business/claude</code></pre>
+<p>主キーワード 優先度 キーワード SV CPC 最優先 Claude研修 90 994円 高 Claude Code研修 レポートに直接値なし ― 高 法人向けClaude研修 レポートに直接値なし ― 中 Claude活用研修 レポートに直接値なし ― 中 Claude業務効率化研修 レポートに直接値なし ― 中 Claude AI研修 レポートに直接値なし ―</p>
+<p>現在のページが持つ内容 現在のClaude研修は、次の両方を扱っています。 全社員向けのAIコワーク、業務効率化、ノーコード改善 エンジニア向けのClaude Code、MCP、自律型開発 タイトル案 法人向けClaude研修・Claude Code研修｜業務活用とAI駆動開発｜CodeCamp 分割を検討する条件 今後「AI駆動開発研修」を独立させる場合は、次のように分けます。 ページ 主な検索語 Claude研修 Claude研修、Claude活用研修 AI駆動開発研修 AI駆動開発研修、AIコーディング研修 AIエージェント開発研修 AIエージェント開発研修、RAG研修</p>
+<p>現段階では、添付レポートにAI駆動開発・AIエージェント開発のSVが含まれていないため、Claude研修から直ちに分割する根拠は不足しています。</p>
+<h3 id="keyword-source-5-4-AI-デ-タ分析研修">5-4. AI・データ分析研修<button class="anchor-copy" data-copy-link="keyword-source-5-4-AI-デ-タ分析研修" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>案AのURL</p>
+<pre><code>/business/thm-ai-data-analysis</code></pre>
+<p>主キーワード AI・データ分析研修 AIデータ分析研修 データ分析研修 機械学習研修 AI基礎研修 AI・機械学習研修 添付レポートでは「機械学習研修」のSVは20です。 ただし、「AI・データ分析研修」という完全一致語のSV・CPCは、添付レポートの主要クラスタ表では直接確認できません。そのため、ページ名の完全一致語だけでなく、実際のカリキュラムに合わせて「データ分析」「機械学習」を明確に設定します。 タイトル案 法人向けAI・データ分析研修｜機械学習・統計・データ活用を学ぶ｜CodeCamp H1案 AI・データ分析研修 このページで扱う範囲 AIの基本原理 データ分析基礎 統計 機械学習 データを使った意思決定 AI活用の企画・判断 現在、公開講座にもAI初学者向けのAI機械学習実践Campがあり、AIの基礎、業務活用の企画・判断、導入プロセスを扱っています。法人向けページと公開講座ページは、企業導入と1名参加という検索意図で分けます。</p>
+<h3 id="keyword-source-5-5-Pythonデ-タサイエンス研修">5-5. Pythonデータサイエンス研修<button class="anchor-copy" data-copy-link="keyword-source-5-5-Pythonデ-タサイエンス研修" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>案AのURL</p>
+<pre><code>/business/thm-python-data-science</code></pre>
+<p>主キーワード Pythonデータサイエンス研修 Pythonデータ分析研修 法人向けPythonデータサイエンス研修 Python機械学習研修 Python統計研修 ページの役割 Pythonを使ったデータ分析 Pythonによるデータ加工 統計処理 機械学習の実装 データサイエンス業務 現在、CodeCampにはPython基礎・実践研修とは別にPythonデータサイエンス研修が存在します。Python基礎・実践研修は文法からWebアプリやデータ分析への応用までを扱うため、データサイエンスページでは分析・統計・機械学習に焦点を絞る必要があります。 カニバリ防止 ページ 主な検索語</p>
+<pre><code>/business/lag-python</code></pre>
+<p>Python研修、Pythonプログラミング研修</p>
+<pre><code>/business/thm-python-data-science</code></pre>
+<p>Pythonデータサイエンス研修、Pythonデータ分析研修</p>
+<pre><code>/business/thm-ai-data-analysis</code></pre>
+<p>AI・データ分析研修、機械学習研修</p>
+<h3 id="keyword-source-5-6-デ-タエンジニア-デ-タサイエンティスト研修">5-6. データエンジニア・データサイエンティスト研修<button class="anchor-copy" data-copy-link="keyword-source-5-6-デ-タエンジニア-デ-タサイエンティスト研修" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>案AのURL</p>
+<pre><code>/business/occ-data-engineer-scientist</code></pre>
+<p>主キーワード データサイエンティスト研修 データエンジニア研修 データサイエンティスト育成研修 データエンジニア育成研修 データ人材育成研修 AIエンジニア研修との関係 「AIエンジニア研修」はSV40、CPC1,549円で、専門人材育成として商業性のある検索語です。 しかし、AIエンジニアとデータサイエンティストは完全に同じ職種ではありません。 そのため、次のどちらかで判断します。 独自商品がない場合 データエンジニア・データサイエンティスト研修</p>
+<pre><code>└── AIエンジニア育成に関する章を設ける</code></pre>
+<p>この場合、「AIエンジニア研修」をタイトルの主キーワードにはしません。 独自商品がある場合</p>
+<pre><code>/business/occ-ai-engineer</code></pre>
+<p>を新設します。</p>
+<h3 id="keyword-source-5-7-AIエンジニア研修">5-7. AIエンジニア研修<button class="anchor-copy" data-copy-link="keyword-source-5-7-AIエンジニア研修" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>新設条件付きページ</p>
+<pre><code>/business/occ-ai-engineer</code></pre>
+<p>主キーワード 優先度 キーワード SV CPC 最優先 AIエンジニア研修 40 1,549円 高 AIエンジニア育成研修 レポートに直接値なし ― 高 生成AIエンジニア研修 レポートに直接値なし ― 中 AI開発研修 レポートに直接値なし ― 中 AIアプリ開発研修 レポートに直接値なし ― 中 機械学習エンジニア研修 レポートに直接値なし ―</p>
+<p>新設に必要なカリキュラム Python 機械学習 LLM API RAG LangChain・LangGraph AIエージェント 評価・監視 セキュリティ AIアプリケーション開発 現在の公開講座には、LangChain・LangGraphを使用してRAGやAIエージェントアプリケーション開発を学ぶ生成AIエンジニア養成Campがあります。この内容を法人向けにカスタマイズ提供できるなら、AIエンジニア研修の独立ページを作る商品上の根拠になります。</p>
+<h3 id="keyword-source-5-8-業務改善-効率化研修">5-8. 業務改善・効率化研修<button class="anchor-copy" data-copy-link="keyword-source-5-8-業務改善-効率化研修" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>案AのURL</p>
+<pre><code>/business/thm-automation</code></pre>
+<p>主キーワード 業務効率化研修 業務改善研修 自動化研修 業務自動化研修 AI業務効率化研修 生成AI業務効率化研修 DX業務改善研修 生成AI研修との違い ページ 主目的 生成AI研修 生成AIを理解し、業務へ活用する 業務改善・効率化研修 業務プロセスを整理し、AI・GAS・RPAなどで改善する</p>
+<p>現在の業務改善・効率化研修には、生成AI基礎も含まれています。したがって、生成AI研修との重複を避けるため、こちらは「業務フロー」「改善」「自動化」を主軸にします。</p>
+<h3 id="keyword-source-5-9-AIリテラシ-研修">5-9. AIリテラシー研修<button class="anchor-copy" data-copy-link="keyword-source-5-9-AIリテラシ-研修" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>新設条件付きページ</p>
+<pre><code>/business/thm-ai-literacy</code></pre>
+<p>主キーワード候補 AIリテラシー研修 生成AIリテラシー研修 全社員向けAI研修 社員向けAI教育 AI基礎研修 AIリスク研修 生成AIガバナンス研修 注意点 添付レポートには「AIリテラシー研修」の直接的なSV・CPCがありません。 したがって、SEOデータだけで優先度を高くするのではなく、次を確認して判断します。 独自カリキュラムがあるか ITリテラシー研修と異なるか 全社員向けの導入需要があるか 営業商談で要望があるか AIガバナンスやセキュリティを扱えるか 導入事例を掲載できるか 新入社員向けAI研修も、添付レポートではSV0です。 新入社員という属性だけで独立ページを作るのではなく、新入社員専用のカリキュラムと事例がある場合に限って静的化します。</p>
+<h2 id="keyword-source-6-オンライン-はどこで狙うか">6. 「オンライン」はどこで狙うか<button class="anchor-copy" data-copy-link="keyword-source-6-オンライン-はどこで狙うか" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>「AI研修 オンライン」はSV40、CPC1,415円で、競争性の高い検索語です。 ただし、オンラインは商品ではなく実施形式です。 初期段階の推奨 独立した静的ページを作らず、次で対応します。</p>
+<pre><code>/business/ai-training
+├── オンライン対応の説明
+├── 対面との違い
+├── ハイブリッドとの違い
+├── オンライン演習の方法
+├── 講師サポート
+└── CodeCamp Insightによる進捗管理</code></pre>
+<p>各研修詳細にもオンライン対応を明記します。 ファセット</p>
+<pre><code>/business/training?theme=ai&amp;format=online</code></pre>
+<p>はユーザーの絞り込み用とし、原則インデックスさせません。 静的ページ化する条件 次を満たした場合だけ、ホワイトリストで静的ページ化を検討します。 オンライン固有の検索流入が継続している 広告で高いCVRが出る 対面研修と異なる説明が十分にある オンライン研修の事例がある オンライン専用プランがある オンライン固有のFAQがある</p>
+<h2 id="keyword-source-7-公開講座のキ-ワ-ド設計">7. 公開講座のキーワード設計<button class="anchor-copy" data-copy-link="keyword-source-7-公開講座のキ-ワ-ド設計" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>公開講座は、法人向けカスタマイズ研修と同じ主キーワードを狙わないようにします。</p>
+<h3 id="keyword-source-7-1-生成AI活用-for-Biz">7-1. 生成AI活用 for Biz<button class="anchor-copy" data-copy-link="keyword-source-7-1-生成AI活用-for-Biz" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/open/generative-ai-for-business</code></pre>
+<p>狙う語 生成AI公開講座 生成AI講座 生成AIセミナー 生成AI研修 1名 生成AI研修 公開講座 Gemini講座 現在の講座ではGeminiを使用した生成AI活用を扱っています。</p>
+<h3 id="keyword-source-7-2-生成AIエンジニア養成Camp">7-2. 生成AIエンジニア養成Camp<button class="anchor-copy" data-copy-link="keyword-source-7-2-生成AIエンジニア養成Camp" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/open/generative-ai-engineer-camp</code></pre>
+<p>狙う語 生成AIエンジニア講座 AIエンジニア公開講座 RAG講座 AIエージェント開発講座 LangChain研修 LangGraph研修</p>
+<h3 id="keyword-source-7-3-AI機械学習実践Camp">7-3. AI機械学習実践Camp<button class="anchor-copy" data-copy-link="keyword-source-7-3-AI機械学習実践Camp" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/open/ai-machine-learning-camp</code></pre>
+<p>狙う語 AI機械学習講座 機械学習公開講座 AI基礎講座 AI活用講座 AI初学者講座</p>
+<h3 id="keyword-source-7-4-AIエディタ活用コ-ディング集中講座">7-4. AIエディタ活用コーディング集中講座<button class="anchor-copy" data-copy-link="keyword-source-7-4-AIエディタ活用コ-ディング集中講座" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<pre><code>/open/ai-editor-coding-intensive</code></pre>
+<p>狙う語 AIエディタ講座 AIコーディング講座 AIエディタ研修 生成AIコーディング研修 エンジニア向けAI講座 法人向け詳細ページでは「法人研修」「企業導入」を主軸とし、公開講座では「公開講座」「1名参加」「開催日」「申し込み」を主軸にします。</p>
+<h2 id="keyword-source-8-ファセットで処理すべきキ-ワ-ド">8. ファセットで処理すべきキーワード<button class="anchor-copy" data-copy-link="keyword-source-8-ファセットで処理すべきキ-ワ-ド" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>次の語は、原則として独立ページではなくファセットやページ内の選択軸として扱います。 ファセット軸 キーワード例 対象者 全社員向けAI研修、管理職向けAI研修、新入社員向けAI研修 職種 エンジニア向けAI研修、営業向けAI研修、人事向けAI研修 研修形態 AIカスタマイズ研修、AIパッケージ研修、AI公開講座 実施形式 AI研修 オンライン、AI研修 対面、AI研修 ハイブリッド レベル AI入門研修、AI基礎研修、AI実践研修 期間 AI研修 1日、短期AI研修、長期AI研修 業界 製造業向けAI研修、金融向けAI研修、自治体向けAI研修</p>
+<p>検索需要と独自内容が確認できた組み合わせだけ、静的ページへ昇格させます。 ファセット</p>
+<pre><code>↓</code></pre>
+<p>検索・広告・商談データを蓄積</p>
+<pre><code>↓</code></pre>
+<p>独自内容が成立</p>
+<pre><code>↓</code></pre>
+<p>ホワイトリストで静的ページ化</p>
+<h2 id="keyword-source-9-作らない方がよいペ-ジ">9. 作らない方がよいページ<button class="anchor-copy" data-copy-link="keyword-source-9-作らない方がよいペ-ジ" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<h3 id="keyword-source-9-1-表記ゆれだけのペ-ジ">9-1. 表記ゆれだけのページ<button class="anchor-copy" data-copy-link="keyword-source-9-1-表記ゆれだけのペ-ジ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>次の語をそれぞれ別ページにしてはいけません。 AI研修 AI講習 AI教育 AI社員研修 企業向けAI研修 法人向けAI研修 同一ページ内のタイトル、見出し、本文、FAQで吸収します。</p>
+<h3 id="keyword-source-9-2-比較語を使った自社商用ペ-ジ">9-2. 比較語を使った自社商用ページ<button class="anchor-copy" data-copy-link="keyword-source-9-2-比較語を使った自社商用ペ-ジ" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>AI研修 おすすめ AI研修 ランキング おすすめAI研修会社 をCodeCampの商品ページとして作るのは不自然です。 比較・選定コンテンツで扱います。</p>
+<h3 id="keyword-source-9-3-非研修意図のAIキ-ワ-ド">9-3. 非研修意図のAIキーワード<button class="anchor-copy" data-copy-link="keyword-source-9-3-非研修意図のAIキ-ワ-ド" aria-label="この見出しへのリンクをコピー">#</button></h3>
+<p>添付レポートには、次のような検索数の大きい語も含まれています。 AI生成 AI画像生成 AI企業 AIとは AI補助金 AI導入補助金 これらは必ずしも法人研修を探す検索ではありません。 「検索ボリュームが大きい」という理由だけで、研修ページの対象にしてはいけません。 特に「AI補助金」「AI導入補助金」は、AIシステム導入や設備投資の補助金を探している可能性が高く、研修助成金とは検索意図が異なります。</p>
+<h2 id="keyword-source-10-ペ-ジ間のキ-ワ-ド境界">10. ページ間のキーワード境界<button class="anchor-copy" data-copy-link="keyword-source-10-ペ-ジ間のキ-ワ-ド境界" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>AI研修総合ハブと生成AI研修 AI研修総合ハブ 生成AI研修詳細 AI研修 生成AI研修 法人向けAI研修 生成AI活用研修 AI講習 AI活用研修 AI人材育成研修 生成AI業務活用研修</p>
+<p>生成AI研修とChatGPT研修 生成AI研修 ChatGPT研修 複数生成AIツール ChatGPT固有 組織の生成AI活用 ChatGPTの操作・機能 生成AI全体の基礎 ChatGPTのプロンプト 業務課題への適用 ChatGPTによるタスク自動化</p>
+<p>ChatGPT研修とClaude研修 ChatGPT研修 Claude研修 ChatGPT Claude GPT固有機能 Claude Code ChatGPTによる効率化 AIコワーク・MCP ChatGPTプロンプト Claudeによる業務・開発</p>
+<p>AI・データ分析研修とPythonデータサイエンス研修 AI・データ分析研修 Pythonデータサイエンス研修 AI・機械学習の理解 Pythonによる実装 統計・データ活用 Pythonデータ加工 AI活用の企画・判断 分析コードの作成 非エンジニアも対象可能 Python学習が中心</p>
+<p>AIエンジニア研修とデータサイエンティスト研修 AIエンジニア研修 データサイエンティスト研修 AIアプリ・LLM開発 データ分析・モデル構築 RAG・エージェント 統計・分析 API・システム連携 データ可視化 LLM評価・運用 分析結果の解釈</p>
+<p>AI研修とDX研修 AI研修 DX研修 AI技術・活用が中心 組織・業務変革が中心 AIリテラシー デジタルリテラシー AIエンジニア DX推進人材 生成AI活用 業務プロセス改革 AI開発 DX戦略・人材育成</p>
+<h2 id="keyword-source-11-優先順位">11. 優先順位<button class="anchor-copy" data-copy-link="keyword-source-11-優先順位" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>優先度A：直ちに実施 ページ 対応 AI研修総合ハブ 新設 生成AI研修 既存ページの主KW・タイトル・内容を再定義 ChatGPT研修 既存ページの主KW・内容をChatGPT固有に限定 Claude研修 Claude研修として最適化 DX研修 AIハブと分離して強化 AI関連ページ間の内部リンク 実装</p>
+<p>優先度B：既存ページを強化 ページ 対応 AI・データ分析研修 データ分析・機械学習意図を明確化 Pythonデータサイエンス研修 Pythonデータ分析に特化 業務改善・効率化研修 業務フロー・自動化に特化 データエンジニア・データサイエンティスト研修 職種育成意図を明確化 AI研修比較・選定コンテンツ 「おすすめ」「比較」の受け皿を強化</p>
+<p>優先度C：商品確認後に新設 ページ 条件 AIエンジニア研修 独立カリキュラムが存在する AIリテラシー研修 ITリテラシーと異なる内容がある AIエージェント活用研修 非エンジニア向け商品がある AI駆動開発研修 Claudeに依存しない独立商品がある AIエージェント開発研修 AI駆動開発とは異なる到達目標がある</p>
+<h2 id="keyword-source-12-最終キ-ワ-ドマップ">12. 最終キーワードマップ<button class="anchor-copy" data-copy-link="keyword-source-12-最終キ-ワ-ドマップ" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p>カテゴリ・ハブ ページ 主キーワード 副キーワード AI研修総合 AI研修 AI講習、法人向けAI研修、企業向けAI研修、AI人材研修 DX人材育成 DX研修 DX人材育成、DX人材育成研修、DX推進研修、DXリスキリング AI研修比較 AI研修 おすすめ AI研修 比較、AI研修会社、AI研修一覧 DX研修比較 DX研修 おすすめ DX研修会社、DX研修 比較 言語・ツール別 プログラミング言語・ツール別研修 法人向けプログラミング研修 テーマ別 テーマ別IT研修 DX・AI・セキュリティ研修一覧 職種別 職種別IT研修 IT人材職種別研修 階層別 階層別研修 階層別研修とは</p>
+<p>研修詳細 ページ 主キーワード 副キーワード 生成AI研修 生成AI研修 AI活用研修、生成AI活用研修、法人向け生成AI研修 ChatGPT研修 ChatGPT研修 ChatGPT活用研修、法人向けChatGPT研修 Claude研修 Claude研修 Claude Code研修、Claude活用研修 AI・データ分析 AI・データ分析研修 機械学習研修、AIデータ分析研修 Pythonデータサイエンス Pythonデータサイエンス研修 Pythonデータ分析研修、Python機械学習研修 AIエンジニア AIエンジニア研修 AI開発研修、生成AIエンジニア研修 データサイエンティスト データサイエンティスト研修 データエンジニア研修、データ人材育成研修 業務改善・効率化 業務効率化研修 業務改善研修、自動化研修、AI業務効率化研修 AIリテラシー AIリテラシー研修 生成AIリテラシー研修、全社員向けAI研修 AIエージェント活用 AIエージェント活用研修 AI業務自動化研修 AI駆動開発 AI駆動開発研修 AIコーディング研修 AIエージェント開発 AIエージェント開発研修 RAG研修、LangChain研修、LangGraph研修</p>
+<h2 id="keyword-source-13-最終判断">13. 最終判断<button class="anchor-copy" data-copy-link="keyword-source-13-最終判断" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<pre><code>CodeCampのAI領域では、最初に次の5ページの役割を確定すべきです。</code></pre>
+<p>AI研修 → AI研修総合ハブ</p>
+<p>生成AI研修 → 生成AIビジネス活用研修</p>
+<p>ChatGPT研修 → ChatGPT基礎・実践研修</p>
+<p>Claude研修 → Claude実践研修</p>
+<p>DX研修 → DX人材育成研修 そのうえで、次を第二群として強化します。 AI・データ分析研修 Pythonデータサイエンス研修 業務改善・効率化研修 データサイエンティスト研修 新規ページは、キーワードが存在するから作るのではなく、商品として独立している場合だけ作ります。 AIエンジニア研修 AIリテラシー研修 AIエージェント活用研修 AI駆動開発研修 AIエージェント開発研修 最適な構造は、総称語をハブ、商品・技術語を詳細ページ、比較語を情報コンテンツ、属性語をファセットで受け持つ構造です。 この割り当てであれば、案A・B・CのどのURL構造を採用しても、キーワード設計をそのまま移植できます。</p></div>
+        </details>
+      </section>
+
+      <footer class="document-footer">
+        <p>CodeCamp 法人向けAI研修 サイト構造・キーワード要件書</p>
+        <button class="button button-subtle" id="printButton">印刷・PDF保存</button>
+      </footer>
+    </main>
+  </div>
+
+  <dialog class="tour-dialog" id="tourDialog">
+    <button class="tour-close" id="tourClose" aria-label="ガイドを閉じる">×</button>
+    <p class="tour-progress" id="tourProgress"></p>
+    <h2 id="tourTitle"></h2>
+    <p id="tourDescription"></p>
+    <div class="tour-actions"><button class="button button-subtle" id="tourBack">戻る</button><button class="button button-subtle" id="tourSkip">終了</button><button class="button button-primary" id="tourNext">次へ</button></div>
+  </dialog>
+  <div class="tour-overlay" id="tourOverlay" hidden></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

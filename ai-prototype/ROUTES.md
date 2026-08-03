@@ -1,0 +1,76 @@
+# Routes
+
+## 法人向け研修
+
+- `/business/`
+- `/business/about/`
+- `/business/voice/`
+- `/business/faq/`
+- `/business/codecamp-insight/`
+
+## 横断ハブ・カテゴリ
+
+- `/business/ai-training/`
+- `/business/training/`
+- `/business/lag-list/`
+- `/business/hie-list/`
+- `/business/thm-list/`
+- `/business/occ-list/`
+
+## 研修形態
+
+- `/business/customize/`
+- `/business/package-it/`
+- `/open/`
+
+## 研修詳細
+
+- `/business/lag-generative-ai-chatgpt/`
+- `/business/lag-ai-chatgpt/`
+- `/business/claude/`
+- `/business/thm-ai-data-analysis/`
+- `/business/thm-python-data-science/`
+- `/business/thm-automation/`
+- `/business/occ-data-engineer-scientist/`
+- `/business/dx/`
+- `/business/occ-ai-engineer/`
+- `/business/thm-ai-literacy/`
+- `/business/lag-java/`
+- `/business/lag-python/`
+- `/business/thm-security/`
+- `/business/occ-project-manager/`
+- `/business/shinsotsu/`
+- `/business/base/`
+
+## 公開講座詳細
+
+- `/open/generative-ai-for-business/`
+- `/open/generative-ai-engineer-camp/`
+- `/open/ai-machine-learning-camp/`
+- `/open/ai-editor-coding-intensive/`
+- `/open/engineer-foundation-camp/`
+
+## AI静的ファセットLP（ホワイトリスト）
+
+| URL | robots | canonical | 状態 |
+|---|---|---|---|
+| `/business/ai-training/online/` | `index,follow` | `https://codecamp.jp/business/ai-training/online/` | 承認済み |
+| `/business/ai-training/for-engineers/` | `noindex,follow` | `https://codecamp.jp/business/ai-training/for-engineers/` | 候補 |
+| `/business/ai-training/for-all-employees/` | `noindex,follow` | `https://codecamp.jp/business/ai-training/for-all-employees/` | 候補 |
+| `/business/ai-training/for-new-employees/` | `noindex,follow` | `https://codecamp.jp/business/ai-training/for-new-employees/` | 候補 |
+
+通常のファセット操作ではURLを生成しません。上記または既存カテゴリ・研修詳細に一致する条件だけ、静的URLへのリンクを表示します。
+
+## 案Aサイトマップ・要件書
+
+- `/business/site-map/` — 案Aのリンク付きサイトマップ（プロトタイプ確認用・noindex）
+- `/requirements/` — 法人向けAI研修 サイト構造・キーワード要件書
+
+### AI研修ハブ内のアンカー
+
+- `/business/ai-training/#facet-goals` — 目的から選ぶ
+- `/business/ai-training/#facet-audiences` — 対象者から選ぶ
+- `/business/ai-training/#facet-tools` — 技術・ツールから選ぶ
+- `/business/ai-training/#facet-delivery` — 研修形態から選ぶ
+- `/business/ai-training/#facet-formats` — 実施形式から選ぶ
+- `/business/ai-training/#ai-training-grid` — 研修詳細一覧

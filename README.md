@@ -1,5 +1,7 @@
-# SEO競合レポート（共有用）
+# SEO SERP Report (private share)
 
-閲覧時にパスワード入力が必要です（HTML側ゲート）。
+- Dashboard: `/` (password gated)
+- AI site structure prototype (review only, noindex): `/ai-prototype/business/`
+- Requirements viewer: `/ai-prototype/requirements/`
 
-本体パイプラインは別リポジトリ（Private）です。ここには共有用 HTML のみを置きます。
+Password is shared out-of-band.
