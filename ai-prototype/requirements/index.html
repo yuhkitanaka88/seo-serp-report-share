@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="ja" data-theme="light">
 <head>
-  <meta name="robots" content="noindex,nofollow">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="CodeCamp法人向けAI研修サイトの情報設計、SEO・LLMO、キーワード設計、ファセット制御をまとめた要件書。">
@@ -170,7 +169,7 @@
         <div class="flow">
           <article><span>1</span><h3>属性として保持</h3><p>カテゴリ、対象者、目的、研修形態、実施形式、レベル、期間、技術などを研修データに付与。</p></article>
           <i>→</i>
-          <article><span>2</span><h3>ファセットで探索</h3><p><code>?theme=ai&amp;format=online</code>などはユーザーの絞り込みに利用。</p></article>
+          <article><span>2</span><h3>ファセットで探索</h3><p>同一ページ内のJS絞り込み（クエリURLは作らない）。言語・ツールでAIを選ぶとタイトルを「AI研修を探す」に切替。</p></article>
           <i>→</i>
           <article><span>3</span><h3>需要を検証</h3><p>検索、広告、商談、事例、商品差を確認。</p></article>
           <i>→</i>
@@ -183,8 +182,8 @@
           </div>
           <div>
             <h3>通常ファセットの扱い</h3>
-            <div class="code-samples"><code>/business/training?theme=ai</code><code>/business/training?theme=ai&amp;audience=engineer</code><code>/business/training?theme=ai&amp;format=online</code></div>
-            <p>内部リンクとサイトマップを制限し、原則としてインデックス対象外にします。並び替えや無価値な組み合わせも同様です。</p>
+            <div class="code-samples"><code>/business/training/</code><code>/business/ai-training/</code><code>/business/ai-training/online/</code></div>
+            <p>一覧は常に静的パスのままJSで絞り込み。需要がある条件だけホワイトリストの静的URLへ昇格。クエリURLは生成しません。</p>
           </div>
         </div>
         <h3>研修詳細に必要なデータ項目</h3>
@@ -418,12 +417,11 @@
 <p>将来的には、全研修を対象としたマスター一覧を追加します。</p>
 <pre><code>/business/training</code></pre>
 <p>ここで、次の属性を組み合わせて絞り込みます。 軸 値の例 カテゴリ 言語・ツール、階層、テーマ、職種 AIテーマ 生成AI、ChatGPT、Claude、機械学習 対象者 全社員、新入社員、管理職、エンジニア 目的 AIリテラシー、業務効率化、開発、DX推進 研修形態 カスタマイズ、パッケージ、公開講座 実施形式 オンライン、現地、ハイブリッド レベル 入門、基礎、実践、応用 期間 1日、短期、1～3か月、長期 技術 ChatGPT、Claude、Python、RAG、MCP、AIエージェント 業界 製造、金融、IT、自治体など</p>
-<p>通常のファセットURL</p>
-<pre><code>/business/training?theme=ai
-/business/training?theme=ai&amp;audience=engineer
-/business/training?theme=ai&amp;format=online
-/business/training?theme=ai&amp;audience=manager&amp;format=online</code></pre>
-<p>これらは原則としてインデックス対象外とします。 ファセットナビゲーションは組み合わせによってURLが大量に発生し、クロール負荷や重複ページを増やす可能性があるためです。 canonicalだけに依存してすべての組み合わせを公開するのではなく、クロール対象、内部リンク、サイトマップ、インデックス対象を最初から限定します。</p>
+<p>通常のファセット操作</p>
+<pre><code>/business/training/（クエリなし・同一ページ内JS絞り込み）
+言語・ツール=AI → 表示タイトル「AI研修を探す」／静的受け皿 /business/ai-training/
+需要がある組み合わせのみ例: /business/ai-training/online/</code></pre>
+<p>クエリURLは生成しません。ファセットの組み合わせをすべてURL化するとクロール負荷や重複ページが増えるため、インデックス対象はホワイトリストの静的パスに限定します。</p>
 <h3 id="architecture-source-4-4-ホワイトリスト方式で静的化する条件">4-4. ホワイトリスト方式で静的化する条件<button class="anchor-copy" data-copy-link="architecture-source-4-4-ホワイトリスト方式で静的化する条件" aria-label="この見出しへのリンクをコピー">#</button></h3>
 <p>検索需要と独自内容がある組み合わせだけ、通常のファセット結果から独立した静的ページとして作成します。 例えば次のようなページです。</p>
 <pre><code>/business/ai-training
@@ -738,12 +736,7 @@ CodeCampの法人向けAI研修全体を説明する、AI領域トップです�
 &gt; ChatGPT研修</code></pre>
 <p>同一ページに複数のパンくず経路を持たせても、URL自体は1つです。</p>
 <h3 id="architecture-source-6-11-案Bのファセットと静的ペ-ジ">6-11. 案Bのファセットと静的ページ<button class="anchor-copy" data-copy-link="architecture-source-6-11-案Bのファセットと静的ペ-ジ" aria-label="この見出しへのリンクをコピー">#</button></h3>
-<p>通常の非インデックスファセット</p>
-<pre><code>/business/ai/training?audience=engineer
-/business/ai/training?tool=chatgpt
-/business/ai/training?format=online
-/business/ai/training?tool=chatgpt&amp;format=online</code></pre>
-<p>これらは原則としてクロール・インデックス対象外です。 ホワイトリストで静的化するページ</p>
+<p>案BでもクエリURLは作らず、同一ページ内の絞り込みのみとします。ホワイトリストで静的化するページ（パス例）</p>
 <pre><code>/business/ai/ai-literacy
 /business/ai/ai-utilization
 /business/ai/ai-engineer
@@ -927,11 +920,7 @@ CodeCampの法人向けAI研修全体を説明する、AI領域トップです�
 &gt; ChatGPT研修</code></pre>
 <p>しかし、表示上の主パンくずをどちらにするか決める必要があります。 AI事業を主とするなら：AI &gt; AI研修 法人研修を主とするなら：法人向け研修 &gt; 言語・ツール別 ここが曖昧だと、ページの主たる事業所属も曖昧になります。</p>
 <h3 id="architecture-source-7-10-案Cのファセットと静的ペ-ジ">7-10. 案Cのファセットと静的ページ<button class="anchor-copy" data-copy-link="architecture-source-7-10-案Cのファセットと静的ペ-ジ" aria-label="この見出しへのリンクをコピー">#</button></h3>
-<p>通常ファセット</p>
-<pre><code>/ai/training?audience=engineer
-/ai/training?purpose=business-utilization
-/ai/training?format=online</code></pre>
-<p>原則としてインデックスさせません。 静的ページ候補</p>
+<p>案CでもクエリURLは作らず、同一ページ内の絞り込みのみとします。静的ページ候補（パス例）</p>
 <pre><code>/ai/training/generative-ai
 /ai/training/chatgpt
 /ai/training/claude
@@ -1262,9 +1251,7 @@ CodeCampのAI研修を導入したい</code></pre>
 ├── オンライン演習の方法
 ├── 講師サポート
 └── CodeCamp Insightによる進捗管理</code></pre>
-<p>各研修詳細にもオンライン対応を明記します。 ファセット</p>
-<pre><code>/business/training?theme=ai&amp;format=online</code></pre>
-<p>はユーザーの絞り込み用とし、原則インデックスさせません。 静的ページ化する条件 次を満たした場合だけ、ホワイトリストで静的ページ化を検討します。 オンライン固有の検索流入が継続している 広告で高いCVRが出る 対面研修と異なる説明が十分にある オンライン研修の事例がある オンライン専用プランがある オンライン固有のFAQがある</p>
+<p>各研修詳細にもオンライン対応を明記します。ファセットでの「AI × オンライン」は <code>/business/training/</code> 上のJS絞り込みのみとし、クエリURLは作りません。需要と独自内容が揃った場合のみ静的パス例 <code>/business/ai-training/online/</code> をホワイトリスト検討します。静的ページ化する条件：オンライン固有の検索流入が継続している／広告で高いCVRが出る／対面研修と異なる説明が十分にある／オンライン研修の事例がある／オンライン専用プランがある／オンライン固有のFAQがある</p>
 <h2 id="keyword-source-7-公開講座のキ-ワ-ド設計">7. 公開講座のキーワード設計<button class="anchor-copy" data-copy-link="keyword-source-7-公開講座のキ-ワ-ド設計" aria-label="この見出しへのリンクをコピー">#</button></h2>
 <p>公開講座は、法人向けカスタマイズ研修と同じ主キーワードを狙わないようにします。</p>
 <h3 id="keyword-source-7-1-生成AI活用-for-Biz">7-1. 生成AI活用 for Biz<button class="anchor-copy" data-copy-link="keyword-source-7-1-生成AI活用-for-Biz" aria-label="この見出しへのリンクをコピー">#</button></h3>

@@ -359,14 +359,11 @@ ChatGPT、Claude、Python、RAG、MCP、AIエージェント
 業界
 製造、金融、IT、自治体など
 
-通常のファセットURL
-/business/training?theme=ai
-/business/training?theme=ai&audience=engineer
-/business/training?theme=ai&format=online
-/business/training?theme=ai&audience=manager&format=online
-これらは原則としてインデックス対象外とします。
-ファセットナビゲーションは組み合わせによってURLが大量に発生し、クロール負荷や重複ページを増やす可能性があるためです。
-canonicalだけに依存してすべての組み合わせを公開するのではなく、クロール対象、内部リンク、サイトマップ、インデックス対象を最初から限定します。
+通常のファセット操作
+クエリURL（例: /business/training?theme=ai）は生成しません。
+同一ページ内のJavaScript絞り込みのみとし、ブラウザのアドレスは /business/training/ のままです。
+言語・ツールで「AI」を選んだ場合は、表示タイトルを「AI研修を探す」に切り替え、需要がある場合は静的URL /business/ai-training/ へ誘導します（一覧とハブの二重インデックスを避ける）。
+ファセットの組み合わせをすべてURL化するとクロール負荷や重複ページが増えるため、インデックス対象はホワイトリストの静的パスに限定します。
 
 4-4. ホワイトリスト方式で静的化する条件
 検索需要と独自内容がある組み合わせだけ、通常のファセット結果から独立した静的ページとして作成します。
@@ -934,13 +931,8 @@ CodeCamp
 同一ページに複数のパンくず経路を持たせても、URL自体は1つです。
 
 6-11. 案Bのファセットと静的ページ
-通常の非インデックスファセット
-/business/ai/training?audience=engineer
-/business/ai/training?tool=chatgpt
-/business/ai/training?format=online
-/business/ai/training?tool=chatgpt&format=online
-これらは原則としてクロール・インデックス対象外です。
-ホワイトリストで静的化するページ
+案BでもクエリURLは作らず、同一ページ内の絞り込みのみとします。
+ホワイトリストで静的化するページ（パス例）
 /business/ai/ai-literacy
 /business/ai/ai-utilization
 /business/ai/ai-engineer
@@ -1252,12 +1244,8 @@ AI事業を主とするなら：AI > AI研修
 ここが曖昧だと、ページの主たる事業所属も曖昧になります。
 
 7-10. 案Cのファセットと静的ページ
-通常ファセット
-/ai/training?audience=engineer
-/ai/training?purpose=business-utilization
-/ai/training?format=online
-原則としてインデックスさせません。
-静的ページ候補
+案CでもクエリURLは作らず、同一ページ内の絞り込みのみとします。
+静的ページ候補（パス例）
 /ai/training/generative-ai
 /ai/training/chatgpt
 /ai/training/claude
@@ -1271,7 +1259,7 @@ AI事業を主とするなら：AI > AI研修
 専用FAQ
 独自の到達目標
 広告・営業上の独立性
-AI領域を独立させても、ファセットURLを自由にインデックスさせてよいわけではありません。
+AI領域を独立させても、ファセット組み合わせを自由にインデックスさせてよいわけではありません。
 
 7-11. 案Cの広告運用
 案Cは、AI広告を独立した事業として管理する場合には分かりやすい構成です。

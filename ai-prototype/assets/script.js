@@ -806,9 +806,35 @@
 
   function masterFacetMarkup(groups) {
     const entries = Object.entries(groups);
-    const tabs = entries.map(([key, group], index) => `<button class="facet-tab ${index === 0 ? 'is-active' : ''}" type="button" data-facet-tab="${key}" aria-selected="${index === 0 ? 'true' : 'false'}"><span>${group.label}</span><small data-facet-tab-value="${key}">指定なし</small></button>`).join("");
-    const panels = entries.map(([key, group], index) => `<section class="facet-option-panel" data-facet-panel="${key}" ${index === 0 ? '' : 'hidden'}><h3>${group.label}を選ぶ</h3><div class="checkbox-chip-list">${group.values.map((raw) => { const pair = Array.isArray(raw) ? raw : [raw, raw]; return `<label class="checkbox-chip"><input type="checkbox" data-master-filter="${key}" value="${escapeHtml(pair[0])}"><span>${escapeHtml(pair[1])}</span></label>`; }).join("")}</div></section>`).join("");
-    return `<div id="masterFacetNav" class="facet-navigator"><div class="facet-compact-bar"><div><strong>絞り込み条件</strong><span id="masterSelectedFilters" class="facet-selected-summary">条件指定なし</span></div><button class="button button-small facet-mobile-trigger" type="button" data-facet-open>条件を変更</button></div><div class="facet-backdrop" data-facet-close></div><div class="facet-surface"><div class="facet-mobile-header"><strong>絞り込み条件</strong><button class="dialog-close" type="button" data-facet-close aria-label="閉じる">×</button></div><nav class="facet-tabs" aria-label="絞り込み項目">${tabs}</nav><div class="facet-panels">${panels}</div><div class="facet-actions"><button id="masterReset" class="button button-small" type="button">条件をリセット</button><button class="button button-primary button-small facet-mobile-apply" type="button" data-facet-close>この条件で表示</button></div></div></div>`;
+    const sections = entries.map(([key, group], index) => {
+      const options = group.values.map((raw) => {
+        const pair = Array.isArray(raw) ? raw : [raw, raw];
+        const id = `master-${key}-${String(pair[0]).replace(/[^\w\u3040-\u30ff\u4e00-\u9fff-]/g, "_")}`;
+        return `<div class="filter-option"><input type="checkbox" id="${id}" data-master-filter="${key}" value="${escapeHtml(pair[0])}"><label for="${id}"><span>${escapeHtml(pair[1])}</span></label></div>`;
+      }).join("");
+      return `<div class="filter-section ${index === 0 ? "open" : ""}" data-filter-section="${key}"><button type="button" class="filter-section-title" data-filter-toggle><span>${escapeHtml(group.label)}</span><small data-facet-tab-value="${key}">指定なし</small></button><div class="filter-options">${options}</div></div>`;
+    }).join("");
+    return `<aside id="masterFacetNav" class="pc-sticky-filters" aria-label="絞り込み条件"><div class="facet-compact-bar"><div><strong>絞り込み条件</strong><span id="masterSelectedFilters" class="facet-selected-summary">条件指定なし</span></div><button class="button button-small facet-mobile-trigger" type="button" data-facet-open>条件を変更</button></div><div class="facet-backdrop" data-facet-close></div><div class="facet-surface"><div class="facet-mobile-header"><strong>絞り込み条件</strong><button class="dialog-close" type="button" data-facet-close aria-label="閉じる">×</button></div><div class="pc-sticky-filter-stack">${sections}</div><div class="facet-actions"><button id="masterReset" class="button button-small" type="button">条件をリセット</button><button class="button button-primary button-small facet-mobile-apply" type="button" data-facet-close>この条件で表示</button></div></div></aside>`;
+  }
+
+  function bindStickyFilterSections(rootId) {
+    const root = document.getElementById(rootId);
+    if (!root) return;
+    root.querySelectorAll("[data-filter-toggle]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const section = button.closest(".filter-section");
+        if (!section) return;
+        section.classList.toggle("open");
+      });
+    });
+    root.querySelectorAll("[data-facet-open]").forEach((button) => button.addEventListener("click", () => {
+      root.classList.add("is-open");
+      document.body.classList.add("has-facet-drawer");
+    }));
+    root.querySelectorAll("[data-facet-close]").forEach((button) => button.addEventListener("click", () => {
+      root.classList.remove("is-open");
+      document.body.classList.remove("has-facet-drawer");
+    }));
   }
 
   function renderUrlDesignInspector({ badgeId, queryId, linkId, resetId, whitelist = '' }) {
@@ -820,8 +846,8 @@
     const whitelisted = staticFilterDestinations.filter((item) => item.route !== "/business/ai-training/");
     const whitelistTable = `<div class="matrix-table-wrap"><table class="matrix-table"><thead><tr><th>ページ</th><th>静的URL</th><th>canonical</th><th>状態</th></tr></thead><tbody>${whitelisted.map((item) => `<tr><td><a href="${href(item.route)}">${escapeHtml(item.label)}</a></td><td><code>${escapeHtml(item.route)}</code></td><td><code>${escapeHtml(item.canonical)}</code></td><td><span class="tag ${item.indexable ? 'tag-green' : 'tag-amber'}">${item.indexable ? 'index' : 'noindex候補'}</span></td></tr>`).join('')}</tbody></table></div>`;
     const content = `
-      <section class="hero"><div class="container hero-grid"><div class="hero-copy"><p class="eyebrow">AI TRAINING</p><h1>企業・法人向け<br>AI研修</h1><p class="lead">AIリテラシー、生成AI業務活用、データ分析、AI開発まで、対象者と目的に応じて最適な研修を選定します。</p><div class="hero-actions"><a class="button button-primary" href="#ai-filter">AI研修を探す</a><a class="button" href="${href('/business/customize/')}">カスタマイズを相談</a></div></div><aside class="hero-visual selection-guide"><p class="eyebrow">HOW TO CHOOSE</p><h2>AI研修の選び方</h2><ol><li><strong>目的</strong><span>リテラシー、業務活用、開発など</span></li><li><strong>対象者</strong><span>全社員、非エンジニア、エンジニアなど</span></li><li><strong>研修を比較</strong><span>内容・期間・提供方法を確認</span></li></ol></aside></div></section>
-      <section id="ai-filter" class="section"><div class="container"><div class="section-heading"><div><p class="eyebrow">FIND AI TRAINING</p><h2>条件からAI研修を選ぶ</h2><p class="lead">項目をクリックすると、その項目の選択肢だけを表示します。</p></div></div>${aiFacetGroupMarkup()}<div class="filter-results-toolbar user-results-toolbar"><div class="filter-count"><strong id="aiResultCount">${aiTrainings.length}</strong>件の研修候補</div><a class="text-link" href="${href('/business/training/')}">AI以外を含む全研修を見る →</a></div><div id="ai-training-grid" class="training-grid">${aiTrainings.map((item) => renderTrainingCard(item)).join("")}</div><div id="aiEmpty" class="empty-state" hidden><h3>条件に合う研修がありません</h3><p class="muted">条件を減らすか、カスタマイズ研修としてご相談ください。</p></div>${renderUrlDesignInspector({ badgeId: 'aiSeoBadge', queryId: 'aiFilterQuery', linkId: 'aiStaticLink', whitelist: `<h3>静的URL・canonicalのホワイトリスト</h3>${whitelistTable}` })}</div></section>
+      <section class="hero"><div class="container hero-grid"><div class="hero-copy"><p class="eyebrow">AI TRAINING</p><h1>企業・法人向け<br>AI研修</h1><p class="lead">AIリテラシー、生成AI業務活用、データ分析、AI開発まで、対象者と目的に応じて最適な研修を選定します。全研修の薄い複製一覧ではなく、「AI研修」総称語向けの編集・商用ハブです。</p><div class="hero-actions"><a class="button button-primary" href="#ai-filter">条件で絞り込む</a><a class="button" href="${href('/business/training/')}">全研修一覧へ</a></div></div><aside class="hero-visual selection-guide"><p class="eyebrow">HOW TO CHOOSE</p><h2>AI研修の選び方</h2><ol><li><strong>目的</strong><span>リテラシー、業務活用、開発など</span></li><li><strong>対象者</strong><span>全社員、非エンジニア、エンジニアなど</span></li><li><strong>研修を比較</strong><span>内容・期間・提供方法を確認</span></li></ol></aside></div></section>
+      <section id="ai-filter" class="section"><div class="container"><div class="section-heading"><div><p class="eyebrow">FIND AI TRAINING</p><h2>このハブ内で条件を絞る</h2><p class="lead">クエリURLは作りません。需要がある条件だけ静的LPへ誘導します。全カテゴリ横断の探索は「研修を探す」側のTrends風ファセットを使います。</p></div></div>${aiFacetGroupMarkup()}<div class="filter-results-toolbar user-results-toolbar"><div class="filter-count"><strong id="aiResultCount">${aiTrainings.length}</strong>件の研修候補</div><a class="text-link" href="${href('/business/training/')}">AI以外を含む全研修を見る →</a></div><div id="ai-training-grid" class="training-grid">${aiTrainings.map((item) => renderTrainingCard(item)).join("")}</div><div id="aiEmpty" class="empty-state" hidden><h3>条件に合う研修がありません</h3><p class="muted">条件を減らすか、カスタマイズ研修としてご相談ください。</p></div>${renderUrlDesignInspector({ badgeId: 'aiSeoBadge', queryId: 'aiFilterQuery', linkId: 'aiStaticLink', whitelist: `<h3>静的URL・canonicalのホワイトリスト</h3>${whitelistTable}` })}</div></section>
       <section class="section section-white"><div class="container"><div class="section-heading"><div><p class="eyebrow">DELIVERY</p><h2>導入方法を選ぶ</h2><p class="lead">研修内容を確認した後、企業単位での導入または公開講座を選択します。</p></div></div><div class="card-grid">${Object.values(deliveryPages).map((item) => `<a class="card" href="${href(item.route)}"><div class="card-icon">${icon(item.icon)}</div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.summary)}</p><span class="card-link">導入方法を見る →</span></a>`).join("")}</div></div></section>`;
     shell(content, { title: "企業・法人向けAI研修", description: "AI研修横断ハブの視覚プロトタイプ", breadcrumbs: [{ label: "AI研修", route: "/business/ai-training/" }], mobileCta: { secondaryLabel: "全研修を見る", secondaryRoute: "/business/training/", primaryLabel: "AI研修を相談", primaryRoute: "/business/faq/" } });
     bindFacetNavigator("aiFacetNav");
@@ -860,18 +886,19 @@
 
   function renderTrainingMaster() {
     const groups = {
-      categories: { label: "カテゴリ", values: Object.entries(categoryPages).map(([value, item]) => [value, item.short]) },
-      themes: { label: "テーマ", values: ["生成AI", "AI・データ分析", "業務効率化", "DX", "セキュリティ", "Web開発", "新人育成"] },
+      tools: { label: "言語・ツール", values: ["AI", "Java", "Python", "ChatGPT", "Claude", "Excel", "AWS", "JavaScript"] },
       audiences: { label: "対象者", values: ["全社員", "新入社員", "内定者", "非エンジニア", "エンジニア", "管理職"] },
-      delivery: { label: "研修形態", values: [["customize", "カスタマイズ"], ["package", "パッケージ"], ["open", "公開講座"]] },
-      formats: { label: "実施形式", values: ["オンライン", "現地", "ハイブリッド"] },
+      themes: { label: "テーマ", values: ["生成AI", "AI・データ分析", "業務効率化", "DX", "セキュリティ", "Web開発", "新人育成"] },
+      categories: { label: "カテゴリ", values: Object.entries(categoryPages).map(([value, item]) => [value, item.short]) },
+      delivery: { label: "形態", values: [["customize", "カスタマイズ"], ["package", "パッケージ"], ["open", "公開講座"]] },
+      formats: { label: "形式", values: ["オンライン", "現地", "ハイブリッド"] },
       status: { label: "ページ状態", values: [["existing", "既存ページ"], ["candidate", "新設候補"]] }
     };
     const content = `
-      <section class="detail-hero"><div class="container"><p class="eyebrow">TRAINING FINDER</p><h1>研修を探す</h1><p class="lead">カテゴリ、対象者、テーマ、研修形態、実施形式から研修を絞り込みます。</p></div></section>
-      <section class="section"><div class="container">${masterFacetMarkup(groups)}<div class="filter-results-toolbar user-results-toolbar"><div class="filter-count"><strong id="masterCount">${trainings.length}</strong>件を表示</div></div><div id="masterGrid" class="training-grid">${trainings.map((item) => renderTrainingCard(item)).join("")}</div><div id="masterEmpty" class="empty-state" hidden><h3>条件に合う研修がありません</h3><p class="muted">条件をリセットするか、カスタマイズ研修をご相談ください。</p></div>${renderUrlDesignInspector({ badgeId: 'masterSeoBadge', queryId: 'masterQuery', linkId: 'masterStaticLink' })}</div></section>`;
-    shell(content, { title: "研修を探す", description: "将来のファセット検索を想定した全研修一覧", breadcrumbs: [{ label: "研修を探す", route: "/business/training/" }] });
-    bindFacetNavigator("masterFacetNav");
+      <section class="detail-hero"><div class="container"><p class="eyebrow">TRAINING FINDER</p><h1 id="masterPageTitle">研修を探す</h1><p id="masterPageLead" class="lead">Trendsの研修検索と同様に、言語・ツール・対象者・テーマなどから絞り込みます。クエリURLは作らず、需要がある条件だけ静的URLへ誘導します。</p></div></section>
+      <section class="section"><div class="container"><div class="training-finder-layout">${masterFacetMarkup(groups)}<div class="training-finder-main"><div class="filter-results-toolbar user-results-toolbar"><div class="filter-count"><strong id="masterCount">${trainings.length}</strong>件を表示</div><p id="masterAiHint" class="muted" hidden>言語・ツールでAIを選択中です。タイトルを「AI研修を探す」に切り替え、静的ハブへ誘導します（二重一覧にしません）。</p></div><div id="masterGrid" class="training-grid">${trainings.map((item) => renderTrainingCard(item)).join("")}</div><div id="masterEmpty" class="empty-state" hidden><h3>条件に合う研修がありません</h3><p class="muted">条件をリセットするか、カスタマイズ研修をご相談ください。</p></div>${renderUrlDesignInspector({ badgeId: 'masterSeoBadge', queryId: 'masterQuery', linkId: 'masterStaticLink', resetId: 'masterResetInspector' })}</div></div></div></section>`;
+    shell(content, { title: "研修を探す", description: "Trends風ファセットを想定した全研修一覧（静的URL方針）", breadcrumbs: [{ label: "研修を探す", route: "/business/training/" }] });
+    bindStickyFilterSections("masterFacetNav");
     bindMasterFilters();
   }
 
@@ -1080,19 +1107,31 @@
 
   function bindMasterFilters() {
     const inputs = [...document.querySelectorAll("[data-master-filter]")];
+    const isAiFocus = (selected) => {
+      const toolsAi = selected.tools?.includes("AI");
+      const themeAi = selected.themes?.some((value) => /生成AI|AI/.test(value));
+      return Boolean(toolsAi || (themeAi && !selected.tools?.length));
+    };
     const destinationFor = (selected) => {
       const keys = Object.keys(selected).filter((key) => selected[key]?.length);
       if (keys.length === 1 && keys[0] === "categories" && selected.categories.length === 1) {
         return categoryPages[selected.categories[0]] ? { route: categoryPages[selected.categories[0]].route, label: categoryPages[selected.categories[0]].title, canonical: `https://codecamp.jp${categoryPages[selected.categories[0]].route}`, indexable: true } : null;
       }
+      if (keys.length === 1 && keys[0] === "tools" && selected.tools.length === 1 && selected.tools[0] === "AI") {
+        return { route: "/business/ai-training/", label: "AI研修ハブ", canonical: "https://codecamp.jp/business/ai-training/", indexable: true };
+      }
       if (keys.length === 1 && keys[0] === "themes" && selected.themes.length === 1 && selected.themes[0] === "生成AI") {
         return { route: "/business/ai-training/", label: "AI研修ハブ", canonical: "https://codecamp.jp/business/ai-training/", indexable: true };
+      }
+      if (keys.length === 2 && selected.tools?.includes("AI") && selected.formats?.length === 1 && selected.formats[0] === "オンライン") {
+        const page = seoFacetRoutes.find((item) => item.route.endsWith('/online/'));
+        return page && { route: page.route, label: page.title, canonical: page.canonical, indexable: page.indexable };
       }
       if (keys.length === 2 && selected.themes?.length === 1 && selected.themes[0] === "生成AI" && selected.formats?.length === 1 && selected.formats[0] === "オンライン") {
         const page = seoFacetRoutes.find((item) => item.route.endsWith('/online/'));
         return page && { route: page.route, label: page.title, canonical: page.canonical, indexable: page.indexable };
       }
-      if (keys.length === 2 && selected.themes?.length === 1 && selected.themes[0] === "生成AI" && selected.audiences?.length === 1 && selected.audiences[0] === "エンジニア") {
+      if (keys.length === 2 && ((selected.tools?.includes("AI") || selected.themes?.[0] === "生成AI") && selected.audiences?.length === 1 && selected.audiences[0] === "エンジニア")) {
         const page = seoFacetRoutes.find((item) => item.route.endsWith('/for-engineers/'));
         return page && { route: page.route, label: page.title, canonical: page.canonical, indexable: page.indexable };
       }
@@ -1111,6 +1150,13 @@
           if (!values.length) return true;
           if (key === "status") return values.includes(item.status);
           if (key === "delivery") return values.some((value) => item.delivery.includes(value) || (value === 'open' && item.openCourses.length));
+          if (key === "tools") {
+            const source = [...(item.tools || []), ...(item.themes || []), ...(item.keywords?.secondary || []), item.keywords?.primary || ""];
+            return values.some((value) => {
+              if (value === "AI") return source.some((itemValue) => /AI|ChatGPT|Claude|生成AI|機械学習|RAG/i.test(String(itemValue)));
+              return source.some((itemValue) => String(itemValue).includes(value) || value.includes(String(itemValue)));
+            });
+          }
           const source = item[key] || [];
           return values.some((value) => source.some((itemValue) => itemValue.includes(value) || value.includes(itemValue)));
         });
@@ -1119,11 +1165,21 @@
       });
       document.getElementById("masterCount").textContent = String(count);
       document.getElementById("masterEmpty").hidden = count !== 0;
-      const labelMap = { categories: "カテゴリ", themes: "テーマ", audiences: "対象者", delivery: "研修形態", formats: "実施形式", status: "ページ状態" };
+      const aiFocus = isAiFocus(selected);
+      const titleEl = document.getElementById("masterPageTitle");
+      const leadEl = document.getElementById("masterPageLead");
+      const hintEl = document.getElementById("masterAiHint");
+      if (titleEl) titleEl.textContent = aiFocus ? "AI研修を探す" : "研修を探す";
+      if (leadEl) leadEl.textContent = aiFocus
+        ? "言語・ツールでAIを選択中です。一覧の薄い複製ではなく、編集コンテンツ付きの静的ハブ /business/ai-training/ が正規の受け皿です。"
+        : "Trendsの研修検索と同様に、言語・ツール・対象者・テーマなどから絞り込みます。クエリURLは作らず、需要がある条件だけ静的URLへ誘導します。";
+      if (hintEl) hintEl.hidden = !aiFocus;
+      document.title = `${aiFocus ? "AI研修を探す" : "研修を探す"} | CodeCamp 法人向け研修`;
+      const labelMap = { tools: "言語・ツール", categories: "カテゴリ", themes: "テーマ", audiences: "対象者", delivery: "形態", formats: "形式", status: "ページ状態" };
       const displayMap = { customize: "カスタマイズ", package: "パッケージ", open: "公開講座", existing: "既存ページ", candidate: "新設候補", language: "言語・ツール", hierarchy: "階層", theme: "テーマ", occupation: "職種" };
       const activeLabels = Object.entries(selected).filter(([, values]) => values.length).map(([key, values]) => {
         const display = values.map((value) => displayMap[value] || value).join("・");
-        setFacetTabValue("masterFacetNav", key, `${values.length}件`);
+        setFacetTabValue("masterFacetNav", key, display);
         return `${labelMap[key]}：${display}`;
       });
       Object.keys(labelMap).filter((key) => !selected[key]?.length).forEach((key) => setFacetTabValue("masterFacetNav", key, "すべて"));
@@ -1142,7 +1198,7 @@
         link.hidden = false;
       } else {
         const hasSelection = Object.values(selected).some((values) => values.length);
-        query.textContent = hasSelection ? "ホワイトリスト外：URLを生成せず、JS絞り込みのみ" : "URLは変更しません";
+        query.textContent = hasSelection ? "ホワイトリスト外：URLを生成せず、JS絞り込みのみ（クエリURLなし）" : "URLは変更しません（クエリURLなし）";
         badge.textContent = "JS絞り込み";
         badge.className = "tag";
         link.hidden = true;
@@ -1150,6 +1206,7 @@
     };
     inputs.forEach((input) => input.addEventListener("change", apply));
     document.getElementById("masterReset")?.addEventListener("click", () => { inputs.forEach((input) => input.checked = false); apply(); });
+    document.getElementById("masterResetInspector")?.addEventListener("click", () => { inputs.forEach((input) => input.checked = false); apply(); });
   }
 
   function startGuide() {

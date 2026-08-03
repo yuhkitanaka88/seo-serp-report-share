@@ -10,8 +10,8 @@
 
 ## 横断ハブ・カテゴリ
 
-- `/business/ai-training/`
-- `/business/training/`
+- `/business/training/` — 全研修マスター一覧（Trends風ファセット。クエリURLなし）
+- `/business/ai-training/` — AI研修の編集・商用ハブ（一覧の「言語・ツール=AI」の静的受け皿。薄い二重一覧にしない）
 - `/business/lag-list/`
 - `/business/hie-list/`
 - `/business/thm-list/`

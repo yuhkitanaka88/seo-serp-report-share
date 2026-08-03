@@ -1227,3 +1227,133 @@ body.has-facet-drawer { overflow: hidden; }
 }
 .prototype-scope a { margin-left: auto; color: var(--blue); font-weight: 800; text-decoration: none; }
 @media (max-width: 600px) { .prototype-scope a { margin-left: 0; } }
+
+/* Trends風：研修一覧の左ファセット */
+.training-finder-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+.pc-sticky-filters {
+  position: sticky;
+  top: 88px;
+  align-self: start;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.pc-sticky-filters .facet-compact-bar { display: none; }
+.pc-sticky-filter-stack { max-height: calc(100vh - 140px); overflow: auto; }
+.filter-section { border-bottom: 1px solid var(--line); }
+.filter-section:last-child { border-bottom: 0; }
+.filter-section-title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 0;
+  background: transparent;
+  color: var(--navy);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+}
+.filter-section-title small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  max-width: 46%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.filter-section-title::after {
+  content: "▾";
+  color: var(--muted);
+  font-size: 11px;
+  transition: transform .15s ease;
+}
+.filter-section.open .filter-section-title::after { transform: rotate(180deg); }
+.filter-options {
+  display: none;
+  padding: 0 12px 14px;
+  max-height: 260px;
+  overflow: auto;
+}
+.filter-section.open .filter-options { display: grid; gap: 4px; }
+.filter-option {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  padding: 6px 4px;
+  border-radius: 8px;
+}
+.filter-option:hover { background: var(--surface-2); }
+.filter-option input { margin-top: 4px; }
+.filter-option label {
+  cursor: pointer;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.pc-sticky-filters .facet-actions {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  gap: 8px;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0), #fff 28%);
+  border-top: 1px solid var(--line);
+}
+.training-finder-main .filter-results-toolbar { margin-bottom: 16px; }
+#masterAiHint { margin: 8px 0 0; font-size: 13px; }
+@media (max-width: 960px) {
+  .training-finder-layout { grid-template-columns: 1fr; }
+  .pc-sticky-filters {
+    position: static;
+    top: auto;
+  }
+  .pc-sticky-filters .facet-compact-bar { display: flex; }
+  .pc-sticky-filters .facet-surface {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    max-height: min(82vh, 720px);
+    background: #fff;
+    border-radius: 18px 18px 0 0;
+    box-shadow: var(--shadow-lg);
+    transform: translateY(110%);
+    transition: transform .2s ease;
+  }
+  .pc-sticky-filters.is-open .facet-surface { transform: translateY(0); }
+  .pc-sticky-filters .facet-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 35;
+    background: rgba(17, 33, 61, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: .15s ease;
+  }
+  .pc-sticky-filters.is-open .facet-backdrop { opacity: 1; visibility: visible; }
+  .pc-sticky-filters .facet-mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .pc-sticky-filter-stack { max-height: calc(82vh - 140px); }
+  .pc-sticky-filters .facet-mobile-apply { display: inline-flex; }
+}
