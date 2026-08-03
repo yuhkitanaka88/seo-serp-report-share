@@ -2,25 +2,27 @@
 
 ## 基本ルール
 
-- 通常のファセット操作はURLを変更しないJavaScript絞り込みです。
-- `?theme=...` / `?languages=AI` のようなクエリURLは生成しません（静的パスのみを正規URLとする）。
-- 検索需要と独自内容がある条件だけ静的URLとしてホワイトリスト登録します。
+- ユーザー向けナビの探索入口は **「研修を探す」1本**（`/business/training/`）。「AI研修」を並立ナビにしない。
+- 通常のファセット操作は同一ページ内のJavaScript絞り込みです。
+- `?theme=...` / `?languages=AI` のようなクエリURLは生成しません。
+- インデックスしたい条件は **ディレクトリ型の静的パス** で表現します（例: `/business/ai-training/`、`/business/ai-training/online/`）。
 - 承認済み静的ページは `index,follow` と自己参照canonicalです。
 - 候補ページは要件を満たすまで `noindex,follow` と自己参照canonicalです。
 - 0件条件の静的ページは作成せず、本番では404を返します。
 
-## 研修一覧と AI研修ハブの棲み分け（案A）
+## 「研修を探す」とディレクトリURL（案A）
 
-UX参考: [Trends 研修検索のファセット](https://trends.codecamp.jp/apps/training-search/)（言語・ツール／対象者／テーマ／階層／価格帯／形態／日数／形式）。
+UX参考: [Trends 研修検索のファセット](https://trends.codecamp.jp/apps/training-search/)。
 
-| 役割 | URL | 内容 |
+| 画面 | URL | 意味 |
 |---|---|---|
-| マスター一覧 | `/business/training/` | Trends同様の左ファセットで全研修を探索。クエリURLは作らない |
-| AI横断ハブ | `/business/ai-training/` | 「AI研修」総称語向けの編集・商用ハブ（比較・形態・事例・FAQ）。薄いフィルタ結果の複製ではない |
+| 研修を探す（全件） | `/business/training/` | マスター一覧。クエリなし |
+| 研修を探す（言語・ツール=AI） | `/business/ai-training/` | 同じ一覧UX。タイトルは「AI研修を探す」。AI選択のディレクトリ表現 |
+| さらに需要のある条件 | `/business/ai-training/online/` など | ホワイトリストの下層ディレクトリ |
 
-- 一覧で「言語・ツール = AI」を選んだときは、表示上のタイトルを **「AI研修を探す」** に切り替え、ホワイトリスト済みなら静的URL `/business/ai-training/` へ誘導する（同一SERP向けの二重一覧にしない）。
-- `/business/ai-training/` を別タブの「もう一つの研修一覧」としては扱わない。ナビ文言も「AI研修ハブ」など編集ハブであることが分かる呼び方にする。
-- AI以外の組み合わせも、需要と独自内容が揃ったものだけ静的LP化（例: `/business/ai-training/online/`）。それ以外は同一ページ内JS絞り込みのみ。
+- 一覧で「言語・ツール = AI」を選ぶ → タイトルを「AI研修を探す」にし、正規URLとして `/business/ai-training/` へ遷移（`?languages=AI` は使わない）。
+- `/business/ai-training/` は別ナビの「もう一つの一覧」ではなく、**同じ「研修を探す」のAI条件をディレクトリ化したページ**。
+- その他の組み合わせも、需要と独自内容が揃ったものだけ下層ディレクトリ化。それ以外は `/business/training/` 上のJS絞り込みのみ。
 
 ## index対象条件
 

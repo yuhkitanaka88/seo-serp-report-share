@@ -10,8 +10,8 @@
 
 ## 横断ハブ・カテゴリ
 
-- `/business/training/` — 全研修マスター一覧（Trends風ファセット。クエリURLなし）
-- `/business/ai-training/` — AI研修の編集・商用ハブ（一覧の「言語・ツール=AI」の静的受け皿。薄い二重一覧にしない）
+- `/business/training/` — 研修を探す（唯一のナビ入口。Trends風ファセット）
+- `/business/ai-training/` — 言語・ツール=AI のディレクトリURL（同一UX・タイトル「AI研修を探す」。並立ナビには出さない）
 - `/business/lag-list/`
 - `/business/hie-list/`
 - `/business/thm-list/`
@@ -68,9 +68,6 @@
 
 ### AI研修ハブ内のアンカー
 
-- `/business/ai-training/#facet-goals` — 目的から選ぶ
-- `/business/ai-training/#facet-audiences` — 対象者から選ぶ
-- `/business/ai-training/#facet-tools` — 技術・ツールから選ぶ
-- `/business/ai-training/#facet-delivery` — 研修形態から選ぶ
-- `/business/ai-training/#facet-formats` — 実施形式から選ぶ
-- `/business/ai-training/#ai-training-grid` — 研修詳細一覧
+- `/business/ai-training/` は「研修を探す」で言語・ツール=AIを選んだときのディレクトリ表現です（並立ナビ項目ではない）。
+- 下層の静的LP例: `/business/ai-training/online/` など（ホワイトリスト）。
+- プロトタイプ上のアンカー `#facet-*` / `#ai-training-grid` は同一ページ内の絞り込みUI向けです。

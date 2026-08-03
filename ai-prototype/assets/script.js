@@ -522,10 +522,10 @@
   };
 
   const tourSteps = [
-    { route: "/business/", selector: "#ai-entry", title: "AI研修の横断ハブ", message: "法人トップからAI研修ハブへ進みます。AIは第5カテゴリではなく、既存資産を横断して束ねる入口です。" },
+    { route: "/business/", selector: "#ai-entry", title: "AIは一覧の条件", message: "ナビ並立の「AI研修」は置きません。研修を探すで言語・ツール=AIを選ぶと、ディレクトリURL /business/ai-training/ になります。" },
     { route: "/business/", selector: "#category-entry", title: "4つのカリキュラムカテゴリ", message: "言語・ツール、階層、テーマ、職種という4つの視点から同じ研修を発見できます。" },
-    { route: "/business/ai-training/", selector: "#ai-filter", title: "目的に合わせてAI研修を絞り込む", message: "対象者、目的、ツール、研修形態を組み合わせて候補を比較します。通常の絞り込み結果は非インデックス想定です。" },
-    { route: "/business/ai-training/", selector: "#ai-training-grid", title: "研修詳細へ移動", message: "総称語はハブ、生成AI・ChatGPT・Claudeなどの商品語は個別研修詳細が受け持ちます。" },
+    { route: "/business/training/", selector: "#masterFacetNav", title: "研修を探す（唯一の一覧入口）", message: "Trends風ファセットで絞り込みます。クエリURLは作らず、需要がある条件だけディレクトリ型URLへ遷移します。" },
+    { route: "/business/ai-training/", selector: "#masterGrid", title: "AI条件のディレクトリ表現", message: "同じ一覧UXでタイトルは「AI研修を探す」。正規URLは /business/ai-training/ です。" },
     { route: "/business/lag-generative-ai-chatgpt/", selector: "#delivery-methods", title: "研修形態を選択", message: "同じカリキュラムでも、カスタマイズ、パッケージ、公開講座という異なる導入方法へ接続します。" },
     { route: "/open/", selector: "#open-courses", title: "公開講座へ接続", message: "公開講座は1名参加・日程確認という異なる検索意図を持ち、法人研修詳細と相互に接続します。" }
   ];
@@ -596,15 +596,15 @@
   function planALocationLabel() {
     if (ROUTE === "/business/") return "案A：/businessトップ";
     if (ROUTE === "/business/site-map/") return "案A：サイトマップ";
-    if (ROUTE === "/business/ai-training/") return "案A：AI研修ハブ";
-    if (ROUTE.startsWith("/business/ai-training/")) return "案A：AI研修ハブ配下の静的LP候補";
+    if (ROUTE === "/business/ai-training/") return "案A：研修を探す（言語・ツール=AI のディレクトリURL）";
+    if (ROUTE.startsWith("/business/ai-training/")) return "案A：研修を探すの下層ディレクトリ（静的LP候補）";
+    if (ROUTE === "/business/training/") return "案A：研修を探す";
     const category = Object.values(categoryPages).find((item) => item.route === ROUTE);
     if (category) return `案A：4カテゴリ ＞ ${category.short}`;
     const delivery = Object.values(deliveryPages).find((item) => item.route === ROUTE);
     if (delivery) return `案A：3研修形態 ＞ ${delivery.title}`;
     if (ROUTE.startsWith("/open/")) return "案A：3研修形態 ＞ 公開講座";
     if (trainings.some((item) => item.route === ROUTE)) return "案A：研修詳細";
-    if (ROUTE === "/business/training/") return "案A：全研修ファセット";
     return "案A：法人向け研修の関連ページ";
   }
 
@@ -614,8 +614,11 @@
     const description = options.description || "CodeCampの法人向け研修サイト構造を確認する視覚プロトタイプです。";
     document.title = `${title} | CodeCamp Prototype`;
     const businessCurrent = ROUTE === "/business/" ? ' aria-current="page"' : "";
-    const aiCurrent = ROUTE.startsWith("/business/ai-training/") ? ' aria-current="page"' : "";
-    const trainingCurrent = ["/business/training/", "/business/lag-list/", "/business/hie-list/", "/business/thm-list/", "/business/occ-list/"].includes(ROUTE) ? ' aria-current="page"' : "";
+    const trainingCurrent = (
+      ROUTE === "/business/training/"
+      || ROUTE.startsWith("/business/ai-training/")
+      || ["/business/lag-list/", "/business/hie-list/", "/business/thm-list/", "/business/occ-list/"].includes(ROUTE)
+    ) ? ' aria-current="page"' : "";
     const openCurrent = ROUTE.startsWith("/open/") ? ' aria-current="page"' : "";
     const breadcrumbs = options.breadcrumbs || [];
 
@@ -628,7 +631,6 @@
           </a>
           <nav id="primaryNav" class="primary-nav" aria-label="主要ナビゲーション">
             <a href="${href('/business/')}"${businessCurrent}>法人向け研修</a>
-            <a href="${href('/business/ai-training/')}"${aiCurrent}>AI研修</a>
             <a href="${href('/business/training/')}"${trainingCurrent}>研修を探す</a>
             <a href="${href('/business/site-map/')}">案Aサイトマップ</a>
             <a href="${href('/business/customize/')}">カスタマイズ</a>
@@ -702,7 +704,7 @@
           <nav class="dialog-tree" aria-label="案Aサイトマップ">
             <a class="dialog-tree-root" href="${href('/business/')}"><strong>/business トップ</strong><span>法人向け研修全体</span></a>
             <div class="dialog-tree-branches">
-              <section><h3>AI研修ハブ</h3><a href="${href('/business/ai-training/')}">AI研修トップ</a><a href="${href('/business/ai-training/#facet-goals')}">目的から選ぶ</a><a href="${href('/business/ai-training/#facet-audiences')}">対象者から選ぶ</a><a href="${href('/business/ai-training/#facet-tools')}">技術・ツールから選ぶ</a><a href="${href('/business/ai-training/#facet-delivery')}">研修形態から選ぶ</a><a href="${href('/business/ai-training/#facet-formats')}">実施形式から選ぶ</a><a href="${href('/business/ai-training/#ai-training-grid')}">研修詳細へ遷移</a></section>
+              <section><h3>研修を探す</h3><a href="${href('/business/training/')}">全研修一覧</a><a href="${href('/business/ai-training/')}">言語・ツール=AI（/business/ai-training/）</a><a href="${href('/business/ai-training/online/')}">AI × オンライン</a><a href="${href('/business/lag-list/')}">言語・ツール別</a><a href="${href('/business/hie-list/')}">階層別</a><a href="${href('/business/thm-list/')}">テーマ別</a><a href="${href('/business/occ-list/')}">職種別</a></section>
               <section><h3>4カテゴリ</h3>${Object.values(categoryPages).map((item) => `<a href="${href(item.route)}">${escapeHtml(item.title)}</a>`).join("")}</section>
               <section><h3>3研修形態</h3>${Object.values(deliveryPages).map((item) => `<a href="${href(item.route)}">${escapeHtml(item.title)}</a>`).join("")}</section>
               <section><h3>主要研修詳細</h3><a href="${href('/business/lag-generative-ai-chatgpt/')}">生成AI研修</a><a href="${href('/business/lag-ai-chatgpt/')}">ChatGPT研修</a><a href="${href('/business/claude/')}">Claude研修</a><a href="${href('/business/thm-ai-data-analysis/')}">AI・データ分析研修</a></section>
@@ -746,9 +748,9 @@
   function renderFacetLanding(page) {
     const items = trainings.filter(isAITraining).filter((item) => matchesRule(item, page.filters));
     const content = `
-      <section class="detail-hero"><div class="container"><p class="eyebrow">AI TRAINING</p><h1>${escapeHtml(page.title)}</h1><p class="lead">${escapeHtml(page.description)}</p><div class="hero-actions"><a class="button button-primary" href="#curatedTrainings">対象研修を見る</a><a class="button" href="${href('/business/ai-training/')}">AI研修トップへ</a></div></div></section>
+      <section class="detail-hero"><div class="container"><p class="eyebrow">AI TRAINING</p><h1>${escapeHtml(page.title)}</h1><p class="lead">${escapeHtml(page.description)}</p><div class="hero-actions"><a class="button button-primary" href="#curatedTrainings">対象研修を見る</a><a class="button" href="${href('/business/training/')}">研修を探すへ</a></div></div></section>
       <section id="curatedTrainings" class="section"><div class="container"><div class="section-heading"><div><p class="eyebrow">TRAINING LIST</p><h2>対象となる研修</h2><p class="lead">この条件に合う研修を比較できます。</p></div></div><div class="training-grid">${items.map((item) => renderTrainingCard(item)).join('')}</div>${renderSeoStatus(page)}</div></section>`;
-    shell(content, { title: page.title, description: page.description, breadcrumbs: [{ label: "AI研修", route: "/business/ai-training/" }, { label: page.title, route: page.route }] });
+    shell(content, { title: page.title, description: page.description, breadcrumbs: [{ label: "研修を探す", route: "/business/training/" }, { label: "AI研修を探す", route: "/business/ai-training/" }, { label: page.title, route: page.route }] });
   }
 
   function renderTrainingCard(item, options = {}) {
@@ -777,13 +779,13 @@
           </div>
           <aside class="hero-visual quick-finder" aria-label="研修を探す">
             <p class="eyebrow">QUICK FINDER</p><h2>研修を探す</h2><p class="muted">探し方を選択してください。</p>
-            <nav class="quick-finder-links"><a href="${href('/business/ai-training/')}"><strong>AI研修から探す</strong><span>目的・対象者・ツールで比較</span></a><a href="${href('/business/lag-list/')}"><strong>言語・ツールから探す</strong><span>Java、Python、ChatGPTなど</span></a><a href="${href('/business/hie-list/')}"><strong>階層から探す</strong><span>新入社員、管理職など</span></a><a href="${href('/business/thm-list/')}"><strong>テーマから探す</strong><span>DX、AI、セキュリティなど</span></a><a href="${href('/business/occ-list/')}"><strong>職種から探す</strong><span>エンジニア、PM、データ人材</span></a></nav>
+            <nav class="quick-finder-links"><a href="${href('/business/training/')}"><strong>条件から絞り込む</strong><span>言語・ツール・対象者・テーマなど（Trends風）</span></a><a href="${href('/business/lag-list/')}"><strong>言語・ツールから探す</strong><span>AI、Java、Python、ChatGPTなど</span></a><a href="${href('/business/hie-list/')}"><strong>階層から探す</strong><span>新入社員、管理職など</span></a><a href="${href('/business/thm-list/')}"><strong>テーマから探す</strong><span>DX、AI、セキュリティなど</span></a><a href="${href('/business/occ-list/')}"><strong>職種から探す</strong><span>エンジニア、PM、データ人材</span></a></nav>
           </aside>
         </div>
       </section>
       <section class="section-compact section-white"><div class="container"><div class="stats-grid"><div class="stat-card"><div class="stat-value">4</div><div class="stat-label">カリキュラムカテゴリ</div></div><div class="stat-card"><div class="stat-value">3</div><div class="stat-label">研修形態</div></div><div class="stat-card"><div class="stat-value">50+</div><div class="stat-label">研修詳細の想定</div></div><div class="stat-card"><div class="stat-value">1</div><div class="stat-label">共通データ基盤</div></div></div></div></section>
-      <section id="plan-a-map" class="section section-white"><div class="container"><div class="section-heading"><div><p class="eyebrow">PLAN A / SITE MAP</p><h2>案Aのどこを見ているか確認する</h2><p class="lead">法人トップ、AI横断ハブ、4カテゴリ、3研修形態、主要な研修詳細を一つの地図から開けます。</p></div><div class="section-actions"><a class="button button-primary" href="${href('/business/site-map/')}">サイトマップを開く</a><a class="button" href="${ROOT}requirements/index.html">要件書を読む</a></div></div><div class="compact-map"><a class="compact-map-root" href="${href('/business/')}"><strong>/business トップ</strong><span>法人向け研修全体</span></a><div class="compact-map-grid"><a href="${href('/business/ai-training/')}"><strong>AI研修ハブ</strong><span>目的・対象者・技術・研修形態から選ぶ</span></a><a href="${href('/business/lag-list/')}"><strong>4カテゴリ</strong><span>言語・ツール／階層／テーマ／職種</span></a><a href="${href('/business/customize/')}"><strong>3研修形態</strong><span>カスタマイズ／パッケージ／公開講座</span></a><a href="${href('/business/lag-generative-ai-chatgpt/')}"><strong>研修詳細</strong><span>生成AI／ChatGPT／Claude／AI・データ分析</span></a></div></div></div></section>
-      <section id="ai-entry" class="section section-blue"><div class="container"><div class="split-panel"><div class="split-panel-copy"><p class="eyebrow">AI TRAINING HUB</p><h2>AI研修を横断して選ぶ</h2><p class="lead">AI研修は第5カテゴリではありません。既存の言語・ツール、階層、テーマ、職種と3研修形態を横断し、自社に合う研修を比較する入口です。</p><div class="hero-actions"><a class="button button-primary" href="${href('/business/ai-training/')}">AI研修ハブを見る</a><a class="button" href="${href('/business/lag-generative-ai-chatgpt/')}">生成AI研修を見る</a></div></div><div class="card-grid card-grid-2">${aiCards.map((item) => `<a class="card" href="${href(item.route)}"><div class="card-icon">${icon(item.icon)}</div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.summary)}</p><span class="card-link">研修詳細へ →</span></a>`).join("")}</div></div></div></section>
+      <section id="plan-a-map" class="section section-white"><div class="container"><div class="section-heading"><div><p class="eyebrow">PLAN A / SITE MAP</p><h2>案Aのどこを見ているか確認する</h2><p class="lead">法人トップ、研修を探す、4カテゴリ、3研修形態、主要な研修詳細を一つの地図から開けます。AIはナビ並立ではなく、言語・ツール条件のディレクトリURLです。</p></div><div class="section-actions"><a class="button button-primary" href="${href('/business/site-map/')}">サイトマップを開く</a><a class="button" href="${ROOT}requirements/index.html">要件書を読む</a></div></div><div class="compact-map"><a class="compact-map-root" href="${href('/business/')}"><strong>/business トップ</strong><span>法人向け研修全体</span></a><div class="compact-map-grid"><a href="${href('/business/training/')}"><strong>研修を探す</strong><span>唯一の一覧入口。AI選択時は /business/ai-training/</span></a><a href="${href('/business/lag-list/')}"><strong>4カテゴリ</strong><span>言語・ツール／階層／テーマ／職種</span></a><a href="${href('/business/customize/')}"><strong>3研修形態</strong><span>カスタマイズ／パッケージ／公開講座</span></a><a href="${href('/business/lag-generative-ai-chatgpt/')}"><strong>研修詳細</strong><span>生成AI／ChatGPT／Claude／AI・データ分析</span></a></div></div></div></section>
+      <section id="ai-entry" class="section section-blue"><div class="container"><div class="split-panel"><div class="split-panel-copy"><p class="eyebrow">AI AS A FILTER</p><h2>AIは「研修を探す」の条件</h2><p class="lead">ナビに「AI研修」は置きません。研修を探すで言語・ツール=AIを選ぶとタイトルが「AI研修を探す」になり、ディレクトリURL <code>/business/ai-training/</code> で表現します（クエリパラメータは使いません）。</p><div class="hero-actions"><a class="button button-primary" href="${href('/business/training/')}">研修を探す</a><a class="button" href="${href('/business/ai-training/')}">AI条件のディレクトリを見る</a></div></div><div class="card-grid card-grid-2">${aiCards.map((item) => `<a class="card" href="${href(item.route)}"><div class="card-icon">${icon(item.icon)}</div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.summary)}</p><span class="card-link">研修詳細へ →</span></a>`).join("")}</div></div></div></section>
       <section id="category-entry" class="section section-white"><div class="container"><div class="section-heading"><div><p class="eyebrow">FIND BY CATEGORY</p><h2>4つの視点から研修を探す</h2><p class="lead">カテゴリは研修を一意に収納する箱ではなく、同じ研修へ到達する複数の発見経路です。</p></div><a class="button" href="${href('/business/training/')}">すべての研修を絞り込む</a></div><div class="category-index">${Object.values(categoryPages).map((item, index) => `<a class="category-card" href="${href(item.route)}"><span class="category-number">0${index + 1}</span><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.description)}</p><ul>${item.examples.map((value) => `<li>${escapeHtml(value)}</li>`).join("")}</ul></a>`).join("")}</div></div></section>
       <section class="section"><div class="container"><div class="section-heading"><div><p class="eyebrow">DELIVERY MODEL</p><h2>3つの研修形態から導入する</h2><p class="lead">研修形態は「何を学ぶか」ではなく、「どの方式で導入・参加するか」を表します。</p></div></div><div class="card-grid">${Object.values(deliveryPages).map((item) => `<a class="card ${item.route === '/open/' ? 'card-feature' : ''}" href="${href(item.route)}"><div class="card-icon">${icon(item.icon)}</div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.summary)}</p><div class="card-meta">${tags(item.features.slice(0, 2))}</div><span class="card-link">詳しく見る →</span></a>`).join("")}</div></div></section>
       <section class="section section-white"><div class="container"><div class="section-heading"><div><p class="eyebrow">FEATURED TRAINING</p><h2>主要な研修詳細</h2><p class="lead">研修詳細はすべて/business直下に置き、複数カテゴリと研修形態を属性として持ちます。</p></div></div><div class="training-grid">${trainings.slice(0, 6).map((item) => renderTrainingCard(item, { showKeyword: false })).join("")}</div></div></section>
@@ -842,16 +844,7 @@
   }
 
   function renderAIHub() {
-    const aiTrainings = trainings.filter(isAITraining);
-    const whitelisted = staticFilterDestinations.filter((item) => item.route !== "/business/ai-training/");
-    const whitelistTable = `<div class="matrix-table-wrap"><table class="matrix-table"><thead><tr><th>ページ</th><th>静的URL</th><th>canonical</th><th>状態</th></tr></thead><tbody>${whitelisted.map((item) => `<tr><td><a href="${href(item.route)}">${escapeHtml(item.label)}</a></td><td><code>${escapeHtml(item.route)}</code></td><td><code>${escapeHtml(item.canonical)}</code></td><td><span class="tag ${item.indexable ? 'tag-green' : 'tag-amber'}">${item.indexable ? 'index' : 'noindex候補'}</span></td></tr>`).join('')}</tbody></table></div>`;
-    const content = `
-      <section class="hero"><div class="container hero-grid"><div class="hero-copy"><p class="eyebrow">AI TRAINING</p><h1>企業・法人向け<br>AI研修</h1><p class="lead">AIリテラシー、生成AI業務活用、データ分析、AI開発まで、対象者と目的に応じて最適な研修を選定します。全研修の薄い複製一覧ではなく、「AI研修」総称語向けの編集・商用ハブです。</p><div class="hero-actions"><a class="button button-primary" href="#ai-filter">条件で絞り込む</a><a class="button" href="${href('/business/training/')}">全研修一覧へ</a></div></div><aside class="hero-visual selection-guide"><p class="eyebrow">HOW TO CHOOSE</p><h2>AI研修の選び方</h2><ol><li><strong>目的</strong><span>リテラシー、業務活用、開発など</span></li><li><strong>対象者</strong><span>全社員、非エンジニア、エンジニアなど</span></li><li><strong>研修を比較</strong><span>内容・期間・提供方法を確認</span></li></ol></aside></div></section>
-      <section id="ai-filter" class="section"><div class="container"><div class="section-heading"><div><p class="eyebrow">FIND AI TRAINING</p><h2>このハブ内で条件を絞る</h2><p class="lead">クエリURLは作りません。需要がある条件だけ静的LPへ誘導します。全カテゴリ横断の探索は「研修を探す」側のTrends風ファセットを使います。</p></div></div>${aiFacetGroupMarkup()}<div class="filter-results-toolbar user-results-toolbar"><div class="filter-count"><strong id="aiResultCount">${aiTrainings.length}</strong>件の研修候補</div><a class="text-link" href="${href('/business/training/')}">AI以外を含む全研修を見る →</a></div><div id="ai-training-grid" class="training-grid">${aiTrainings.map((item) => renderTrainingCard(item)).join("")}</div><div id="aiEmpty" class="empty-state" hidden><h3>条件に合う研修がありません</h3><p class="muted">条件を減らすか、カスタマイズ研修としてご相談ください。</p></div>${renderUrlDesignInspector({ badgeId: 'aiSeoBadge', queryId: 'aiFilterQuery', linkId: 'aiStaticLink', whitelist: `<h3>静的URL・canonicalのホワイトリスト</h3>${whitelistTable}` })}</div></section>
-      <section class="section section-white"><div class="container"><div class="section-heading"><div><p class="eyebrow">DELIVERY</p><h2>導入方法を選ぶ</h2><p class="lead">研修内容を確認した後、企業単位での導入または公開講座を選択します。</p></div></div><div class="card-grid">${Object.values(deliveryPages).map((item) => `<a class="card" href="${href(item.route)}"><div class="card-icon">${icon(item.icon)}</div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.summary)}</p><span class="card-link">導入方法を見る →</span></a>`).join("")}</div></div></section>`;
-    shell(content, { title: "企業・法人向けAI研修", description: "AI研修横断ハブの視覚プロトタイプ", breadcrumbs: [{ label: "AI研修", route: "/business/ai-training/" }], mobileCta: { secondaryLabel: "全研修を見る", secondaryRoute: "/business/training/", primaryLabel: "AI研修を相談", primaryRoute: "/business/faq/" } });
-    bindFacetNavigator("aiFacetNav");
-    bindAIHubFilters(aiTrainings);
+    renderTrainingMaster({ presetTools: ["AI"] });
   }
 
   function renderPlanASiteMap() {
@@ -861,30 +854,28 @@
       ["Claude研修", "/business/claude/", "Claude研修・Claude Code研修"],
       ["AI・データ分析研修", "/business/thm-ai-data-analysis/", "AI・データ分析研修・機械学習研修"]
     ];
-    const aiPaths = [
-      ["目的から選ぶ", "#facet-goals", "AIリテラシー、業務活用、AI開発など"],
-      ["対象者から選ぶ", "#facet-audiences", "全社員、新入社員、非エンジニア、エンジニアなど"],
-      ["技術・ツールから選ぶ", "#facet-tools", "生成AI、ChatGPT、Claude、Pythonなど"],
-      ["研修形態から選ぶ", "#facet-delivery", "カスタマイズ、パッケージ、公開講座"],
-      ["実施形式から選ぶ", "#facet-formats", "オンライン、現地、ハイブリッド"],
-      ["研修詳細へ遷移", "#ai-training-grid", "条件に合う個別研修を比較して詳細へ進む"]
-    ];
     const content = `
-      <section class="detail-hero"><div class="container"><p class="eyebrow">PLAN A / INTERACTIVE SITE MAP</p><h1>案A サイトマップ</h1><p class="lead">このページは、確定した案Aの各要素がプロトタイプ上のどの画面に該当するかを示すリンク付きの地図です。</p><div class="hero-actions"><a class="button button-primary" href="${href('/business/')}">/businessトップへ</a><a class="button" href="${ROOT}requirements/index.html">サイト構造・キーワード要件書</a></div></div></section>
+      <section class="detail-hero"><div class="container"><p class="eyebrow">PLAN A / INTERACTIVE SITE MAP</p><h1>案A サイトマップ</h1><p class="lead">探索入口は「研修を探す」1本。AIは言語・ツール条件をディレクトリURLで表現します（クエリパラメータは使いません）。</p><div class="hero-actions"><a class="button button-primary" href="${href('/business/')}">/businessトップへ</a><a class="button" href="${ROOT}requirements/index.html">サイト構造・キーワード要件書</a></div></div></section>
       <section class="section"><div class="container"><div class="plan-a-tree" aria-label="案Aのサイトマップ">
         <a class="plan-a-root" href="${href('/business/')}"><span class="map-node-label">ROOT</span><strong>/business トップ</strong><small>法人向け研修全体、固定・信頼ページ、研修の入口</small></a>
         <div class="plan-a-columns">
-          <article class="plan-a-branch plan-a-branch-feature"><div class="branch-head"><span>01</span><div><h2>AI研修ハブ</h2><code>/business/ai-training/</code></div></div><p>AIは第5カテゴリではなく、既存のカテゴリ・研修形態・詳細を横断して選ぶ編集型ハブです。</p><a class="branch-primary-link" href="${href('/business/ai-training/')}">AI研修ハブを開く →</a><div class="branch-links">${aiPaths.map(([label, hash, text]) => `<a href="${href('/business/ai-training/'+hash)}"><strong>${escapeHtml(label)}</strong><span>${escapeHtml(text)}</span></a>`).join("")}</div></article>
+          <article class="plan-a-branch plan-a-branch-feature"><div class="branch-head"><span>01</span><div><h2>研修を探す</h2><code>/business/training/</code></div></div><p>唯一の一覧ナビ。Trends風ファセットで絞り込み。言語・ツール=AIを選ぶとタイトルが「AI研修を探す」になり、ディレクトリ <code>/business/ai-training/</code> へ遷移します。</p><a class="branch-primary-link" href="${href('/business/training/')}">研修を探すを開く →</a><div class="branch-links"><a href="${href('/business/ai-training/')}"><strong>言語・ツール=AI</strong><span>/business/ai-training/（ディレクトリ表現）</span></a><a href="${href('/business/ai-training/online/')}"><strong>AI × オンライン</strong><span>/business/ai-training/online/</span></a><a href="${href('/business/ai-training/for-engineers/')}"><strong>AI × エンジニア</strong><span>候補ディレクトリ（要件充足待ち）</span></a></div></article>
           <article class="plan-a-branch"><div class="branch-head"><span>02</span><div><h2>4カテゴリ</h2><small>研修の発見経路</small></div></div><p>同じ研修を、言語・ツール、階層、テーマ、職種の異なる視点から探します。</p><div class="branch-links">${Object.values(categoryPages).map((item) => `<a href="${href(item.route)}"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.description)}</span></a>`).join("")}</div></article>
           <article class="plan-a-branch"><div class="branch-head"><span>03</span><div><h2>3研修形態</h2><small>導入・参加方法</small></div></div><p>カリキュラムの種類ではなく、企業がどの方式で導入・参加するかを示します。</p><div class="branch-links">${Object.values(deliveryPages).map((item) => `<a href="${href(item.route)}"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.summary)}</span></a>`).join("")}</div></article>
-          <article class="plan-a-branch"><div class="branch-head"><span>04</span><div><h2>研修詳細</h2><small>/business直下の個別商品ページ</small></div></div><p>総称語はAIハブ、商品・技術固有のキーワードは個別の研修詳細が受け持ちます。</p><div class="branch-links">${details.map(([label, route, keyword]) => `<a href="${href(route)}"><strong>${escapeHtml(label)}</strong><span>主な狙い：${escapeHtml(keyword)}</span></a>`).join("")}</div></article>
+          <article class="plan-a-branch"><div class="branch-head"><span>04</span><div><h2>研修詳細</h2><small>/business直下の個別商品ページ</small></div></div><p>総称語「AI研修」はディレクトリ化した一覧条件、商品・技術固有語は個別の研修詳細が受け持ちます。</p><div class="branch-links">${details.map(([label, route, keyword]) => `<a href="${href(route)}"><strong>${escapeHtml(label)}</strong><span>主な狙い：${escapeHtml(keyword)}</span></a>`).join("")}</div></article>
         </div>
       </div></div></section>
-      <section class="section section-white"><div class="container"><div class="section-heading"><div><p class="eyebrow">REQUIREMENTS INTEGRATION</p><h2>サイト構造とキーワード要件を一緒に確認する</h2><p class="lead">視覚プロトタイプは画面と遷移を確認するもの、要件書は構造・SEO・キーワード所有を確認するものです。同じパッケージ内で相互に移動できます。</p></div></div><div class="requirements-summary"><article><h3>構造の確定事項</h3><ul class="bullet-list"><li>案Aを採用し、AI研修ハブを横断ハブとして新設</li><li>4カテゴリと3研修形態を維持</li><li>既存研修詳細URLは原則維持</li><li>ファセット静的化はホワイトリスト方式</li></ul></article><article><h3>キーワード所有の確定事項</h3><ul class="bullet-list"><li>「AI研修」はAI研修総合ハブ</li><li>生成AI・ChatGPT・Claudeは各研修詳細</li><li>比較語は比較・選定コンテンツ</li><li>対象者・実施形式などの属性語は原則ファセット</li></ul></article><article class="requirements-cta"><h3>法人向けAI研修<br>サイト構造・キーワード要件書</h3><p>案A・B・C、現行構造、SEO・canonical、キーワードマップ、ロードマップの全文を確認できます。</p><a class="button button-primary" href="${ROOT}requirements/index.html">要件書を開く</a></article></div></div></section>`;
+      <section class="section section-white"><div class="container"><div class="section-heading"><div><p class="eyebrow">REQUIREMENTS INTEGRATION</p><h2>サイト構造とキーワード要件を一緒に確認する</h2><p class="lead">視覚プロトタイプは画面と遷移を確認するもの、要件書は構造・SEO・キーワード所有を確認するものです。同じパッケージ内で相互に移動できます。</p></div></div><div class="requirements-summary"><article><h3>構造の確定事項</h3><ul class="bullet-list"><li>ナビの探索入口は「研修を探す」1本</li><li>AIはファセット条件＋ディレクトリURL（クエリなし）</li><li>4カテゴリと3研修形態を維持</li><li>既存研修詳細URLは原則維持</li></ul></article><article><h3>キーワード所有の確定事項</h3><ul class="bullet-list"><li>「AI研修」は /business/ai-training/（一覧のAI条件）</li><li>生成AI・ChatGPT・Claudeは各研修詳細</li><li>比較語は比較・選定コンテンツ</li><li>対象者・実施形式などの属性語は原則ファセット</li></ul></article><article class="requirements-cta"><h3>法人向けAI研修<br>サイト構造・キーワード要件書</h3><p>案A・B・C、現行構造、SEO・canonical、キーワードマップ、ロードマップの全文を確認できます。</p><a class="button button-primary" href="${ROOT}requirements/index.html">要件書を開く</a></article></div></div></section>`;
     shell(content, { title: "案A サイトマップ", description: "案Aの各ページをリンク付きで確認するサイトマップ", breadcrumbs: [{ label: "案Aサイトマップ", route: "/business/site-map/" }] });
   }
 
-  function renderTrainingMaster() {
+  function renderTrainingMaster(options = {}) {
+    const presetTools = options.presetTools || [];
+    const aiPreset = presetTools.includes("AI");
+    const pageTitle = aiPreset ? "AI研修を探す" : "研修を探す";
+    const pageLead = aiPreset
+      ? "言語・ツール=AI の条件をディレクトリURL /business/ai-training/ で表現しています。クエリパラメータは使いません。条件を外すと /business/training/ に戻ります。"
+      : "Trendsの研修検索と同様に、言語・ツール・対象者・テーマなどから絞り込みます。インデックスしたい条件はディレクトリ型URLへ遷移します（例: 言語・ツール=AI → /business/ai-training/）。";
     const groups = {
       tools: { label: "言語・ツール", values: ["AI", "Java", "Python", "ChatGPT", "Claude", "Excel", "AWS", "JavaScript"] },
       audiences: { label: "対象者", values: ["全社員", "新入社員", "内定者", "非エンジニア", "エンジニア", "管理職"] },
@@ -894,12 +885,22 @@
       formats: { label: "形式", values: ["オンライン", "現地", "ハイブリッド"] },
       status: { label: "ページ状態", values: [["existing", "既存ページ"], ["candidate", "新設候補"]] }
     };
+    const breadcrumbs = aiPreset
+      ? [{ label: "研修を探す", route: "/business/training/" }, { label: "AI研修を探す", route: "/business/ai-training/" }]
+      : [{ label: "研修を探す", route: "/business/training/" }];
     const content = `
-      <section class="detail-hero"><div class="container"><p class="eyebrow">TRAINING FINDER</p><h1 id="masterPageTitle">研修を探す</h1><p id="masterPageLead" class="lead">Trendsの研修検索と同様に、言語・ツール・対象者・テーマなどから絞り込みます。クエリURLは作らず、需要がある条件だけ静的URLへ誘導します。</p></div></section>
-      <section class="section"><div class="container"><div class="training-finder-layout">${masterFacetMarkup(groups)}<div class="training-finder-main"><div class="filter-results-toolbar user-results-toolbar"><div class="filter-count"><strong id="masterCount">${trainings.length}</strong>件を表示</div><p id="masterAiHint" class="muted" hidden>言語・ツールでAIを選択中です。タイトルを「AI研修を探す」に切り替え、静的ハブへ誘導します（二重一覧にしません）。</p></div><div id="masterGrid" class="training-grid">${trainings.map((item) => renderTrainingCard(item)).join("")}</div><div id="masterEmpty" class="empty-state" hidden><h3>条件に合う研修がありません</h3><p class="muted">条件をリセットするか、カスタマイズ研修をご相談ください。</p></div>${renderUrlDesignInspector({ badgeId: 'masterSeoBadge', queryId: 'masterQuery', linkId: 'masterStaticLink', resetId: 'masterResetInspector' })}</div></div></div></section>`;
-    shell(content, { title: "研修を探す", description: "Trends風ファセットを想定した全研修一覧（静的URL方針）", breadcrumbs: [{ label: "研修を探す", route: "/business/training/" }] });
+      <section class="detail-hero"><div class="container"><p class="eyebrow">TRAINING FINDER</p><h1 id="masterPageTitle">${pageTitle}</h1><p id="masterPageLead" class="lead">${pageLead}</p></div></section>
+      <section class="section"><div class="container"><div class="training-finder-layout">${masterFacetMarkup(groups)}<div class="training-finder-main"><div class="filter-results-toolbar user-results-toolbar"><div class="filter-count"><strong id="masterCount">${trainings.length}</strong>件を表示</div><p id="masterAiHint" class="muted"${aiPreset ? "" : " hidden"}>${aiPreset ? "現在のディレクトリURLは /business/ai-training/ です（言語・ツール=AI）。" : "言語・ツールでAIを選ぶと、タイトルを「AI研修を探す」にし /business/ai-training/ へ遷移します。"}</p></div><div id="masterGrid" class="training-grid">${trainings.map((item) => renderTrainingCard(item)).join("")}</div><div id="masterEmpty" class="empty-state" hidden><h3>条件に合う研修がありません</h3><p class="muted">条件をリセットするか、カスタマイズ研修をご相談ください。</p></div>${renderUrlDesignInspector({ badgeId: 'masterSeoBadge', queryId: 'masterQuery', linkId: 'masterStaticLink', resetId: 'masterResetInspector' })}</div></div></div></section>`;
+    shell(content, { title: pageTitle, description: "研修を探す（ディレクトリ型URL方針）", breadcrumbs, mobileCta: { secondaryLabel: "法人トップ", secondaryRoute: "/business/", primaryLabel: "導入を相談", primaryRoute: "/business/faq/" } });
+    if (aiPreset) {
+      document.querySelectorAll('[data-master-filter="tools"]').forEach((input) => {
+        input.checked = presetTools.includes(input.value);
+      });
+      const toolsSection = document.querySelector('[data-filter-section="tools"]');
+      toolsSection?.classList.add("open");
+    }
     bindStickyFilterSections("masterFacetNav");
-    bindMasterFilters();
+    bindMasterFilters({ aiDirectoryMode: aiPreset });
   }
 
   function renderCategoryPage(categoryKey) {
@@ -951,7 +952,7 @@
     const content = `
       <section class="detail-hero"><div class="container detail-hero-grid"><div><div class="card-meta">${statusTag(training)}${tags(training.themes.slice(0, 3), "tag-blue")}</div><h1 style="margin-top:16px">${escapeHtml(training.title)}</h1><p class="lead">${escapeHtml(training.heroLead)}</p><div class="hero-actions"><a class="button button-primary" href="#delivery-methods">導入方法を見る</a><a class="button" href="${href('/business/faq/')}">研修を相談する</a></div></div><aside class="detail-summary"><dl><div><dt>主カテゴリ</dt><dd>${escapeHtml(primary.title)}</dd></div><div><dt>対象者</dt><dd>${escapeHtml(training.audiences.join('・'))}</dd></div><div><dt>レベル</dt><dd>${escapeHtml(training.level)}</dd></div><div><dt>期間</dt><dd>${escapeHtml(training.duration)}</dd></div><div><dt>実施形式</dt><dd>${escapeHtml(training.formats.join('・'))}</dd></div></dl></aside></div></section>
       <section class="section"><div class="container detail-layout"><div class="detail-main"><article class="content-panel"><p class="eyebrow">OVERVIEW</p><h2>研修概要</h2><p class="lead">${escapeHtml(training.summary)}</p><h3>研修後にできること</h3><ul class="bullet-list">${training.outcomes.map((value) => `<li>${escapeHtml(value)}</li>`).join("")}</ul><div class="card-meta" style="margin-top:22px">${tags(training.tools, "tag-purple")}${tags(training.roles)}</div></article><article id="delivery-methods" class="content-panel"><p class="eyebrow">DELIVERY METHODS</p><h2>この研修の提供方法</h2><p class="lead">カリキュラム詳細は研修形態を内包せず、対応可能な導入方法へ接続します。</p><div class="delivery-grid">${Object.entries(deliveryPages).map(([key, page]) => { const available = key === 'open' ? relatedCourses.length > 0 : training.delivery.includes(key); const route = key === 'open' && relatedCourses[0] ? relatedCourses[0].route : page.route; return `<article class="delivery-card ${available ? 'is-available' : ''}"><div class="card-meta"><span class="tag ${available ? 'tag-green' : ''}">${available ? '対応あり' : '要相談'}</span></div><h3>${escapeHtml(page.title)}</h3><p>${escapeHtml(page.summary)}</p><a class="card-link" href="${href(route)}">${available ? '詳しく見る' : '相談する'} →</a></article>`; }).join("")}</div></article><article class="content-panel"><p class="eyebrow">CURRICULUM</p><h2>カリキュラム例</h2><div class="accordion">${training.curriculum.map(([title, body], index) => `<section class="accordion-item"><button class="accordion-button" type="button" aria-expanded="${index === 0 ? 'true' : 'false'}">${escapeHtml(title)}</button><div class="accordion-content" ${index === 0 ? "" : "hidden"}>${escapeHtml(body)}</div></section>`).join("")}</div></article><article class="content-panel"><p class="eyebrow">RELATIONSHIP</p><h2>このページへの発見経路</h2><p class="lead">画面上の主パンくずは1つにしますが、同じ研修を複数カテゴリとAIハブから発見できます。</p><div class="card-grid card-grid-2" style="margin-top:20px">${training.categories.map((key) => { const item = categoryPages[key]; return `<a class="card" href="${href(item.route)}"><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.description)}</p><span class="card-link">カテゴリへ →</span></a>`; }).join("")} ${isAITraining(training) ? `<a class="card card-feature" href="${href('/business/ai-training/')}"><h3>AI研修横断ハブ</h3><p>課題・対象者・ツール・研修形態から比較できます。</p><span class="card-link">AI研修へ →</span></a>` : ""}</div></article>${related.length ? `<article class="content-panel"><p class="eyebrow">RELATED TRAINING</p><h2>関連する研修</h2><div class="training-grid" style="margin-top:20px">${related.map((item) => renderTrainingCard(item, { showKeyword: false })).join("")}</div></article>` : ""}${relatedCourses.length ? `<article class="content-panel"><p class="eyebrow">OPEN COURSES</p><h2>関連する公開講座</h2><div class="card-grid card-grid-2" style="margin-top:20px">${relatedCourses.map(renderOpenCourseCard).join("")}</div></article>` : ""}</div><aside class="sidebar-cta"><div class="cta-card"><h3>この研修を相談する</h3><p>対象者、期間、演習、研修形態を確認し、企業に合うプランを設計します。</p><a class="button button-primary button-block" href="${href('/business/faq/')}">お問い合わせ</a></div><div class="related-links"><a href="${href('/business/ai-training/')}">AI研修を比較</a><a href="${href(primary.route)}">${escapeHtml(primary.title)}</a><a href="${href('/business/customize/')}">カスタマイズ研修</a><a href="${href('/business/voice/')}">導入事例</a><a href="${href('/business/codecamp-insight/')}">研修管理システム</a></div></aside></div></section>`;
-    shell(content, { title: training.title, description: training.summary, breadcrumbs: [{ label: primary.title, route: primary.route }, { label: training.title, route: training.route }], mobileCta: { secondaryLabel: "AI研修比較", secondaryRoute: "/business/ai-training/", primaryLabel: "研修を相談", primaryRoute: "/business/faq/" } });
+    shell(content, { title: training.title, description: training.summary, breadcrumbs: [{ label: primary.title, route: primary.route }, { label: training.title, route: training.route }], mobileCta: { secondaryLabel: "研修を探す", secondaryRoute: "/business/training/", primaryLabel: "研修を相談", primaryRoute: "/business/faq/" } });
     bindAccordions();
   }
 
@@ -1105,23 +1106,19 @@
     });
   }
 
-  function bindMasterFilters() {
+  function bindMasterFilters(options = {}) {
     const inputs = [...document.querySelectorAll("[data-master-filter]")];
-    const isAiFocus = (selected) => {
-      const toolsAi = selected.tools?.includes("AI");
-      const themeAi = selected.themes?.some((value) => /生成AI|AI/.test(value));
-      return Boolean(toolsAi || (themeAi && !selected.tools?.length));
-    };
+    const aiDirectoryMode = Boolean(options.aiDirectoryMode);
     const destinationFor = (selected) => {
       const keys = Object.keys(selected).filter((key) => selected[key]?.length);
       if (keys.length === 1 && keys[0] === "categories" && selected.categories.length === 1) {
         return categoryPages[selected.categories[0]] ? { route: categoryPages[selected.categories[0]].route, label: categoryPages[selected.categories[0]].title, canonical: `https://codecamp.jp${categoryPages[selected.categories[0]].route}`, indexable: true } : null;
       }
       if (keys.length === 1 && keys[0] === "tools" && selected.tools.length === 1 && selected.tools[0] === "AI") {
-        return { route: "/business/ai-training/", label: "AI研修ハブ", canonical: "https://codecamp.jp/business/ai-training/", indexable: true };
+        return { route: "/business/ai-training/", label: "AI研修を探す", canonical: "https://codecamp.jp/business/ai-training/", indexable: true };
       }
       if (keys.length === 1 && keys[0] === "themes" && selected.themes.length === 1 && selected.themes[0] === "生成AI") {
-        return { route: "/business/ai-training/", label: "AI研修ハブ", canonical: "https://codecamp.jp/business/ai-training/", indexable: true };
+        return { route: "/business/ai-training/", label: "AI研修を探す", canonical: "https://codecamp.jp/business/ai-training/", indexable: true };
       }
       if (keys.length === 2 && selected.tools?.includes("AI") && selected.formats?.length === 1 && selected.formats[0] === "オンライン") {
         const page = seoFacetRoutes.find((item) => item.route.endsWith('/online/'));
@@ -1137,12 +1134,26 @@
       }
       return null;
     };
+    const maybeNavigateDirectory = (selected) => {
+      const keys = Object.keys(selected).filter((key) => selected[key]?.length);
+      const onlyAiTool = keys.length === 1 && keys[0] === "tools" && selected.tools.length === 1 && selected.tools[0] === "AI";
+      if (!aiDirectoryMode && onlyAiTool && ROUTE === "/business/training/") {
+        location.href = href("/business/ai-training/");
+        return true;
+      }
+      if (aiDirectoryMode && ROUTE === "/business/ai-training/" && !(selected.tools || []).includes("AI")) {
+        location.href = href("/business/training/");
+        return true;
+      }
+      return false;
+    };
     const apply = () => {
       const selected = {};
       inputs.forEach((input) => {
         if (!input.checked) return;
         (selected[input.dataset.masterFilter] ||= []).push(input.value);
       });
+      if (maybeNavigateDirectory(selected)) return;
       let count = 0;
       document.querySelectorAll("#masterGrid .training-card").forEach((card) => {
         const item = trainingById(card.dataset.trainingId);
@@ -1165,16 +1176,23 @@
       });
       document.getElementById("masterCount").textContent = String(count);
       document.getElementById("masterEmpty").hidden = count !== 0;
-      const aiFocus = isAiFocus(selected);
+      const aiFocus = Boolean(selected.tools?.includes("AI") || aiDirectoryMode);
       const titleEl = document.getElementById("masterPageTitle");
       const leadEl = document.getElementById("masterPageLead");
       const hintEl = document.getElementById("masterAiHint");
       if (titleEl) titleEl.textContent = aiFocus ? "AI研修を探す" : "研修を探す";
-      if (leadEl) leadEl.textContent = aiFocus
-        ? "言語・ツールでAIを選択中です。一覧の薄い複製ではなく、編集コンテンツ付きの静的ハブ /business/ai-training/ が正規の受け皿です。"
-        : "Trendsの研修検索と同様に、言語・ツール・対象者・テーマなどから絞り込みます。クエリURLは作らず、需要がある条件だけ静的URLへ誘導します。";
-      if (hintEl) hintEl.hidden = !aiFocus;
-      document.title = `${aiFocus ? "AI研修を探す" : "研修を探す"} | CodeCamp 法人向け研修`;
+      if (leadEl) {
+        leadEl.textContent = aiFocus
+          ? "言語・ツール=AI の条件をディレクトリURL /business/ai-training/ で表現しています。クエリパラメータは使いません。"
+          : "Trendsの研修検索と同様に絞り込みます。インデックスしたい条件はディレクトリ型URLへ遷移します（例: 言語・ツール=AI → /business/ai-training/）。";
+      }
+      if (hintEl) {
+        hintEl.hidden = !aiFocus;
+        if (aiFocus) hintEl.textContent = aiDirectoryMode
+          ? "現在のディレクトリURLは /business/ai-training/ です（言語・ツール=AI）。"
+          : "言語・ツールでAIを選ぶと /business/ai-training/ へ遷移します。";
+      }
+      document.title = `${aiFocus ? "AI研修を探す" : "研修を探す"} | CodeCamp Prototype`;
       const labelMap = { tools: "言語・ツール", categories: "カテゴリ", themes: "テーマ", audiences: "対象者", delivery: "形態", formats: "形式", status: "ページ状態" };
       const displayMap = { customize: "カスタマイズ", package: "パッケージ", open: "公開講座", existing: "既存ページ", candidate: "新設候補", language: "言語・ツール", hierarchy: "階層", theme: "テーマ", occupation: "職種" };
       const activeLabels = Object.entries(selected).filter(([, values]) => values.length).map(([key, values]) => {
@@ -1185,28 +1203,37 @@
       Object.keys(labelMap).filter((key) => !selected[key]?.length).forEach((key) => setFacetTabValue("masterFacetNav", key, "すべて"));
       const summary = document.getElementById("masterSelectedFilters");
       if (summary) summary.textContent = activeLabels.length ? activeLabels.join(" / ") : "条件指定なし";
-      const destination = destinationFor(selected);
+      const destination = destinationFor(selected) || (aiDirectoryMode ? { route: "/business/ai-training/", label: "AI研修を探す", canonical: "https://codecamp.jp/business/ai-training/", indexable: true } : null);
       const query = document.getElementById("masterQuery");
       const badge = document.getElementById("masterSeoBadge");
       const link = document.getElementById("masterStaticLink");
       if (destination) {
-        query.textContent = `静的URL：${destination.route}／canonical：${destination.canonical}`;
-        badge.textContent = destination.indexable ? "index静的URL" : "noindex候補URL";
+        query.textContent = `ディレクトリURL：${destination.route}／canonical：${destination.canonical}`;
+        badge.textContent = destination.indexable ? "index静的ディレクトリ" : "noindex候補ディレクトリ";
         badge.className = `tag ${destination.indexable ? 'tag-green' : 'tag-amber'}`;
         link.href = href(destination.route);
-        link.textContent = destination.indexable ? "静的URLで開く" : "候補URLを確認";
-        link.hidden = false;
+        link.textContent = destination.indexable ? "ディレクトリURLで開く" : "候補URLを確認";
+        link.hidden = aiDirectoryMode && destination.route === "/business/ai-training/";
       } else {
         const hasSelection = Object.values(selected).some((values) => values.length);
-        query.textContent = hasSelection ? "ホワイトリスト外：URLを生成せず、JS絞り込みのみ（クエリURLなし）" : "URLは変更しません（クエリURLなし）";
+        query.textContent = hasSelection ? "ホワイトリスト外：クエリURLは作らず、同一ページ内のJS絞り込みのみ" : "URLは変更しません（クエリなし）";
         badge.textContent = "JS絞り込み";
         badge.className = "tag";
         link.hidden = true;
       }
     };
+    const resetToTraining = () => {
+      if (aiDirectoryMode) {
+        location.href = href("/business/training/");
+        return;
+      }
+      inputs.forEach((input) => { input.checked = false; });
+      apply();
+    };
     inputs.forEach((input) => input.addEventListener("change", apply));
-    document.getElementById("masterReset")?.addEventListener("click", () => { inputs.forEach((input) => input.checked = false); apply(); });
-    document.getElementById("masterResetInspector")?.addEventListener("click", () => { inputs.forEach((input) => input.checked = false); apply(); });
+    document.getElementById("masterReset")?.addEventListener("click", resetToTraining);
+    document.getElementById("masterResetInspector")?.addEventListener("click", resetToTraining);
+    apply();
   }
 
   function startGuide() {
