@@ -62,7 +62,16 @@ UX参考: [Trends 研修検索](https://trends.codecamp.jp/apps/training-search/
 | B. 商品詳細 | 課題・育成目的の少数正式商品 | ホワイトリスト承認のみ index |
 | C. 業務用途・検証 | マーケ／問い合わせ／営業等。CMSで作成可 | 原則 noindex → 昇格 |
 
-技術名（LangChain／MCP／RAG）単体の巨大SVは研修意図以外が混ざるため、当面は章・属性。独立詳細は研修意図確認後。
+確定6（一覧）:
+
+1. AIエージェント構築
+2. LangChain／LangGraph基礎
+3. ベクターDB＆RAG基礎（pgvector）
+4. LangChain／LangGraph実践
+5. MCP基礎
+6. AIエージェント実践
+
+代表商品候補: `/business/ai-agent-development/`（上記を束ねる）。技術名（LangChain／MCP／RAG）単体の巨大SVは研修意図以外が混ざるため、当面は章・属性。独立詳細は研修意図確認後。
 
 ### 3.2 制作前に揃える論点
 

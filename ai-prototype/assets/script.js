@@ -64,6 +64,17 @@
   };
 
 
+
+  // 確定済み共通モジュール（サイトカテゴリでも必須index詳細でもない教材資産）
+  const confirmedModules = [
+    { id: "agent-build", name: "AIエージェント構築", focus: "エージェントの設計・実装の入口" },
+    { id: "langchain-basics", name: "LangChain／LangGraph基礎", focus: "オーケストレーション基礎" },
+    { id: "rag-pgvector", name: "ベクターDB＆RAG基礎（pgvector）", focus: "社内ナレッジ検索の土台" },
+    { id: "langchain-practice", name: "LangChain／LangGraph実践", focus: "実装・評価・改善" },
+    { id: "mcp-basics", name: "MCP基礎", focus: "ツール・システム連携" },
+    { id: "agent-practice", name: "AIエージェント実践", focus: "業務適用・運用まで" }
+  ];
+
   const seoFacetRoutes = [
     {
       route: "/business/ai-training/online/",
@@ -371,6 +382,40 @@
       ],
       related: ["ai-data", "automation", "generative-ai"],
       openCourses: ["generative-ai-for-business"]
+    },
+
+    {
+      id: "ai-agent-development",
+      route: "/business/ai-agent-development/",
+      title: "AIエージェント開発研修",
+      icon: "Ag",
+      status: "candidate",
+      primaryCategory: "theme",
+      categories: ["theme", "language", "occupation"],
+      summary: "確定6モジュールを組み替え、RAG・LangGraph・MCPを使ったAIエージェントを開発できる人材を育成します。",
+      heroLead: "共通カリキュラム（エージェント構築〜実践）を束ねたPhase1代表商品候補です。技術名単体ページではなく、育成目的の商品詳細として扱います。",
+      themes: ["AI開発", "生成AI", "業務自動化"],
+      tools: ["AIエージェント", "LangChain", "LangGraph", "RAG", "MCP", "pgvector"],
+      audiences: ["エンジニア"],
+      roles: ["AIエンジニア", "ソフトウェアエンジニア"],
+      goals: ["AI開発", "専門人材育成", "業務自動化"],
+      delivery: ["customize", "package"],
+      formats: ["オンライン", "現地", "ハイブリッド"],
+      level: "実践〜応用",
+      duration: "1〜3か月",
+      keywords: { primary: "AIエージェント開発研修", secondary: ["AIエージェント研修", "RAG研修", "LangChain研修", "MCP研修"] },
+      outcomes: ["エージェントの構成を設計できる", "RAGで社内文書検索を実装できる", "LangGraphでワークフローを組める", "MCPで外部ツールと連携できる"],
+      curriculum: [
+        ["AIエージェント構築", "確定モジュール①。エージェントの構成要素と実装入口を学びます。"],
+        ["LangChain／LangGraph基礎", "確定モジュール②。オーケストレーションの基礎を学びます。"],
+        ["ベクターDB＆RAG基礎（pgvector）", "確定モジュール③。埋め込み・検索・回答の土台を実装します。"],
+        ["LangChain／LangGraph実践", "確定モジュール④。実装・評価・改善を実践します。"],
+        ["MCP基礎", "確定モジュール⑤。ツール・システム連携の基礎を学びます。"],
+        ["AIエージェント実践", "確定モジュール⑥。業務適用と運用まで仕上げます。"]
+      ],
+      related: ["ai-engineer", "claude", "generative-ai"],
+      openCourses: ["generative-ai-engineer-camp"],
+      modules: ["agent-build", "langchain-basics", "rag-pgvector", "langchain-practice", "mcp-basics", "agent-practice"]
     },
     {
       id: "ai-engineer",
@@ -785,6 +830,7 @@
       </section>
       <section class="section-compact section-white"><div class="container"><div class="stats-grid"><div class="stat-card"><div class="stat-value">4</div><div class="stat-label">カリキュラムカテゴリ</div></div><div class="stat-card"><div class="stat-value">3</div><div class="stat-label">研修形態</div></div><div class="stat-card"><div class="stat-value">50+</div><div class="stat-label">研修詳細の想定</div></div><div class="stat-card"><div class="stat-value">1</div><div class="stat-label">共通データ基盤</div></div></div></div></section>
       <section id="plan-a-map" class="section section-white"><div class="container"><div class="section-heading"><div><p class="eyebrow">PLAN A / SITE MAP</p><h2>案Aのどこを見ているか確認する</h2><p class="lead">法人トップ、研修を探す、4カテゴリ、3研修形態、主要な研修詳細を一つの地図から開けます。AIはナビ並立ではなく、言語・ツール条件のディレクトリURLです。</p></div><div class="section-actions"><a class="button button-primary" href="${ROOT}guide/index.html">目的別ナビ</a><a class="button" href="${href('/business/site-map/')}">サイトマップを開く</a><a class="button" href="${ROOT}requirements/index.html">要件書を読む</a></div></div><div class="compact-map"><a class="compact-map-root" href="${href('/business/')}"><strong>/business トップ</strong><span>法人向け研修全体</span></a><div class="compact-map-grid"><a href="${href('/business/training/')}"><strong>研修を探す</strong><span>唯一の一覧入口。AI選択時は /business/ai-training/</span></a><a href="${href('/business/lag-list/')}"><strong>4カテゴリ</strong><span>言語・ツール／階層／テーマ／職種</span></a><a href="${href('/business/customize/')}"><strong>3研修形態</strong><span>カスタマイズ／パッケージ／公開講座</span></a><a href="${href('/business/lag-generative-ai-chatgpt/')}"><strong>研修詳細</strong><span>生成AI／ChatGPT／Claude／AI・データ分析</span></a></div></div></div></section>
+      ${confirmedModulesMarkup()}
       <section id="ai-entry" class="section section-blue"><div class="container"><div class="split-panel"><div class="split-panel-copy"><p class="eyebrow">AI AS A FILTER</p><h2>AIは「研修を探す」の条件</h2><p class="lead">ナビに「AI研修」は置きません。研修を探すで言語・ツール=AIを選ぶとタイトルが「AI研修を探す」になり、ディレクトリURL <code>/business/ai-training/</code> で表現します（クエリパラメータは使いません）。</p><div class="hero-actions"><a class="button button-primary" href="${href('/business/training/')}">研修を探す</a><a class="button" href="${href('/business/ai-training/')}">AI条件のディレクトリを見る</a></div></div><div class="card-grid card-grid-2">${aiCards.map((item) => `<a class="card" href="${href(item.route)}"><div class="card-icon">${icon(item.icon)}</div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.summary)}</p><span class="card-link">研修詳細へ →</span></a>`).join("")}</div></div></div></section>
       <section id="category-entry" class="section section-white"><div class="container"><div class="section-heading"><div><p class="eyebrow">FIND BY CATEGORY</p><h2>4つの視点から研修を探す</h2><p class="lead">カテゴリは研修を一意に収納する箱ではなく、同じ研修へ到達する複数の発見経路です。</p></div><a class="button" href="${href('/business/training/')}">すべての研修を絞り込む</a></div><div class="category-index">${Object.values(categoryPages).map((item, index) => `<a class="category-card" href="${href(item.route)}"><span class="category-number">0${index + 1}</span><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.description)}</p><ul>${item.examples.map((value) => `<li>${escapeHtml(value)}</li>`).join("")}</ul></a>`).join("")}</div></div></section>
       <section class="section"><div class="container"><div class="section-heading"><div><p class="eyebrow">DELIVERY MODEL</p><h2>3つの研修形態から導入する</h2><p class="lead">研修形態は「何を学ぶか」ではなく、「どの方式で導入・参加するか」を表します。</p></div></div><div class="card-grid">${Object.values(deliveryPages).map((item) => `<a class="card ${item.route === '/open/' ? 'card-feature' : ''}" href="${href(item.route)}"><div class="card-icon">${icon(item.icon)}</div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.summary)}</p><div class="card-meta">${tags(item.features.slice(0, 2))}</div><span class="card-link">詳しく見る →</span></a>`).join("")}</div></div></section>
@@ -847,12 +893,19 @@
     renderTrainingMaster({ presetTools: ["AI"] });
   }
 
+
+  function confirmedModulesMarkup() {
+    return `<section class="section section-white" id="confirmed-modules"><div class="container"><div class="section-heading"><div><p class="eyebrow">CONFIRMED MODULES · LAYER A</p><h2>確定6カリキュラム（共通モジュール）</h2><p class="lead">昨日確定した技術カリキュラムです。サイトの第5カテゴリでも、6枚の必須index詳細でもありません。商品詳細の章・属性として再利用します。</p></div><div class="section-actions"><a class="button" href="${ROOT}strategy/index.html">組み替えマトリクスを見る</a><a class="button" href="${ROOT}ROUTES.md">ROUTES.md</a></div></div><div class="card-grid card-grid-3">${confirmedModules.map((m, i) => `<article class="card"><div class="card-meta"><span class="tag tag-purple">MODULE ${i + 1}</span><span class="tag">非カテゴリ</span></div><h3>${escapeHtml(m.name)}</h3><p>${escapeHtml(m.focus)}</p></article>`).join("")}</div><p class="muted" style="margin-top:14px;font-size:13px">代表の商品詳細候補: <a href="${href('/business/ai-agent-development/')}">AIエージェント開発研修</a>（上記6を束ねる）。LangChain／MCP等の技術名単体ページは当面作りません。</p></div></section>`;
+  }
+
   function renderPlanASiteMap() {
     const details = [
       ["生成AI研修", "/business/lag-generative-ai-chatgpt/", "生成AI研修・生成AI活用研修"],
       ["ChatGPT研修", "/business/lag-ai-chatgpt/", "ChatGPT研修"],
       ["Claude研修", "/business/claude/", "Claude研修・Claude Code研修"],
-      ["AI・データ分析研修", "/business/thm-ai-data-analysis/", "AI・データ分析研修・機械学習研修"]
+      ["AI・データ分析研修", "/business/thm-ai-data-analysis/", "AI・データ分析研修・機械学習研修"],
+      ["AIエージェント開発研修", "/business/ai-agent-development/", "確定6モジュール束ね・Phase1代表候補"],
+      ["AIエンジニア研修", "/business/occ-ai-engineer/", "職種軸の育成商品候補"]
     ];
     const content = `
       <section class="detail-hero"><div class="container"><p class="eyebrow">PLAN A / INTERACTIVE SITE MAP</p><h1>案A サイトマップ</h1><p class="lead">探索入口は「研修を探す」1本。AIは言語・ツール条件をディレクトリURLで表現します（クエリパラメータは使いません）。</p><div class="hero-actions"><a class="button button-primary" href="${href('/business/')}">/businessトップへ</a><a class="button" href="${ROOT}guide/index.html">目的別ナビ</a><a class="button" href="${ROOT}requirements/index.html">サイト構造・キーワード要件書</a></div></div></section>
@@ -866,6 +919,7 @@
           <article class="plan-a-branch plan-a-branch-feature"><div class="branch-head"><span>05</span><div><h2>3レイヤー（v2）</h2><small>モジュール／商品／業務用途</small></div></div><p>業務用途ページ（マーケ・問い合わせ・営業など）はCMSで作成してよいが、案Aの幹には載せず原則noindex。反応と商品差が確認できたものだけホワイトリストでindex昇格します。技術名（LangChain／MCP等）は当面モジュール・章です。</p><div class="branch-links"><a href="${ROOT}guide/index.html"><strong>目的別ナビ</strong><span>資料入口・方針要約</span></a><a href="${ROOT}strategy/index.html"><strong>ポートフォリオ方針</strong><span>共通モジュール再利用・顕在／潜在</span></a><a href="${ROOT}SEO_POLICY.md"><strong>SEO方針 v2</strong><span>公開とindexを分離</span></a><a href="${ROOT}archive/index.html"><strong>v1アーカイブ</strong><span>更新前スナップショット</span></a></div></article>
         </div>
       </div></div></section>
+      ${confirmedModulesMarkup()}
       <section class="section section-white"><div class="container"><div class="section-heading"><div><p class="eyebrow">REQUIREMENTS INTEGRATION</p><h2>サイト構造とキーワード要件を一緒に確認する</h2><p class="lead">視覚プロトタイプは画面と遷移を確認するもの、要件書は構造・SEO・キーワード所有を確認するものです。同じパッケージ内で相互に移動できます。</p></div></div><div class="requirements-summary"><article><h3>構造の確定事項</h3><ul class="bullet-list"><li>ナビの探索入口は「研修を探す」1本</li><li>AIはファセット条件＋ディレクトリURL（クエリなし）</li><li>4カテゴリと3研修形態を維持</li><li>既存研修詳細URLは原則維持</li><li>v2: モジュール≠商品詳細。業務用途はCMS可・原則noindex</li></ul></article><article><h3>キーワード所有の確定事項</h3><ul class="bullet-list"><li>「AI研修」は /business/ai-training/（一覧のAI条件）</li><li>生成AI・ChatGPT・Claudeは各研修詳細</li><li>比較語は比較・選定コンテンツ</li><li>対象者・実施形式などの属性語は原則ファセット</li></ul></article><article class="requirements-cta"><h3>法人向けAI研修<br>サイト構造・キーワード要件書</h3><p>案A・B・C、現行構造、SEO・canonical、キーワードマップ、ロードマップの全文を確認できます。</p><a class="button button-primary" href="${ROOT}requirements/index.html">要件書を開く</a></article></div></div></section>`;
     shell(content, { title: "案A サイトマップ", description: "案Aの各ページをリンク付きで確認するサイトマップ", breadcrumbs: [{ label: "案Aサイトマップ", route: "/business/site-map/" }] });
   }
@@ -878,7 +932,7 @@
       ? "言語・ツール=AI の条件をディレクトリURL /business/ai-training/ で表現しています。クエリパラメータは使いません。条件を外すと /business/training/ に戻ります。"
       : "Trendsの研修検索と同様に、言語・ツール・対象者・テーマなどから絞り込みます。インデックスしたい条件はディレクトリ型URLへ遷移します（例: 言語・ツール=AI → /business/ai-training/）。";
     const groups = {
-      tools: { label: "言語・ツール", values: ["AI", "Java", "Python", "ChatGPT", "Claude", "Excel", "AWS", "JavaScript"] },
+      tools: { label: "言語・ツール", values: ["AI", "Java", "Python", "ChatGPT", "Claude", "LangChain", "LangGraph", "RAG", "MCP", "AIエージェント", "Excel", "AWS", "JavaScript"] },
       audiences: { label: "対象者", values: ["全社員", "新入社員", "内定者", "非エンジニア", "エンジニア", "管理職"] },
       themes: { label: "テーマ", values: ["生成AI", "AI・データ分析", "業務効率化", "DX", "セキュリティ", "Web開発", "新人育成"] },
       categories: { label: "カテゴリ", values: Object.entries(categoryPages).map(([value, item]) => [value, item.short]) },
