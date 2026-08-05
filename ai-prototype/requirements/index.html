@@ -7,6 +7,9 @@
   <title>CodeCamp 法人向けAI研修｜サイト構造・キーワード要件書</title>
   <link rel="stylesheet" href="./style.css">
   <script src="./script.js" defer></script>
+  <script>window.DOCS_NAV_ROOT = "../";</script>
+  <link rel="stylesheet" href="../assets/docs-nav.css">
+  <script src="../assets/docs-nav.js" defer></script>
 </head>
 <body>
   <div class="reading-progress" aria-hidden="true"><span id="readingProgress"></span></div>
@@ -221,10 +224,11 @@
         <div class="section-heading"><div><p class="section-number">STEP 5</p><h2>カテゴリ・ハブと詳細ページのキーワード設計</h2></div></div>
         <div class="ownership-rules">
           <article><span>総称語</span><h3>ハブが所有</h3><p>AI研修、法人向けAI研修、AI講習</p></article>
-          <article><span>商品・技術語</span><h3>研修詳細が所有</h3><p>生成AI研修、ChatGPT研修、Claude研修</p></article>
-          <article><span>比較語</span><h3>情報コンテンツが所有</h3><p>AI研修 おすすめ、比較、研修会社</p></article>
-          <article><span>属性語</span><h3>ファセットが所有</h3><p>オンライン、管理職向け、階層、研修形態</p></article>
+          <article><span>商品・ツール語</span><h3>研修詳細が所有</h3><p>生成AI／ChatGPT／Claude／AIエージェント開発</p></article>
+          <article><span>確定6</span><h3>モジュール（非ページ）</h3><p>LangChain・RAG・MCP等は章・属性。単体indexしない</p></article>
+          <article><span>比較／属性</span><h3>情報／ファセット</h3><p>おすすめ・比較は情報。オンライン等はファセット</p></article>
         </div>
+        <aside class="callout callout-info"><strong>v2クラスタ方針</strong><p>確定6はKWクラスタ表の「受け皿」に単独行を立てません。開発系の検索意図は <code>AIエージェント開発研修</code>（および職種軸のAIエンジニア）へ集約し、技術ヘッド語（LangChain／MCP／RAG）は検証・章扱いにします。</p></aside>
         <div class="keyword-toolbar">
           <label><span>絞り込み</span><select id="keywordRoleFilter"><option value="all">すべての検索意図</option><option>総称</option><option>商品・テーマ</option><option>ツール</option><option>育成目的</option><option>職種育成</option><option>比較</option><option>属性</option><option>料金</option></select></label>
           <label><span>優先度</span><select id="keywordPriorityFilter"><option value="all">すべて</option><option>最優先</option><option>高</option><option>中</option><option>補助</option></select></label>
@@ -233,45 +237,60 @@
         <div class="table-scroll">
           <table id="keywordTable" class="data-table">
             <thead><tr><th>キーワード</th><th>月間SV</th><th>CPC</th><th>検索意図</th><th>受け皿</th><th>優先度</th></tr></thead>
-            <tbody><tr data-role="総称" data-priority="最優先" data-owner="A"><td><strong>AI研修</strong></td><td>1,900</td><td>1,581円</td><td>総称</td><td>AI研修総合ハブ</td><td><span class="priority priority-最優先">最優先</span></td></tr>
-<tr data-role="商品・テーマ" data-priority="最優先" data-owner="A"><td><strong>生成AI研修</strong></td><td>1,000</td><td>1,309円</td><td>商品・テーマ</td><td>生成AI研修詳細</td><td><span class="priority priority-最優先">最優先</span></td></tr>
-<tr data-role="総称" data-priority="最優先" data-owner="A"><td><strong>DX研修</strong></td><td>590</td><td>1,116円</td><td>総称</td><td>DX人材育成研修</td><td><span class="priority priority-最優先">最優先</span></td></tr>
+            <tbody>
+<tr data-role="総称" data-priority="最優先" data-owner="A"><td><strong>AI研修</strong></td><td>1,900</td><td>1,581円</td><td>総称</td><td>AI研修総合ハブ（/business/ai-training/）</td><td><span class="priority priority-最優先">最優先</span></td></tr>
+<tr data-role="商品・テーマ" data-priority="最優先" data-owner="A"><td><strong>生成AI研修</strong></td><td>1,000</td><td>1,309円</td><td>商品・テーマ</td><td>生成AIビジネス活用（活用系・確定6非搭載）</td><td><span class="priority priority-最優先">最優先</span></td></tr>
+<tr data-role="総称" data-priority="最優先" data-owner="A"><td><strong>DX研修</strong></td><td>590</td><td>1,116円</td><td>総称</td><td>DX人材育成研修（AIハブと分離）</td><td><span class="priority priority-最優先">最優先</span></td></tr>
 <tr data-role="育成目的" data-priority="最優先" data-owner="A"><td><strong>DX人材育成</strong></td><td>480</td><td>1,956円</td><td>育成目的</td><td>DX人材育成研修</td><td><span class="priority priority-最優先">最優先</span></td></tr>
 <tr data-role="総称" data-priority="高" data-owner="A"><td><strong>AI講習</strong></td><td>320</td><td>735円</td><td>総称</td><td>AI研修総合ハブ</td><td><span class="priority priority-高">高</span></td></tr>
 <tr data-role="比較" data-priority="高" data-owner="CONTENT"><td><strong>AI研修 おすすめ</strong></td><td>320</td><td>1,401円</td><td>比較</td><td>比較・選定コンテンツ</td><td><span class="priority priority-高">高</span></td></tr>
 <tr data-role="比較" data-priority="高" data-owner="CONTENT"><td><strong>DX研修 おすすめ</strong></td><td>170</td><td>1,621円</td><td>比較</td><td>比較・選定コンテンツ</td><td><span class="priority priority-高">高</span></td></tr>
-<tr data-role="ツール" data-priority="高" data-owner="A"><td><strong>ChatGPT研修</strong></td><td>140</td><td>1,309円</td><td>ツール</td><td>ChatGPT研修詳細</td><td><span class="priority priority-高">高</span></td></tr>
+<tr data-role="ツール" data-priority="高" data-owner="A"><td><strong>ChatGPT研修</strong></td><td>140</td><td>1,309円</td><td>ツール</td><td>ChatGPT基礎・実践（活用系）</td><td><span class="priority priority-高">高</span></td></tr>
 <tr data-role="育成目的" data-priority="中" data-owner="A"><td><strong>DXリスキリング</strong></td><td>140</td><td>1,156円</td><td>育成目的</td><td>DX人材育成研修／解説</td><td><span class="priority priority-中">中</span></td></tr>
-<tr data-role="商品・テーマ" data-priority="高" data-owner="A"><td><strong>AI活用研修</strong></td><td>110</td><td>993円</td><td>商品・テーマ</td><td>生成AI研修詳細</td><td><span class="priority priority-高">高</span></td></tr>
-<tr data-role="商品・テーマ" data-priority="高" data-owner="A"><td><strong>生成AI活用研修</strong></td><td>90</td><td>991円</td><td>商品・テーマ</td><td>生成AI研修詳細</td><td><span class="priority priority-高">高</span></td></tr>
-<tr data-role="ツール" data-priority="高" data-owner="A"><td><strong>Claude研修</strong></td><td>90</td><td>994円</td><td>ツール</td><td>Claude研修詳細</td><td><span class="priority priority-高">高</span></td></tr>
+<tr data-role="商品・テーマ" data-priority="高" data-owner="A"><td><strong>AI活用研修</strong></td><td>110</td><td>993円</td><td>商品・テーマ</td><td>生成AIビジネス活用</td><td><span class="priority priority-高">高</span></td></tr>
+<tr data-role="商品・テーマ" data-priority="高" data-owner="A"><td><strong>生成AI活用研修</strong></td><td>90</td><td>991円</td><td>商品・テーマ</td><td>生成AIビジネス活用</td><td><span class="priority priority-高">高</span></td></tr>
+<tr data-role="ツール" data-priority="高" data-owner="A"><td><strong>Claude研修</strong></td><td>90</td><td>994円</td><td>ツール</td><td>Claude実践（⑤MCP接続・フル6はエージェント開発へ）</td><td><span class="priority priority-高">高</span></td></tr>
 <tr data-role="育成目的" data-priority="高" data-owner="A"><td><strong>DX人材育成研修</strong></td><td>70</td><td>2,329円</td><td>育成目的</td><td>DX人材育成研修</td><td><span class="priority priority-高">高</span></td></tr>
+<tr data-role="商品・テーマ" data-priority="最優先" data-owner="NEW"><td><strong>AIエージェント研修</strong></td><td>—</td><td>—</td><td>商品・テーマ</td><td>AIエージェント開発（確定6束ね・Phase1）</td><td><span class="priority priority-最優先">最優先</span></td></tr>
+<tr data-role="商品・テーマ" data-priority="高" data-owner="NEW"><td><strong>AIエージェント開発研修</strong></td><td>—</td><td>—</td><td>商品・テーマ</td><td>AIエージェント開発（主商品名）</td><td><span class="priority priority-高">高</span></td></tr>
 <tr data-role="育成目的" data-priority="中" data-owner="A"><td><strong>AI人材研修</strong></td><td>40</td><td>1,941円</td><td>育成目的</td><td>AI研修総合ハブ</td><td><span class="priority priority-中">中</span></td></tr>
-<tr data-role="職種育成" data-priority="高" data-owner="NEW"><td><strong>AIエンジニア研修</strong></td><td>40</td><td>1,549円</td><td>職種育成</td><td>AIエンジニア研修候補</td><td><span class="priority priority-高">高</span></td></tr>
-<tr data-role="属性" data-priority="補助" data-owner="FACET"><td><strong>AI研修 オンライン</strong></td><td>40</td><td>1,415円</td><td>属性</td><td>ハブ内説明／ファセット</td><td><span class="priority priority-補助">補助</span></td></tr>
+<tr data-role="職種育成" data-priority="高" data-owner="NEW"><td><strong>AIエンジニア研修</strong></td><td>40</td><td>1,549円</td><td>職種育成</td><td>AIエンジニア（確定6共有・職種KW）</td><td><span class="priority priority-高">高</span></td></tr>
+<tr data-role="ツール" data-priority="補助" data-owner="MODULE"><td><strong>LangChain研修</strong></td><td>—</td><td>—</td><td>ツール</td><td>確定②④の章／エージェント開発の副KW（単体indexしない）</td><td><span class="priority priority-補助">補助</span></td></tr>
+<tr data-role="ツール" data-priority="補助" data-owner="MODULE"><td><strong>LangGraph研修</strong></td><td>—</td><td>—</td><td>ツール</td><td>確定②④の章／エージェント開発の副KW</td><td><span class="priority priority-補助">補助</span></td></tr>
+<tr data-role="ツール" data-priority="補助" data-owner="MODULE"><td><strong>RAG研修</strong></td><td>—</td><td>—</td><td>ツール</td><td>確定③の章／エージェント開発の副KW（ヘッドRAGと混同注意）</td><td><span class="priority priority-補助">補助</span></td></tr>
+<tr data-role="ツール" data-priority="補助" data-owner="MODULE"><td><strong>MCP研修</strong></td><td>—</td><td>—</td><td>ツール</td><td>確定⑤。Claude詳細で接続可／単体は原則noindex</td><td><span class="priority priority-補助">補助</span></td></tr>
+<tr data-role="属性" data-priority="補助" data-owner="FACET"><td><strong>AI研修 オンライン</strong></td><td>40</td><td>1,415円</td><td>属性</td><td>ファセット／候補LP（幹構造外・noindex）</td><td><span class="priority priority-補助">補助</span></td></tr>
 <tr data-role="育成目的" data-priority="高" data-owner="A"><td><strong>DX推進研修</strong></td><td>40</td><td>1,195円</td><td>育成目的</td><td>DX人材育成研修</td><td><span class="priority priority-高">高</span></td></tr>
 <tr data-role="テーマ" data-priority="中" data-owner="A"><td><strong>DXリテラシー研修</strong></td><td>40</td><td>792円</td><td>テーマ</td><td>DXページ／詳細候補</td><td><span class="priority priority-中">中</span></td></tr>
 <tr data-role="比較" data-priority="中" data-owner="CONTENT"><td><strong>DX研修会社</strong></td><td>40</td><td>1,076円</td><td>比較</td><td>比較・選定コンテンツ</td><td><span class="priority priority-中">中</span></td></tr>
+<tr data-role="テーマ" data-priority="中" data-owner="PILOT"><td><strong>問い合わせ対応AI研修</strong></td><td>—</td><td>—</td><td>テーマ</td><td>業務用途レイヤーC（CMS・原則noindex）</td><td><span class="priority priority-中">中</span></td></tr>
+<tr data-role="テーマ" data-priority="中" data-owner="PILOT"><td><strong>マーケ業務内製化AI研修</strong></td><td>—</td><td>—</td><td>テーマ</td><td>業務用途レイヤーC（CMS・原則noindex）</td><td><span class="priority priority-中">中</span></td></tr>
 <tr data-role="テーマ" data-priority="中" data-owner="A"><td><strong>DX基礎研修</strong></td><td>30</td><td>—</td><td>テーマ</td><td>DXページ／詳細候補</td><td><span class="priority priority-中">中</span></td></tr>
-<tr data-role="料金" data-priority="補助" data-owner="A"><td><strong>DX研修 費用</strong></td><td>10</td><td>397円</td><td>料金</td><td>DXページ内料金・FAQ</td><td><span class="priority priority-補助">補助</span></td></tr></tbody>
+<tr data-role="料金" data-priority="補助" data-owner="A"><td><strong>DX研修 費用</strong></td><td>10</td><td>397円</td><td>料金</td><td>DXページ内料金・FAQ</td><td><span class="priority priority-補助">補助</span></td></tr>
+</tbody>
           </table>
         </div>
         <p id="keywordCount" class="result-count"></p>
         <h3>ページ別キーワード所有マップ</h3>
         <div class="table-scroll">
-          <table class="data-table page-map"><thead><tr><th>ページ</th><th>案AのURL</th><th>主KW</th><th>副KW</th><th>種別</th><th>対応</th></tr></thead><tbody><tr><td><strong>AI研修総合</strong></td><td><code>/business/ai-training</code></td><td>AI研修</td><td>AI講習、法人向けAI研修、企業向けAI研修、AI人材研修</td><td>ハブ</td><td>新設</td></tr>
-<tr><td><strong>DX人材育成</strong></td><td><code>/business/dx</code></td><td>DX研修</td><td>DX人材育成、DX人材育成研修、DX推進研修、DXリスキリング</td><td>ハブ／詳細</td><td>強化</td></tr>
-<tr><td><strong>生成AIビジネス活用</strong></td><td><code>/business/lag-generative-ai-chatgpt</code></td><td>生成AI研修</td><td>AI活用研修、生成AI活用研修、法人向け生成AI研修</td><td>研修詳細</td><td>再定義</td></tr>
-<tr><td><strong>ChatGPT基礎・実践</strong></td><td><code>/business/lag-ai-chatgpt</code></td><td>ChatGPT研修</td><td>ChatGPT活用研修、法人向けChatGPT研修</td><td>研修詳細</td><td>再定義</td></tr>
-<tr><td><strong>Claude実践</strong></td><td><code>/business/claude</code></td><td>Claude研修</td><td>Claude Code研修、Claude活用研修</td><td>研修詳細</td><td>強化</td></tr>
-<tr><td><strong>AI・データ分析</strong></td><td><code>/business/thm-ai-data-analysis</code></td><td>AI・データ分析研修</td><td>機械学習研修、AIデータ分析研修</td><td>研修詳細</td><td>強化</td></tr>
-<tr><td><strong>Pythonデータサイエンス</strong></td><td><code>/business/thm-python-data-science</code></td><td>Pythonデータサイエンス研修</td><td>Pythonデータ分析研修、Python機械学習研修</td><td>研修詳細</td><td>強化</td></tr>
-<tr><td><strong>業務改善・効率化</strong></td><td><code>/business/thm-automation</code></td><td>業務効率化研修</td><td>業務改善研修、自動化研修、AI業務効率化研修</td><td>研修詳細</td><td>強化</td></tr>
-<tr><td><strong>データ人材育成</strong></td><td><code>/business/occ-data-engineer-scientist</code></td><td>データサイエンティスト研修</td><td>データエンジニア研修、データ人材育成研修</td><td>研修詳細</td><td>強化</td></tr>
-<tr><td><strong>AIエンジニア</strong></td><td><code>/business/occ-ai-engineer（候補）</code></td><td>AIエンジニア研修</td><td>AI開発研修、生成AIエンジニア研修</td><td>研修詳細</td><td>条件付き新設</td></tr>
-<tr><td><strong>AIリテラシー</strong></td><td><code>/business/thm-ai-literacy（候補）</code></td><td>AIリテラシー研修</td><td>生成AIリテラシー研修、全社員向けAI研修</td><td>研修詳細</td><td>条件付き新設</td></tr></tbody></table>
+          <table class="data-table page-map"><thead><tr><th>ページ</th><th>案AのURL</th><th>主KW</th><th>副KW</th><th>種別</th><th>対応</th></tr></thead><tbody>
+<tr><td><strong>AI研修総合</strong></td><td><code>/business/ai-training/</code></td><td>AI研修</td><td>AI講習、法人向けAI研修、企業向けAI研修、AI人材研修</td><td>ハブ</td><td>維持</td></tr>
+<tr><td><strong>DX人材育成</strong></td><td><code>/business/dx/</code></td><td>DX研修</td><td>DX人材育成、DX推進、DXリスキリング</td><td>ハブ／詳細</td><td>強化</td></tr>
+<tr><td><strong>生成AIビジネス活用</strong></td><td><code>/business/lag-generative-ai-chatgpt/</code></td><td>生成AI研修</td><td>AI活用研修、生成AI活用研修</td><td>活用系詳細</td><td>確定6非搭載・接続明示</td></tr>
+<tr><td><strong>ChatGPT基礎・実践</strong></td><td><code>/business/lag-ai-chatgpt/</code></td><td>ChatGPT研修</td><td>ChatGPT活用研修</td><td>ツール詳細</td><td>確定6非搭載・接続明示</td></tr>
+<tr><td><strong>Claude実践</strong></td><td><code>/business/claude/</code></td><td>Claude研修</td><td>Claude Code研修、Claude活用研修</td><td>ツール詳細</td><td>⑤MCP接続／フル6はエージェントへ</td></tr>
+<tr><td><strong>AIエージェント開発</strong></td><td><code>/business/ai-agent-development/</code></td><td>AIエージェント開発研修</td><td>AIエージェント研修、RAG／LangChain／MCP（副）</td><td>開発系詳細</td><td>確定6フル・Phase1候補</td></tr>
+<tr><td><strong>AIエンジニア</strong></td><td><code>/business/occ-ai-engineer/</code></td><td>AIエンジニア研修</td><td>AI開発研修、生成AIエンジニア研修</td><td>職種詳細</td><td>確定6共有・職種KW</td></tr>
+<tr><td><strong>AI・データ分析</strong></td><td><code>/business/thm-ai-data-analysis/</code></td><td>AI・データ分析研修</td><td>機械学習研修、AIデータ分析研修</td><td>研修詳細</td><td>強化</td></tr>
+<tr><td><strong>Pythonデータサイエンス</strong></td><td><code>/business/thm-python-data-science/</code></td><td>Pythonデータサイエンス研修</td><td>Pythonデータ分析研修</td><td>研修詳細</td><td>強化</td></tr>
+<tr><td><strong>業務改善・効率化</strong></td><td><code>/business/thm-automation/</code></td><td>業務効率化研修</td><td>業務改善、自動化、AI業務効率化</td><td>研修詳細</td><td>強化</td></tr>
+<tr><td><strong>データ人材育成</strong></td><td><code>/business/occ-data-engineer-scientist/</code></td><td>データサイエンティスト研修</td><td>データエンジニア研修</td><td>研修詳細</td><td>強化</td></tr>
+<tr><td><strong>AIリテラシー</strong></td><td><code>/business/thm-ai-literacy/</code></td><td>AIリテラシー研修</td><td>全社員向けAI研修</td><td>研修詳細</td><td>条件付き</td></tr>
+<tr><td><strong>業務用途（例）</strong></td><td><code>/business/ai-*-/</code></td><td>用途別（問い合わせ・マーケ等）</td><td>—</td><td>レイヤーC</td><td>CMS可・原則noindex</td></tr>
+<tr><td><strong>確定6モジュール</strong></td><td>（ルートなし）</td><td>—</td><td>LangChain／LangGraph／RAG／MCP／エージェント</td><td>教材資産</td><td>カテゴリ・必須indexにしない</td></tr>
+</tbody></table>
         </div>
-        <aside class="callout callout-warning"><strong>カニバリ防止</strong><p>「AI研修」はハブ、「生成AI研修」は生成AI詳細、「ChatGPT研修」はChatGPT詳細が所有します。表記ゆれだけの別ページや、「おすすめ」を使った自社商品LPは作りません。</p></aside>
+        <aside class="callout callout-warning"><strong>カニバリ防止（v2）</strong><p>「AI研修」はハブ、生成AI／ChatGPT／Claudeは各詳細、開発系の主KWはAIエージェント開発が所有します。LangChain／MCP／RAGは確定6の章であり単体ページ化しません。表記ゆれだけの別ページや「おすすめ」自社LPは作りません。</p></aside>
       </section>
 
       <section class="section-card tour-target" id="implementation" data-stage="6">
@@ -281,7 +300,7 @@
           <article><div class="roadmap-marker">1</div><div><p>Data model</p><h3>研修データモデルを作る</h3><ul><li>4カテゴリ、3研修形態、3実施形式</li><li>対象、目的、レベル、期間、技術</li><li>ファセットUIより先にデータを整備</li></ul></div></article>
           <article><div class="roadmap-marker">2</div><div><p>Hub</p><h3>AI研修ハブを新設</h3><ul><li><code>/business/ai-training</code></li><li>研修、形態、公開講座、事例、FAQを接続</li><li>既存詳細URLは変更しない</li></ul></div></article>
           <article><div class="roadmap-marker">3</div><div><p>Content</p><h3>既存AIページの役割整理</h3><ul><li>生成AI、ChatGPT、Claude</li><li>AI・データ分析、Python、業務効率化、DX</li><li>対象者・到達目標・CTAを分離</li></ul></div></article>
-          <article><div class="roadmap-marker">4</div><div><p>Expansion</p><h3>不足する詳細を条件付き追加</h3><ul><li>AIリテラシー、AIエンジニア</li><li>AIエージェント活用、AI駆動開発</li><li>商品差と需要がある場合のみ</li></ul></div></article>
+          <article><div class="roadmap-marker">4</div><div><p>Expansion</p><h3>不足する詳細を条件付き追加</h3><ul><li>AIエージェント開発（確定6束ね）</li><li>AIエンジニア（職種・確定6共有）</li><li>業務用途はCMS・noindex検証</li></ul></div></article>
           <article><div class="roadmap-marker">5</div><div><p>Facets</p><h3>ファセットとホワイトリストを実装</h3><ul><li><code>/business/training</code>の追加</li><li>通常結果は非インデックス</li><li>正規URLのみサイトマップ掲載</li></ul></div></article>
         </div>
         <h3>受け入れ条件</h3>
@@ -1320,16 +1339,23 @@ CodeCampのAI研修を導入したい</code></pre>
 <p>優先度A：直ちに実施 ページ 対応 AI研修総合ハブ 新設 生成AI研修 既存ページの主KW・タイトル・内容を再定義 ChatGPT研修 既存ページの主KW・内容をChatGPT固有に限定 Claude研修 Claude研修として最適化 DX研修 AIハブと分離して強化 AI関連ページ間の内部リンク 実装</p>
 <p>優先度B：既存ページを強化 ページ 対応 AI・データ分析研修 データ分析・機械学習意図を明確化 Pythonデータサイエンス研修 Pythonデータ分析に特化 業務改善・効率化研修 業務フロー・自動化に特化 データエンジニア・データサイエンティスト研修 職種育成意図を明確化 AI研修比較・選定コンテンツ 「おすすめ」「比較」の受け皿を強化</p>
 <p>優先度C：商品確認後に新設 ページ 条件 AIエンジニア研修 独立カリキュラムが存在する AIリテラシー研修 ITリテラシーと異なる内容がある AIエージェント活用研修 非エンジニア向け商品がある AI駆動開発研修 Claudeに依存しない独立商品がある AIエージェント開発研修 AI駆動開発とは異なる到達目標がある</p>
-<h2 id="keyword-source-12-最終キ-ワ-ドマップ">12. 最終キーワードマップ<button class="anchor-copy" data-copy-link="keyword-source-12-最終キ-ワ-ドマップ" aria-label="この見出しへのリンクをコピー">#</button></h2>
-<p>カテゴリ・ハブ ページ 主キーワード 副キーワード AI研修総合 AI研修 AI講習、法人向けAI研修、企業向けAI研修、AI人材研修 DX人材育成 DX研修 DX人材育成、DX人材育成研修、DX推進研修、DXリスキリング AI研修比較 AI研修 おすすめ AI研修 比較、AI研修会社、AI研修一覧 DX研修比較 DX研修 おすすめ DX研修会社、DX研修 比較 言語・ツール別 プログラミング言語・ツール別研修 法人向けプログラミング研修 テーマ別 テーマ別IT研修 DX・AI・セキュリティ研修一覧 職種別 職種別IT研修 IT人材職種別研修 階層別 階層別研修 階層別研修とは</p>
-<p>研修詳細 ページ 主キーワード 副キーワード 生成AI研修 生成AI研修 AI活用研修、生成AI活用研修、法人向け生成AI研修 ChatGPT研修 ChatGPT研修 ChatGPT活用研修、法人向けChatGPT研修 Claude研修 Claude研修 Claude Code研修、Claude活用研修 AI・データ分析 AI・データ分析研修 機械学習研修、AIデータ分析研修 Pythonデータサイエンス Pythonデータサイエンス研修 Pythonデータ分析研修、Python機械学習研修 AIエンジニア AIエンジニア研修 AI開発研修、生成AIエンジニア研修 データサイエンティスト データサイエンティスト研修 データエンジニア研修、データ人材育成研修 業務改善・効率化 業務効率化研修 業務改善研修、自動化研修、AI業務効率化研修 AIリテラシー AIリテラシー研修 生成AIリテラシー研修、全社員向けAI研修 AIエージェント活用 AIエージェント活用研修 AI業務自動化研修 AI駆動開発 AI駆動開発研修 AIコーディング研修 AIエージェント開発 AIエージェント開発研修 RAG研修、LangChain研修、LangGraph研修</p>
+<h2 id="keyword-source-12-最終キ-ワ-ドマップ">12. 最終キーワードマップ（v2）<button class="anchor-copy" data-copy-link="keyword-source-12-最終キ-ワ-ドマップ" aria-label="この見出しへのリンクをコピー">#</button></h2>
+<p><strong>ハブ・カテゴリ</strong> AI研修総合＝AI研修／AI講習／法人向けAI研修。DX＝DX研修群（AIと分離）。4カテゴリ一覧は発見経路。比較語は情報コンテンツ。</p>
+<p><strong>活用系詳細</strong> 生成AI研修→生成AIビジネス活用。ChatGPT研修→ChatGPT詳細。いずれも確定6非搭載・エージェント開発へ接続。</p>
+<p><strong>ツール詳細（Claude）</strong> Claude研修／Claude Code。確定⑤MCPを接続。①〜④・⑥はエージェント開発。</p>
+<p><strong>開発系詳細</strong> AIエージェント開発研修（主）＋副にAIエージェント研修、RAG／LangChain／MCP（単体indexしない）。AIエンジニア研修は職種KWで確定6を共有。</p>
+<p><strong>その他詳細</strong> AI・データ分析、Python DS、業務効率化、データ人材、AIリテラシーは既存方針を維持。</p>
+<p><strong>レイヤーC</strong> 問い合わせ対応・マーケ内製化・営業支援などはCMS詳細可・原則noindex。</p>
+<p><strong>確定6（非ページ）</strong> ①エージェント構築 ②LangChain／LangGraph基礎 ③RAG/pgvector ④LangChain／LangGraph実践 ⑤MCP基礎 ⑥エージェント実践。</p>
 <h2 id="keyword-source-13-最終判断">13. 最終判断<button class="anchor-copy" data-copy-link="keyword-source-13-最終判断" aria-label="この見出しへのリンクをコピー">#</button></h2>
-<pre><code>CodeCampのAI領域では、最初に次の5ページの役割を確定すべきです。</code></pre>
+<pre><code>CodeCampのAI領域では、最初に次の役割を確定すべきです。</code></pre>
 <p>AI研修 → AI研修総合ハブ</p>
-<p>生成AI研修 → 生成AIビジネス活用研修</p>
-<p>ChatGPT研修 → ChatGPT基礎・実践研修</p>
-<p>Claude研修 → Claude実践研修</p>
-<p>DX研修 → DX人材育成研修 そのうえで、次を第二群として強化します。 AI・データ分析研修 Pythonデータサイエンス研修 業務改善・効率化研修 データサイエンティスト研修 新規ページは、キーワードが存在するから作るのではなく、商品として独立している場合だけ作ります。 AIエンジニア研修 AIリテラシー研修 AIエージェント活用研修 AI駆動開発研修 AIエージェント開発研修 最適な構造は、総称語をハブ、商品・技術語を詳細ページ、比較語を情報コンテンツ、属性語をファセットで受け持つ構造です。 この割り当てであれば、案A・B・CのどのURL構造を採用しても、キーワード設計をそのまま移植できます。</p></div>
+<p>生成AI研修 → 生成AIビジネス活用（活用系・確定6非搭載）</p>
+<p>ChatGPT研修 → ChatGPT基礎・実践（活用系）</p>
+<p>Claude研修 → Claude実践（⑤MCP接続）</p>
+<p>AIエージェント開発研修 → 確定6を束ねる開発系代表</p>
+<p>DX研修 → DX人材育成（AIと分離）</p>
+<p>第二群：AI・データ分析、Python DS、業務効率化、データ人材。職種軸のAIエンジニアは確定6共有。業務用途はCMSで検証。最適な構造は、総称語をハブ、商品・ツール語を詳細、確定6をモジュール、比較語を情報、属性語をファセット、検証ページをnoindexで持つことです。</p></div>
         </details>
       </section>
 

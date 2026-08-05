@@ -1,0 +1,102 @@
+/* Shared floating docs TOC for AI training materials / prototype */
+:root {
+  --docs-nav-blue: #2357d8;
+  --docs-nav-ink: #152238;
+  --docs-nav-muted: #61708a;
+  --docs-nav-line: #dce3ee;
+  --docs-nav-bg: #ffffff;
+}
+.docs-nav-fab {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9990;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", Meiryo, sans-serif;
+}
+.docs-nav-fab__btn {
+  border: 0;
+  border-radius: 999px;
+  background: var(--docs-nav-blue);
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+  padding: 12px 16px;
+  box-shadow: 0 10px 28px rgba(20, 58, 104, 0.28);
+  cursor: pointer;
+}
+.docs-nav-fab__btn:hover { filter: brightness(1.05); }
+.docs-nav-fab__panel {
+  width: min(340px, calc(100vw - 28px));
+  max-height: min(70vh, 560px);
+  overflow: auto;
+  background: var(--docs-nav-bg);
+  color: var(--docs-nav-ink);
+  border: 1px solid var(--docs-nav-line);
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(22, 44, 78, 0.16);
+  padding: 14px 14px 12px;
+}
+.docs-nav-fab__panel[hidden] { display: none !important; }
+.docs-nav-fab__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.docs-nav-fab__head strong { font-size: 13px; letter-spacing: -0.02em; }
+.docs-nav-fab__close {
+  border: 1px solid var(--docs-nav-line);
+  background: #f7f9fc;
+  border-radius: 8px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.docs-nav-fab__label {
+  margin: 10px 0 6px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: var(--docs-nav-muted);
+  text-transform: uppercase;
+}
+.docs-nav-fab__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+.docs-nav-fab__list a {
+  display: block;
+  text-decoration: none;
+  color: var(--docs-nav-ink);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.docs-nav-fab__list a:hover { background: #eaf1ff; color: var(--docs-nav-blue); }
+.docs-nav-fab__list a span {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--docs-nav-muted);
+  margin-top: 2px;
+}
+.docs-nav-fab__note {
+  margin: 10px 0 0;
+  font-size: 11px;
+  color: var(--docs-nav-muted);
+  line-height: 1.45;
+}
+@media (max-width: 640px) {
+  .docs-nav-fab { right: 12px; bottom: 72px; }
+}

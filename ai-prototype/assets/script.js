@@ -143,6 +143,7 @@
   ];
 
   const trainings = [
+
     {
       id: "generative-ai",
       route: "/business/lag-generative-ai-chatgpt/",
@@ -151,8 +152,8 @@
       status: "existing",
       primaryCategory: "language",
       categories: ["language", "theme", "hierarchy"],
-      summary: "生成AIの基礎から、業務課題に合わせたプロンプト設計・活用までを実践します。",
-      heroLead: "生成AIを理解するだけでなく、実際の業務で使い成果につなげる法人向け研修です。",
+      summary: "生成AIの基礎から業務適用までを学ぶ活用系研修です。確定6（開発モジュール）は実装しない代わりに、必要時はAIエージェント開発へ接続します。",
+      heroLead: "活用系の正式詳細。確定6カリキュラムは開発系の共通モジュールであり、本ページの章立てには含めず、関係を明示して接続します。",
       themes: ["生成AI", "AI活用", "業務効率化"],
       tools: ["ChatGPT", "Gemini", "生成AI"],
       audiences: ["全社員", "新入社員", "非エンジニア"],
@@ -163,16 +164,25 @@
       level: "入門〜実践",
       duration: "2か月〜（調整可）",
       keywords: { primary: "生成AI研修", secondary: ["生成AI活用研修", "AI活用研修", "法人向け生成AI研修"] },
-      outcomes: ["生成AIの仕組みとリスクを説明できる", "目的に応じたプロンプトを設計できる", "自社業務へ生成AIを適用できる", "チーム内で安全な活用ルールを共有できる"],
+      outcomes: ["生成AIの仕組みとリスクを説明できる", "目的に応じたプロンプトを設計できる", "自社業務へ生成AIを適用できる", "開発が必要な場合に確定6商品へ橋渡しできる"],
+      moduleRelation: {
+        stance: "活用系（確定6は非搭載）",
+        included: [],
+        bridgeTo: "ai-agent-development",
+        note: "本詳細は業務活用。エージェント／RAG／MCP実装は確定6を束ねたAIエージェント開発研修が所有します。"
+      },
       curriculum: [
-        ["生成AIの基礎と利用上の注意", "生成AI・LLMの基本構造、得意・不得意、情報管理と著作権などを理解します。"],
-        ["プロンプト設計", "要件、前提、出力形式、検証条件を整理し、再利用できるプロンプトを設計します。"],
-        ["業務ユースケース演習", "文章作成、調査、分析、企画、会議準備など、自社に近い課題で演習します。"],
-        ["定着とガバナンス", "研修後に継続活用するためのルール、共有方法、成果確認の考え方を整理します。"]
+        ["生成AIの基礎と安全利用", "LLMの基本、得意不得意、情報管理・著作権・ガバナンスを学びます（活用系）。"],
+        ["プロンプト設計", "要件・前提・出力形式・検証条件を整理し、再利用できるプロンプトを設計します。"],
+        ["業務ユースケース演習", "文章、調査、分析、企画、会議準備など自社に近い課題で演習します。"],
+        ["定着とガバナンス", "継続活用のルール、共有、成果確認の考え方を整理します。"],
+        ["確定6モジュールへの接続", "開発・内製が必要な場合は、①エージェント構築〜⑥実践の共通モジュールを束ねたAIエージェント開発研修へ進みます。本ページではLangChain／RAG／MCPの実装章は扱いません。"]
       ],
-      related: ["chatgpt", "claude", "automation", "ai-literacy"],
+      related: ["chatgpt", "claude", "ai-agent-development", "ai-literacy"],
       openCourses: ["generative-ai-for-business"]
     },
+
+
     {
       id: "chatgpt",
       route: "/business/lag-ai-chatgpt/",
@@ -181,8 +191,8 @@
       status: "existing",
       primaryCategory: "language",
       categories: ["language", "theme", "hierarchy"],
-      summary: "ChatGPTの基本操作、プロンプト、タスク自動化を業務別の演習で習得します。",
-      heroLead: "ChatGPT固有の機能とプロンプト設計に焦点を当てた、企業向けの基礎・実践研修です。",
+      summary: "ChatGPT固有の操作・プロンプト・業務自動化に特化したツール詳細です。確定6の実装は扱わず、開発需要はエージェント開発へ接続します。",
+      heroLead: "ツール固有の活用詳細。確定6（LangChain／RAG／MCP等）は章として持たず、所有キーワードと到達目標をChatGPTに限定します。",
       themes: ["生成AI", "業務効率化"],
       tools: ["ChatGPT"],
       audiences: ["全社員", "新入社員", "非エンジニア"],
@@ -193,16 +203,25 @@
       level: "基礎〜実践",
       duration: "1日〜2か月",
       keywords: { primary: "ChatGPT研修", secondary: ["ChatGPT活用研修", "法人向けChatGPT研修", "ChatGPT講習"] },
-      outcomes: ["ChatGPTの機能を業務に応じて使い分けられる", "精度を高めるプロンプトを作成できる", "定型業務を効率化できる", "出力を検証し安全に利用できる"],
+      outcomes: ["ChatGPTの機能を業務に応じて使い分けられる", "精度を高めるプロンプトを作成できる", "定型業務を効率化できる", "アプリ開発が必要なら確定6商品へ橋渡しできる"],
+      moduleRelation: {
+        stance: "ツール固有・活用系（確定6は非搭載）",
+        included: [],
+        bridgeTo: "ai-agent-development",
+        note: "ChatGPT操作・業務効率化が主意図。エージェント構築やRAG実装は確定6側。"
+      },
       curriculum: [
         ["ChatGPTの基本", "画面操作、モデルの特徴、ファイル利用、出力の検証方法を学びます。"],
         ["プロンプト基礎", "役割、制約、文脈、出力形式を指定する基本パターンを習得します。"],
         ["業務効率化演習", "メール、議事録、調査、資料構成、表データの整理などを実践します。"],
-        ["チーム活用", "テンプレート共有、利用ルール、成果の振り返り方法を設計します。"]
+        ["チーム活用", "テンプレート共有、利用ルール、成果の振り返り方法を設計します。"],
+        ["確定6モジュールへの接続", "社内システム連携やエージェント開発が必要な場合は、確定モジュール①〜⑥を束ねたAIエージェント開発研修へ接続します。"]
       ],
-      related: ["generative-ai", "claude", "automation"],
+      related: ["generative-ai", "claude", "ai-agent-development", "automation"],
       openCourses: ["generative-ai-for-business"]
     },
+
+
     {
       id: "claude",
       route: "/business/claude/",
@@ -211,8 +230,8 @@
       status: "existing",
       primaryCategory: "language",
       categories: ["language", "theme", "occupation"],
-      summary: "Claudeによる業務活用からClaude Code・MCPを使ったAI駆動開発まで学びます。",
-      heroLead: "全社員向けの業務活用と、エンジニア向けのAI駆動開発を目的別に設計できる研修です。",
+      summary: "Claudeの業務活用と、Claude Code／MCPによる開発入口を扱います。確定6のうちMCP基礎をClaude実装で接続し、フルセットはエージェント開発へ渡します。",
+      heroLead: "ツール詳細としてClaudeを所有。確定6との対応は、⑤MCP基礎を本ページで触れ、①〜④・⑥の体系はAIエージェント開発が担います。",
       themes: ["生成AI", "AI開発", "業務効率化"],
       tools: ["Claude", "Claude Code", "MCP"],
       audiences: ["全社員", "エンジニア"],
@@ -223,16 +242,24 @@
       level: "基礎〜応用",
       duration: "1日〜2か月",
       keywords: { primary: "Claude研修", secondary: ["Claude Code研修", "Claude活用研修", "法人向けClaude研修"] },
-      outcomes: ["Claudeの特性を理解して業務へ適用できる", "長文・ファイルを活用した作業を効率化できる", "Claude Codeによる開発フローを実践できる", "MCPを含む連携方法を理解できる"],
+      outcomes: ["Claudeの特性を理解して業務へ適用できる", "Claude Codeで開発フローを実践できる", "MCP基礎（確定モジュール⑤）をClaude環境で理解できる", "確定6フルセットはエージェント開発へ接続できる"],
+      moduleRelation: {
+        stance: "ツール詳細＋モジュール⑤接続",
+        included: ["mcp-basics"],
+        bridgeTo: "ai-agent-development",
+        note: "⑤MCP基礎をClaude実装例として扱う。①エージェント構築〜④・⑥実践の体系はAIエージェント開発研修。"
+      },
       curriculum: [
-        ["Claudeの基本と業務活用", "文書作成、分析、情報整理などのユースケースを学びます。"],
+        ["Claude業務活用（活用トラック）", "文書作成、分析、情報整理など非エンジニア向けユースケースを学びます。"],
         ["AIコワーク", "複雑なタスクを分解し、Claudeと協働して成果物を作成します。"],
-        ["Claude Code", "コード理解、修正、テスト、レビューの開発フローを実践します。"],
-        ["MCPと連携", "外部データやツールと接続する基本設計、安全性、運用上の注意を学びます。"]
+        ["Claude Code（開発トラック入口）", "コード理解・修正・テスト・レビュー。確定モジュール①エージェント構築のClaude実装入口として位置づけます。"],
+        ["MCP基礎（確定モジュール⑤）", "確定6のMCP基礎をClaude環境で学びます。外部ツール接続、安全性、運用上の注意を扱います。"],
+        ["確定6フルセットへの接続", "①構築／②③LangChain・RAG／④実践／⑥エージェント実践は、AIエージェント開発研修（確定6束ね）で体系的に扱います。本ページはClaude固有KWを所有します。"]
       ],
-      related: ["generative-ai", "chatgpt", "ai-engineer"],
+      related: ["generative-ai", "chatgpt", "ai-agent-development", "ai-engineer"],
       openCourses: ["ai-editor-coding-intensive"]
     },
+
     {
       id: "ai-data",
       route: "/business/thm-ai-data-analysis/",
@@ -413,10 +440,11 @@
         ["MCP基礎", "確定モジュール⑤。ツール・システム連携の基礎を学びます。"],
         ["AIエージェント実践", "確定モジュール⑥。業務適用と運用まで仕上げます。"]
       ],
-      related: ["ai-engineer", "claude", "generative-ai"],
+      related: ["ai-engineer", "claude", "generative-ai", "chatgpt"],
       openCourses: ["generative-ai-engineer-camp"],
       modules: ["agent-build", "langchain-basics", "rag-pgvector", "langchain-practice", "mcp-basics", "agent-practice"]
     },
+
     {
       id: "ai-engineer",
       route: "/business/occ-ai-engineer/",
@@ -425,10 +453,10 @@
       status: "candidate",
       primaryCategory: "occupation",
       categories: ["occupation", "theme", "language"],
-      summary: "LLM、RAG、AIエージェント、API連携を学び、AIアプリを開発できる人材を育成します。",
-      heroLead: "生成AIを使う人材ではなく、AIアプリケーションを設計・開発・評価できる人材を育成する新設候補です。",
+      summary: "職種軸の育成商品候補。カリキュラム章立ては確定6モジュールと同一で、所有KWはAIエンジニア研修です。",
+      heroLead: "商品詳細のAIエージェント開発と教材は共通（確定6）。こちらは職種・人材育成意図の受け皿として分離します。",
       themes: ["AI開発", "生成AI", "機械学習"],
-      tools: ["Python", "RAG", "AIエージェント", "API"],
+      tools: ["Python", "LangChain", "LangGraph", "RAG", "MCP", "AIエージェント", "pgvector"],
       audiences: ["エンジニア"],
       roles: ["AIエンジニア", "エンジニア"],
       goals: ["AI開発", "専門人材育成"],
@@ -437,16 +465,26 @@
       level: "実践〜応用",
       duration: "2か月〜",
       keywords: { primary: "AIエンジニア研修", secondary: ["AIエンジニア育成研修", "AI開発研修", "生成AIエンジニア研修"] },
-      outcomes: ["LLMアプリの構成を設計できる", "RAGを実装・評価できる", "AIエージェントを試作できる", "安全性と運用を考慮できる"],
+      outcomes: ["確定6に沿ってLLMアプリを設計できる", "RAGを実装・評価できる", "LangGraphでワークフローを組める", "MCP連携と運用を考慮できる"],
+      moduleRelation: {
+        stance: "職種軸（確定6フル共有）",
+        included: ["agent-build", "langchain-basics", "rag-pgvector", "langchain-practice", "mcp-basics", "agent-practice"],
+        bridgeTo: "ai-agent-development",
+        note: "章立ては確定6と同一。主KWは職種語。商品名・検索意図がエージェント開発と異なる場合のみ別ページ維持。"
+      },
       curriculum: [
-        ["LLM・API基礎", "LLMの特性、API、トークン、構成要素を理解します。"],
-        ["RAG", "検索、埋め込み、ベクトルデータベース、回答評価を実装します。"],
-        ["AIエージェント", "ツール利用、ワークフロー、状態管理の基本を実践します。"],
-        ["開発・評価・運用", "テスト、監視、コスト、セキュリティを含む開発プロセスを学びます。"]
+        ["AIエージェント構築（確定①）", "エージェントの構成要素と実装入口を学びます。"],
+        ["LangChain／LangGraph基礎（確定②）", "オーケストレーションの基礎を学びます。"],
+        ["ベクターDB＆RAG基礎・pgvector（確定③）", "埋め込み・検索・回答の土台を実装します。"],
+        ["LangChain／LangGraph実践（確定④）", "実装・評価・改善を実践します。"],
+        ["MCP基礎（確定⑤）", "ツール・システム連携の基礎を学びます。"],
+        ["AIエージェント実践（確定⑥）", "業務適用と運用まで仕上げます。人材像・評価は職種軸で設計します。"]
       ],
-      related: ["claude", "data-engineer", "python-data"],
-      openCourses: ["generative-ai-engineer-camp", "ai-editor-coding-intensive"]
+      related: ["ai-agent-development", "claude", "data-engineer", "python-data"],
+      openCourses: ["generative-ai-engineer-camp", "ai-editor-coding-intensive"],
+      modules: ["agent-build", "langchain-basics", "rag-pgvector", "langchain-practice", "mcp-basics", "agent-practice"]
     },
+
     {
       id: "ai-literacy",
       route: "/business/thm-ai-literacy/",
@@ -680,6 +718,7 @@
             <a href="${href('/business/site-map/')}">案Aサイトマップ</a>
             <a href="${href('/business/customize/')}">カスタマイズ</a>
             <a href="${href('/open/')}"${openCurrent}>公開講座</a>
+            <a href="${ROOT}guide/index.html">目的別ナビ</a>
             <a href="${ROOT}requirements/index.html">要件書</a>
           </nav>
           <div class="header-actions">
@@ -711,6 +750,15 @@
       </aside>
     `;
     bindGlobalInteractions();
+    if (!document.querySelector('script[data-docs-nav]')) {
+      const s = document.createElement('script');
+      s.src = ROOT + 'assets/docs-nav.js';
+      s.defer = true;
+      s.setAttribute('data-docs-nav', '1');
+      document.body.appendChild(s);
+    } else if (window.DocsNav && typeof window.DocsNav.remount === 'function') {
+      window.DocsNav.remount();
+    }
   }
 
   function renderBreadcrumbs(items) {
@@ -1000,13 +1048,25 @@
     shell(content, { title: course.title, description: course.summary, breadcrumbs: [{ label: "公開講座", route: "/open/" }, { label: course.title, route: course.route }], mobileCta: { secondaryLabel: "企業向け研修", secondaryRoute: related?.route || "/business/ai-training/", primaryLabel: "日程を見る", primaryRoute: course.route + "#sampleSchedule" } });
   }
 
+
+  function moduleRelationMarkup(training) {
+    const rel = training.moduleRelation;
+    if (!rel) return "";
+    const included = (rel.included || []).map((id) => confirmedModules.find((m) => m.id === id)).filter(Boolean);
+    const bridge = rel.bridgeTo ? trainingById(rel.bridgeTo) : null;
+    const chips = included.length
+      ? included.map((m) => `<span class="tag tag-purple">${escapeHtml(m.name)}</span>`).join("")
+      : `<span class="tag">確定6は章として非搭載</span>`;
+    return `<article class="content-panel" id="module-relation"><p class="eyebrow">CONFIRMED MODULES MAP</p><h2>確定6カリキュラムとの対応</h2><p class="lead">${escapeHtml(rel.note || "")}</p><div class="card-meta" style="margin-top:14px"><span class="tag tag-green">${escapeHtml(rel.stance || "")}</span>${chips}</div>${bridge ? `<p style="margin-top:14px">接続先: <a href="${href(bridge.route)}">${escapeHtml(bridge.title)}</a></p>` : ""}<p class="muted" style="margin-top:10px;font-size:12px"><a href="${href('/business/')}#confirmed-modules">確定6一覧を見る</a></p></article>`;
+  }
+
   function renderTrainingDetail(training) {
     const primary = categoryPages[training.primaryCategory];
     const related = training.related.map(trainingById).filter(Boolean).slice(0, 4);
     const relatedCourses = training.openCourses.map(courseById).filter(Boolean);
     const content = `
       <section class="detail-hero"><div class="container detail-hero-grid"><div><div class="card-meta">${statusTag(training)}${tags(training.themes.slice(0, 3), "tag-blue")}</div><h1 style="margin-top:16px">${escapeHtml(training.title)}</h1><p class="lead">${escapeHtml(training.heroLead)}</p><div class="hero-actions"><a class="button button-primary" href="#delivery-methods">導入方法を見る</a><a class="button" href="${href('/business/faq/')}">研修を相談する</a></div></div><aside class="detail-summary"><dl><div><dt>主カテゴリ</dt><dd>${escapeHtml(primary.title)}</dd></div><div><dt>対象者</dt><dd>${escapeHtml(training.audiences.join('・'))}</dd></div><div><dt>レベル</dt><dd>${escapeHtml(training.level)}</dd></div><div><dt>期間</dt><dd>${escapeHtml(training.duration)}</dd></div><div><dt>実施形式</dt><dd>${escapeHtml(training.formats.join('・'))}</dd></div></dl></aside></div></section>
-      <section class="section"><div class="container detail-layout"><div class="detail-main"><article class="content-panel"><p class="eyebrow">OVERVIEW</p><h2>研修概要</h2><p class="lead">${escapeHtml(training.summary)}</p><h3>研修後にできること</h3><ul class="bullet-list">${training.outcomes.map((value) => `<li>${escapeHtml(value)}</li>`).join("")}</ul><div class="card-meta" style="margin-top:22px">${tags(training.tools, "tag-purple")}${tags(training.roles)}</div></article><article id="delivery-methods" class="content-panel"><p class="eyebrow">DELIVERY METHODS</p><h2>この研修の提供方法</h2><p class="lead">カリキュラム詳細は研修形態を内包せず、対応可能な導入方法へ接続します。</p><div class="delivery-grid">${Object.entries(deliveryPages).map(([key, page]) => { const available = key === 'open' ? relatedCourses.length > 0 : training.delivery.includes(key); const route = key === 'open' && relatedCourses[0] ? relatedCourses[0].route : page.route; return `<article class="delivery-card ${available ? 'is-available' : ''}"><div class="card-meta"><span class="tag ${available ? 'tag-green' : ''}">${available ? '対応あり' : '要相談'}</span></div><h3>${escapeHtml(page.title)}</h3><p>${escapeHtml(page.summary)}</p><a class="card-link" href="${href(route)}">${available ? '詳しく見る' : '相談する'} →</a></article>`; }).join("")}</div></article><article class="content-panel"><p class="eyebrow">CURRICULUM</p><h2>カリキュラム例</h2><div class="accordion">${training.curriculum.map(([title, body], index) => `<section class="accordion-item"><button class="accordion-button" type="button" aria-expanded="${index === 0 ? 'true' : 'false'}">${escapeHtml(title)}</button><div class="accordion-content" ${index === 0 ? "" : "hidden"}>${escapeHtml(body)}</div></section>`).join("")}</div></article><article class="content-panel"><p class="eyebrow">RELATIONSHIP</p><h2>このページへの発見経路</h2><p class="lead">画面上の主パンくずは1つにしますが、同じ研修を複数カテゴリとAIハブから発見できます。</p><div class="card-grid card-grid-2" style="margin-top:20px">${training.categories.map((key) => { const item = categoryPages[key]; return `<a class="card" href="${href(item.route)}"><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.description)}</p><span class="card-link">カテゴリへ →</span></a>`; }).join("")} ${isAITraining(training) ? `<a class="card card-feature" href="${href('/business/ai-training/')}"><h3>AI研修横断ハブ</h3><p>課題・対象者・ツール・研修形態から比較できます。</p><span class="card-link">AI研修へ →</span></a>` : ""}</div></article>${related.length ? `<article class="content-panel"><p class="eyebrow">RELATED TRAINING</p><h2>関連する研修</h2><div class="training-grid" style="margin-top:20px">${related.map((item) => renderTrainingCard(item, { showKeyword: false })).join("")}</div></article>` : ""}${relatedCourses.length ? `<article class="content-panel"><p class="eyebrow">OPEN COURSES</p><h2>関連する公開講座</h2><div class="card-grid card-grid-2" style="margin-top:20px">${relatedCourses.map(renderOpenCourseCard).join("")}</div></article>` : ""}</div><aside class="sidebar-cta"><div class="cta-card"><h3>この研修を相談する</h3><p>対象者、期間、演習、研修形態を確認し、企業に合うプランを設計します。</p><a class="button button-primary button-block" href="${href('/business/faq/')}">お問い合わせ</a></div><div class="related-links"><a href="${href('/business/ai-training/')}">AI研修を比較</a><a href="${href(primary.route)}">${escapeHtml(primary.title)}</a><a href="${href('/business/customize/')}">カスタマイズ研修</a><a href="${href('/business/voice/')}">導入事例</a><a href="${href('/business/codecamp-insight/')}">研修管理システム</a></div></aside></div></section>`;
+      <section class="section"><div class="container detail-layout"><div class="detail-main"><article class="content-panel"><p class="eyebrow">OVERVIEW</p><h2>研修概要</h2><p class="lead">${escapeHtml(training.summary)}</p><h3>研修後にできること</h3><ul class="bullet-list">${training.outcomes.map((value) => `<li>${escapeHtml(value)}</li>`).join("")}</ul><div class="card-meta" style="margin-top:22px">${tags(training.tools, "tag-purple")}${tags(training.roles)}</div></article><article id="delivery-methods" class="content-panel"><p class="eyebrow">DELIVERY METHODS</p><h2>この研修の提供方法</h2><p class="lead">カリキュラム詳細は研修形態を内包せず、対応可能な導入方法へ接続します。</p><div class="delivery-grid">${Object.entries(deliveryPages).map(([key, page]) => { const available = key === 'open' ? relatedCourses.length > 0 : training.delivery.includes(key); const route = key === 'open' && relatedCourses[0] ? relatedCourses[0].route : page.route; return `<article class="delivery-card ${available ? 'is-available' : ''}"><div class="card-meta"><span class="tag ${available ? 'tag-green' : ''}">${available ? '対応あり' : '要相談'}</span></div><h3>${escapeHtml(page.title)}</h3><p>${escapeHtml(page.summary)}</p><a class="card-link" href="${href(route)}">${available ? '詳しく見る' : '相談する'} →</a></article>`; }).join("")}</div></article>${moduleRelationMarkup(training)}<article class="content-panel"><p class="eyebrow">CURRICULUM</p><h2>カリキュラム例</h2><div class="accordion">${training.curriculum.map(([title, body], index) => `<section class="accordion-item"><button class="accordion-button" type="button" aria-expanded="${index === 0 ? 'true' : 'false'}">${escapeHtml(title)}</button><div class="accordion-content" ${index === 0 ? "" : "hidden"}>${escapeHtml(body)}</div></section>`).join("")}</div></article><article class="content-panel"><p class="eyebrow">RELATIONSHIP</p><h2>このページへの発見経路</h2><p class="lead">画面上の主パンくずは1つにしますが、同じ研修を複数カテゴリとAIハブから発見できます。</p><div class="card-grid card-grid-2" style="margin-top:20px">${training.categories.map((key) => { const item = categoryPages[key]; return `<a class="card" href="${href(item.route)}"><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.description)}</p><span class="card-link">カテゴリへ →</span></a>`; }).join("")} ${isAITraining(training) ? `<a class="card card-feature" href="${href('/business/ai-training/')}"><h3>AI研修横断ハブ</h3><p>課題・対象者・ツール・研修形態から比較できます。</p><span class="card-link">AI研修へ →</span></a>` : ""}</div></article>${related.length ? `<article class="content-panel"><p class="eyebrow">RELATED TRAINING</p><h2>関連する研修</h2><div class="training-grid" style="margin-top:20px">${related.map((item) => renderTrainingCard(item, { showKeyword: false })).join("")}</div></article>` : ""}${relatedCourses.length ? `<article class="content-panel"><p class="eyebrow">OPEN COURSES</p><h2>関連する公開講座</h2><div class="card-grid card-grid-2" style="margin-top:20px">${relatedCourses.map(renderOpenCourseCard).join("")}</div></article>` : ""}</div><aside class="sidebar-cta"><div class="cta-card"><h3>この研修を相談する</h3><p>対象者、期間、演習、研修形態を確認し、企業に合うプランを設計します。</p><a class="button button-primary button-block" href="${href('/business/faq/')}">お問い合わせ</a></div><div class="related-links"><a href="${href('/business/ai-training/')}">AI研修を比較</a><a href="${href(primary.route)}">${escapeHtml(primary.title)}</a><a href="${href('/business/customize/')}">カスタマイズ研修</a><a href="${href('/business/voice/')}">導入事例</a><a href="${href('/business/codecamp-insight/')}">研修管理システム</a></div></aside></div></section>`;
     shell(content, { title: training.title, description: training.summary, breadcrumbs: [{ label: primary.title, route: primary.route }, { label: training.title, route: training.route }], mobileCta: { secondaryLabel: "研修を探す", secondaryRoute: "/business/training/", primaryLabel: "研修を相談", primaryRoute: "/business/faq/" } });
     bindAccordions();
   }
