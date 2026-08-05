@@ -17,7 +17,6 @@
       <p class="document-title">法人向けAI研修 サイト構造・キーワード要件書</p>
     </div>
     <div class="top-actions">
-      <a class="button button-outline integration-link" href="../guide/index.html">目的別ナビ</a>
       <a class="button button-outline integration-link" href="../business/index.html">視覚プロトタイプ</a>
       <a class="button button-outline integration-link" href="../business/site-map/index.html">案Aサイトマップ</a>
       <button class="button button-subtle" id="themeButton" aria-label="表示テーマを切り替える">表示切替</button>
@@ -25,7 +24,7 @@
       <button class="button button-primary" id="startTour">ガイドで読む</button>
     </div>
   </header>
-  <div class="integration-banner"><strong>v2更新</strong><span>共通モジュール／商品詳細／業務用途検証の3レイヤーを追加。資料入口は目的別ナビ。</span><a href="../guide/index.html">目的別ナビ →</a><a href="../archive/index.html">v1アーカイブ</a></div>
+  <div class="integration-banner"><strong>第2成果物と統合済み</strong><span>サイトマップや各画面イメージは「視覚プロトタイプ」から確認できます。</span><a href="../business/site-map/index.html">案Aサイトマップを見る →</a></div>
 
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
@@ -42,7 +41,6 @@
         <nav class="toc" aria-label="要件書の目次">
           <p class="toc-label">読み進める順序</p>
           <a href="#decision" data-nav="decision"><span>1</span>結論と判断</a>
-          <a href="#product-layers" data-nav="product-layers"><span>1b</span>商品3レイヤー</a>
           <a href="#current-structure" data-nav="current-structure"><span>2</span>現行構造</a>
           <a href="#options" data-nav="options"><span>3</span>案A・B・C</a>
           <a href="#seo-controls" data-nav="seo-controls"><span>4</span>SEO・ファセット</a>
@@ -51,8 +49,8 @@
           <a href="#appendices" data-nav="appendices"><span>+</span>詳細原文</a>
         </nav>
         <div class="sidebar-note">
-          <strong>確定方針（v2）</strong>
-          <p>案Aを採用。モジュール≠商品ページ。業務用途詳細はCMSで作成可・原則noindex。indexはホワイトリストのみ。</p>
+          <strong>確定方針</strong>
+          <p>案Aを採用。検索需要と独自内容がある組み合わせのみ、ホワイトリスト方式で静的ページ化。</p>
         </div>
       </div>
     </aside>
@@ -90,24 +88,8 @@
           <article><span>01</span><h3>AIは第5カテゴリではない</h3><p>AIは言語・ツール、テーマ、職種、階層、提供形態を横断する戦略テーマです。</p></article>
           <article><span>02</span><h3>案Aを採用する</h3><p>既存URLと構造を活かし、<code>/business/ai-training</code>を横断ハブとして新設します。</p></article>
           <article><span>03</span><h3>URLより役割を先に決める</h3><p>総称語はハブ、商品・技術語は詳細、比較語は情報コンテンツ、属性語はファセットが所有します。</p></article>
-          <article><span>04</span><h3>静的化はホワイトリスト</h3><p>検索需要、独自カリキュラム、事例、FAQ、営業差がある組み合わせだけをindex可能にします。業務用途ページの「作成」と「index」は分けます。</p></article>
+          <article><span>04</span><h3>静的化はホワイトリスト</h3><p>検索需要、独自カリキュラム、事例、FAQ、営業差がある組み合わせだけをindex可能にします。</p></article>
         </div>
-      </section>
-
-      <section class="section-card tour-target" id="product-layers" data-stage="1">
-        <div class="section-heading">
-          <div><p class="section-number">v2追加</p><h2 id="product-layers-title">商品ページの3レイヤー</h2></div>
-          <button class="copy-section button button-subtle" data-copy-link="product-layers">リンクをコピー</button>
-        </div>
-        <p class="section-intro">確定済みの6カリキュラム（AIエージェント構築、LangChain／LangGraph基礎・実践、RAG/pgvector、MCP、AIエージェント実践）は、サイトの第5カテゴリでも、6枚の必須index詳細でもありません。Python研修と同様に、共通モジュールを組み替えて複数商品へ展開します。</p>
-        <div class="decision-grid">
-          <article><span>A</span><h3>共通モジュール</h3><p>教材資産。カテゴリにしない。詳細ページの章・属性として再利用する。</p></article>
-          <article><span>B</span><h3>商品詳細（index）</h3><p>企業課題・育成目的で切った少数。例：AIエージェント開発研修。ホワイトリスト承認のみindex。</p></article>
-          <article><span>C</span><h3>業務用途・検証</h3><p>マーケ／問い合わせ／営業など。CMSで詳細を作ってよい。広告・展示会・非テック向け。原則noindex → 反応で昇格。</p></article>
-          <article><span>!</span><h3>技術名単体は慎重</h3><p>LangChain／MCP／RAGの巨大SVは研修意図以外が混ざる。当面は章・属性。独立詳細は研修意図確認後。</p></article>
-        </div>
-        <aside class="callout callout-warning"><strong>公開＝indexではない</strong><p>業務用途の詳細ページをCMSで出すこと自体は推奨です（提案・広告の受け皿になる）。検索エンジンへ載せるかは <code>seo-whitelist.json</code> で別管理します。</p></aside>
-        <p class="section-intro" style="margin-top:16px">関連資料: <a href="../strategy/index.html">ポートフォリオ展開方針</a> ／ <a href="../guide/index.html">目的別ナビ</a> ／ <a href="../SEO_POLICY.md">SEO_POLICY.md</a> ／ <a href="../archive/index.html">v1アーカイブ</a></p>
       </section>
 
       <section class="section-card tour-target" id="current-structure" data-stage="2">
@@ -183,7 +165,7 @@
 
       <section class="section-card tour-target" id="seo-controls" data-stage="4">
         <div class="section-heading"><div><p class="section-number">STEP 4</p><h2>SEO・ファセット・インデックス制御</h2></div></div>
-        <div class="policy-banner"><strong>原則（v2）</strong><span>通常の絞り込み結果は非インデックス。業務用途詳細はCMS作成可・原則noindex。価値が証明されたものだけホワイトリストで静的ページへ昇格。</span></div>
+        <div class="policy-banner"><strong>原則</strong><span>通常の絞り込み結果は非インデックス。価値が証明された組み合わせのみ、ホワイトリストで静的ページへ昇格。</span></div>
         <div class="flow">
           <article><span>1</span><h3>属性として保持</h3><p>カテゴリ、対象者、目的、研修形態、実施形式、レベル、期間、技術などを研修データに付与。</p></article>
           <i>→</i>

@@ -4,69 +4,138 @@
     "canonical": "https://codecamp.jp/business/ai-training/",
     "robots": "index,follow",
     "status": "approved",
-    "type": "hub"
+    "type": "hub",
+    "layer": "B"
   },
   {
     "route": "/business/lag-generative-ai-chatgpt/",
     "canonical": "https://codecamp.jp/business/lag-generative-ai-chatgpt/",
     "robots": "index,follow",
     "status": "approved",
-    "type": "training-detail"
+    "type": "training-detail",
+    "layer": "B"
   },
   {
     "route": "/business/lag-ai-chatgpt/",
     "canonical": "https://codecamp.jp/business/lag-ai-chatgpt/",
     "robots": "index,follow",
     "status": "approved",
-    "type": "training-detail"
+    "type": "training-detail",
+    "layer": "B"
   },
   {
     "route": "/business/claude/",
     "canonical": "https://codecamp.jp/business/claude/",
     "robots": "index,follow",
     "status": "approved",
-    "type": "training-detail"
+    "type": "training-detail",
+    "layer": "B"
   },
   {
     "route": "/business/thm-ai-literacy/",
     "canonical": "https://codecamp.jp/business/thm-ai-literacy/",
     "robots": "index,follow",
     "status": "approved",
-    "type": "training-detail"
+    "type": "training-detail",
+    "layer": "B"
   },
   {
     "route": "/business/occ-ai-engineer/",
     "canonical": "https://codecamp.jp/business/occ-ai-engineer/",
     "robots": "index,follow",
     "status": "approved",
-    "type": "training-detail"
+    "type": "training-detail",
+    "layer": "B"
+  },
+  {
+    "route": "/business/ai-agent-development/",
+    "canonical": "https://codecamp.jp/business/ai-agent-development/",
+    "robots": "noindex,follow",
+    "status": "candidate",
+    "type": "training-detail",
+    "layer": "B",
+    "note": "Phase1代表商品候補。商品差・カリキュラム表が揃い次第 approved へ"
+  },
+  {
+    "route": "/business/rag-knowledge-search/",
+    "canonical": "https://codecamp.jp/business/rag-knowledge-search/",
+    "robots": "noindex,follow",
+    "status": "candidate",
+    "type": "training-detail",
+    "layer": "B",
+    "note": "エージェント開発と成果物が分かれる場合のみ独立。そうでなければ章に留める"
+  },
+  {
+    "route": "/business/ai-inquiry-automation/",
+    "canonical": "https://codecamp.jp/business/ai-inquiry-automation/",
+    "robots": "noindex,follow",
+    "status": "candidate",
+    "type": "business-use",
+    "layer": "C",
+    "note": "業務用途。CMS公開可。広告・展示会受け皿。反応で昇格"
+  },
+  {
+    "route": "/business/ai-marketing-inhouse/",
+    "canonical": "https://codecamp.jp/business/ai-marketing-inhouse/",
+    "robots": "noindex,follow",
+    "status": "candidate",
+    "type": "business-use",
+    "layer": "C"
+  },
+  {
+    "route": "/business/ai-sales-agent/",
+    "canonical": "https://codecamp.jp/business/ai-sales-agent/",
+    "robots": "noindex,follow",
+    "status": "candidate",
+    "type": "business-use",
+    "layer": "C"
+  },
+  {
+    "route": "/business/ai-knowledge-search/",
+    "canonical": "https://codecamp.jp/business/ai-knowledge-search/",
+    "robots": "noindex,follow",
+    "status": "candidate",
+    "type": "business-use",
+    "layer": "C"
+  },
+  {
+    "route": "/business/ai-backoffice-automation/",
+    "canonical": "https://codecamp.jp/business/ai-backoffice-automation/",
+    "robots": "noindex,follow",
+    "status": "candidate",
+    "type": "business-use",
+    "layer": "C"
   },
   {
     "route": "/business/ai-training/online/",
     "canonical": "https://codecamp.jp/business/ai-training/online/",
     "robots": "noindex,follow",
     "status": "candidate",
-    "type": "static-facet"
+    "type": "static-facet",
+    "layer": "C"
   },
   {
     "route": "/business/ai-training/for-engineers/",
     "canonical": "https://codecamp.jp/business/ai-training/for-engineers/",
     "robots": "noindex,follow",
     "status": "candidate",
-    "type": "static-facet"
+    "type": "static-facet",
+    "layer": "C"
   },
   {
     "route": "/business/ai-training/for-all-employees/",
     "canonical": "https://codecamp.jp/business/ai-training/for-all-employees/",
     "robots": "noindex,follow",
     "status": "candidate",
-    "type": "static-facet"
+    "type": "static-facet",
+    "layer": "C"
   },
   {
     "route": "/business/ai-training/for-new-employees/",
     "canonical": "https://codecamp.jp/business/ai-training/for-new-employees/",
     "robots": "noindex,follow",
     "status": "candidate",
-    "type": "static-facet"
+    "type": "static-facet",
+    "layer": "C"
   }
 ]

@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="CodeCamp法人向けAI研修：資料・プロトタイプの目的別ナビ（v2）">
+  <title>目的別ナビ｜CodeCamp AI研修 設計資料</title>
+  <style>
+    :root {
+      --bg: #f4f6fa; --surface: #fff; --ink: #152238; --muted: #61708a;
+      --line: #dce3ee; --blue: #2357d8; --blue-soft: #eaf1ff; --orange: #ee6c2e;
+      --orange-soft: #fff1e8; --green: #11845a; --green-soft: #e8f7f0; --navy: #143a68;
+      --shadow: 0 14px 36px rgba(22, 44, 78, .08);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", Meiryo, sans-serif; line-height: 1.65; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 20px 72px; }
+    .top { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: flex-start; margin-bottom: 28px; }
+    .eyebrow { margin: 0 0 6px; color: var(--orange); font-size: .72rem; font-weight: 900; letter-spacing: .14em; }
+    h1 { margin: 0 0 10px; font-size: clamp(1.7rem, 3.5vw, 2.35rem); letter-spacing: -.03em; line-height: 1.2; }
+    .lead { margin: 0; color: var(--muted); max-width: 720px; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; background: var(--green-soft); color: var(--green); border-radius: 999px; padding: 5px 10px; font-size: .72rem; font-weight: 900; }
+    .policy { background: var(--blue-soft); border: 1px solid #cddcff; border-radius: 14px; padding: 16px 18px; margin: 18px 0 28px; }
+    .policy strong { display: block; margin-bottom: 4px; }
+    .policy p { margin: 0; color: #45546e; font-size: .92rem; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+    section { margin: 28px 0; }
+    .section-head { margin-bottom: 12px; }
+    .section-head h2 { margin: 0; font-size: 1.2rem; }
+    .section-head p { margin: 4px 0 0; color: var(--muted); font-size: .88rem; }
+    .card {
+      display: block; background: var(--surface); border: 1px solid var(--line);
+      border-radius: 16px; padding: 18px 18px 16px; box-shadow: var(--shadow);
+      color: inherit; transition: border-color .15s, transform .15s;
+    }
+    .card:hover { border-color: #9cb4d9; text-decoration: none; transform: translateY(-1px); }
+    .card .kicker { font-size: .68rem; font-weight: 900; letter-spacing: .08em; color: var(--orange); }
+    .card h3 { margin: 6px 0 6px; font-size: 1.02rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .86rem; }
+    .card .meta { margin-top: 12px; font-size: .75rem; font-weight: 800; color: var(--blue); }
+    .card.primary { border-color: #9cb4d9; background: linear-gradient(180deg, #fff, #f7faff); }
+    .layers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+    @media (max-width: 760px) { .layers { grid-template-columns: 1fr; } }
+    .layer { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+    .layer span { font-size: .68rem; font-weight: 900; color: var(--muted); }
+    .layer strong { display: block; margin: 2px 0 4px; font-size: .9rem; }
+    .layer p { margin: 0; font-size: .8rem; color: var(--muted); }
+    .footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); font-size: .75rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <p class="eyebrow">CODECAMP / AI TRAINING DOCS</p>
+        <h1>目的別ナビ（v2）</h1>
+        <p class="lead">ダッシュボード・要件書・サイトマップ・画面プロトタイプ・方針資料を、見たい目的から開けます。共有リンクの入口としても使えます。</p>
+      </div>
+      <span class="badge">現行版 v2 · 2026-08-05</span>
+    </div>
+
+    <div class="policy">
+      <strong>v2で追加した方針（要約）</strong>
+      <p>確定6カリキュラムはカテゴリでも販売詳細でもなく<strong>共通モジュール</strong>。正式index詳細は課題・育成目的で切った少数。業務用途（マーケ／問い合わせ／営業など）の詳細は<strong>CMSで作成してよい</strong>が、原則は検証公開（noindex）→反応でホワイトリスト昇格。技術名（LangChain／MCP等）単体ページは研修意図が確認できるまで慎重。</p>
+      <div class="layers">
+        <div class="layer"><span>LAYER A</span><strong>共通モジュール</strong><p>確定6講座。教材資産。サイトカテゴリにしない。</p></div>
+        <div class="layer"><span>LAYER B</span><strong>商品詳細（index）</strong><p>企業課題・育成目的。ホワイトリスト承認のみ。</p></div>
+        <div class="layer"><span>LAYER C</span><strong>業務用途・検証</strong><p>CMS詳細可。広告・展示会受け皿。原則noindex。</p></div>
+      </div>
+    </div>
+
+    <section>
+      <div class="section-head">
+        <h2>1. まず全体をつかむ</h2>
+        <p>方針・構造の要約から入る場合</p>
+      </div>
+      <div class="grid">
+        <a class="card primary" href="../strategy/index.html">
+          <div class="kicker">STRATEGY BRIEF</div>
+          <h3>ポートフォリオ・展開方針（統合版）</h3>
+          <p>案A維持、共通モジュール再利用、顕在／潜在、カニバリ防止、90日計画。短時間で方針を確認する資料。</p>
+          <div class="meta">開く →</div>
+        </a>
+        <a class="card" href="../requirements/index.html">
+          <div class="kicker">REQUIREMENTS · v2</div>
+          <h3>サイト構造・キーワード要件書</h3>
+          <p>案A採用、SEO・ファセット、キーワード所有、ロードマップの正本ビューア。</p>
+          <div class="meta">開く →</div>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>2. 画面とURL構造を確認する</h2>
+        <p>遷移・見た目・サイトマップ</p>
+      </div>
+      <div class="grid">
+        <a class="card" href="../business/index.html">
+          <div class="kicker">PROTOTYPE</div>
+          <h3>/business トップ（視覚プロトタイプ）</h3>
+          <p>法人トップから研修を探す・詳細・公開講座までの画面遷移。</p>
+          <div class="meta">開く →</div>
+        </a>
+        <a class="card" href="../business/site-map/index.html">
+          <div class="kicker">SITE MAP</div>
+          <h3>案A サイトマップ</h3>
+          <p>研修を探す／4カテゴリ／3形態／詳細の幹構造。AIはディレクトリ条件。</p>
+          <div class="meta">開く →</div>
+        </a>
+        <a class="card" href="../business/training/index.html">
+          <div class="kicker">FINDER</div>
+          <h3>研修を探す</h3>
+          <p>唯一の一覧ナビ入口。Trends風ファセット。</p>
+          <div class="meta">開く →</div>
+        </a>
+        <a class="card" href="../business/ai-training/index.html">
+          <div class="kicker">AI DIRECTORY</div>
+          <h3>AI研修を探す（/business/ai-training/）</h3>
+          <p>言語・ツール=AIのディレクトリ表現。並立ナビではない。</p>
+          <div class="meta">開く →</div>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>3. SEOルールとホワイトリスト</h2>
+        <p>index制御・ルート定義</p>
+      </div>
+      <div class="grid">
+        <a class="card" href="../SEO_POLICY.md">
+          <div class="kicker">POLICY · v2</div>
+          <h3>SEO / ファセットURL方針</h3>
+          <p>クエリ禁止、ディレクトリURL、3レイヤー、業務用途ページのnoindex運用。</p>
+          <div class="meta">開く →</div>
+        </a>
+        <a class="card" href="../ROUTES.md">
+          <div class="kicker">ROUTES · v2</div>
+          <h3>ルート一覧</h3>
+          <p>幹構造・詳細・業務用途候補・ファセットLP候補。</p>
+          <div class="meta">開く →</div>
+        </a>
+        <a class="card" href="../seo-whitelist.json">
+          <div class="kicker">WHITELIST</div>
+          <h3>seo-whitelist.json</h3>
+          <p>approved / candidate の機械可読リスト。</p>
+          <div class="meta">開く →</div>
+        </a>
+        <a class="card" href="../../docs/AI研修_制作前メモと収益シミュレーション.md">
+          <div class="kicker">MEMO</div>
+          <h3>制作前メモ・着金シミュレーション</h3>
+          <p>制作チェック、ファネル定義、試算前提。</p>
+          <div class="meta">開く →</div>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>4. 数値・獲得試算</h2>
+        <p>キーワードと収益シミュレーション</p>
+      </div>
+      <div class="grid">
+        <a class="card primary" href="../../index.html">
+          <div class="kicker">DASHBOARD</div>
+          <h3>SEOダッシュボード（パスワード付き）</h3>
+          <p>SERP・KW・着金シミュ。操作バー「7. 着金シミュ」。</p>
+          <div class="meta">開く →</div>
+        </a>
+        <a class="card" href="../business/faq/index.html">
+          <div class="kicker">RELATED</div>
+          <h3>FAQ（プロトタイプ）</h3>
+          <p>問い合わせ導線の画面イメージ。</p>
+          <div class="meta">開く →</div>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>5. 過去版アーカイブ</h2>
+        <p>v1スナップショット（方針更新前）</p>
+      </div>
+      <div class="grid">
+        <a class="card" href="../archive/index.html">
+          <div class="kicker">ARCHIVE</div>
+          <h3>アーカイブ一覧</h3>
+          <p>v1要件書・SEO方針・ROUTES・whitelist・scriptスナップショット。</p>
+          <div class="meta">開く →</div>
+        </a>
+        <a class="card" href="../archive/v1/requirements/index.html">
+          <div class="kicker">v1 REQUIREMENTS</div>
+          <h3>要件書（v1アーカイブ）</h3>
+          <p>3レイヤー追記前の要件書ビューア。</p>
+          <div class="meta">開く →</div>
+        </a>
+      </div>
+    </section>
+
+    <p class="footer">共有ホスト: <code>https://yuhkitanaka88.github.io/seo-serp-report-share/ai-prototype/guide/</code> · プロトタイプ全体は確認用のため原則 noindex</p>
+  </div>
+</body>
+</html>

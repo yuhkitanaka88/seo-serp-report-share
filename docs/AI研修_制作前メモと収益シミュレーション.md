@@ -1,19 +1,24 @@
 # AI研修サイト制作前メモ・獲得〜着金シミュレーション
 
-最終更新: 2026-08-03  
-関連チャット（Cursor）: プロトタイプ確認 → 共有URL反映 → 収益シミュレーション改善
+最終更新: 2026-08-05  
+関連チャット（Cursor）: プロトタイプ確認 → 共有URL反映 → 収益シミュレーション改善 → **v2（3レイヤー・業務用途CMS／noindex・目的別ナビ）**
 
 ## 1. 背景
 
 CodeCamp 法人向け AI 研修のサイト構造プロトタイプ（案A）とキーワード設計を、既存の SEO SERP レポート（共有ダッシュボード）と突き合わせて確認した。あわせて、狙う KW の SV / CPC を紐づけ、順位 CTR・LLMO・チャネル別ファネルから **リード → 商談 → 受注 → 着金** を試算するシミュレーションをダッシュボードに追加した。
 
+**v2（2026-08-05）**: 確定6カリキュラムを共通モジュールとし、正式index詳細と業務用途検証ページを分離。業務用途詳細はCMS作成可・原則noindex。資料入口に目的別ナビとv1アーカイブを追加。
+
 ## 2. 参照アセット
 
 | 種別 | 場所 |
 |------|------|
+| **目的別ナビ（推奨入口）** | https://yuhkitanaka88.github.io/seo-serp-report-share/ai-prototype/guide/ |
+| ポートフォリオ方針（統合版） | https://yuhkitanaka88.github.io/seo-serp-report-share/ai-prototype/strategy/ |
 | 視覚プロトタイプ（元） | ローカル `codecamp_ai_site_prototype`（Downloads 配下で受領） |
 | 共有ホスト済みプロトタイプ | https://yuhkitanaka88.github.io/seo-serp-report-share/ai-prototype/business/ （**noindex**） |
-| 要件書ビューア | https://yuhkitanaka88.github.io/seo-serp-report-share/ai-prototype/requirements/ |
+| 要件書ビューア（v2） | https://yuhkitanaka88.github.io/seo-serp-report-share/ai-prototype/requirements/ |
+| v1アーカイブ | https://yuhkitanaka88.github.io/seo-serp-report-share/ai-prototype/archive/ |
 | SEO ダッシュボード（PW付き） | https://yuhkitanaka88.github.io/seo-serp-report-share/ |
 | 共有リポジトリ | https://github.com/yuhkitanaka88/seo-serp-report-share |
 | 本パイプラインリポジトリ | https://github.com/yuhkitanaka88/seo-serp-pipeline |
@@ -49,6 +54,16 @@ CodeCamp 法人向け AI 研修のサイト構造プロトタイプ（案A）と
 
 UX参考: [Trends 研修検索](https://trends.codecamp.jp/apps/training-search/)
 
+### 3.1c 商品3レイヤー（確定方針・2026-08-05）
+
+| レイヤー | 内容 | robots |
+|----------|------|--------|
+| A. 共通モジュール | 確定6カリキュラム。カテゴリにしない | 単独ページ化しない |
+| B. 商品詳細 | 課題・育成目的の少数正式商品 | ホワイトリスト承認のみ index |
+| C. 業務用途・検証 | マーケ／問い合わせ／営業等。CMSで作成可 | 原則 noindex → 昇格 |
+
+技術名（LangChain／MCP／RAG）単体の巨大SVは研修意図以外が混ざるため、当面は章・属性。独立詳細は研修意図確認後。
+
 ### 3.2 制作前に揃える論点
 
 1. **ファセット掛け合わせLPは幹構造外**  
@@ -58,8 +73,10 @@ UX参考: [Trends 研修検索](https://trends.codecamp.jp/apps/training-search/
 3. **ハブタイトルの詰め込み**  
    生成AI・ChatGPT・Claude をタイトル主語にすると詳細とカニバリしやすい。ハブは総称語中心が安全。
 4. **新設候補**  
-   AIエンジニア（SV小・CPC高）／AIリテラシー（レポートに直接SVなし）は商品根拠を見て優先度判断。
+   AIエンジニア（SV小・CPC高）／AIリテラシー（レポートに直接SVなし）は商品根拠を見て優先度判断。AIエージェント開発を Phase1 代表商品候補とする。
 5. **Claude ページの二層**（全社員活用と Claude Code）は当面 H2 分離でも、主意図を決める。
+6. **業務用途詳細のCMSスラッグ**  
+   ROUTES.md の候補パスは提案。本番スラッグはCMSに合わせてよい。公開と index を分離すること。
 
 ### 3.3 レポート上の文言調整（実施済）
 

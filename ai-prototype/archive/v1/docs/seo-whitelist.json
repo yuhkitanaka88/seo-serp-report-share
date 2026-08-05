@@ -1,0 +1,72 @@
+[
+  {
+    "route": "/business/ai-training/",
+    "canonical": "https://codecamp.jp/business/ai-training/",
+    "robots": "index,follow",
+    "status": "approved",
+    "type": "hub"
+  },
+  {
+    "route": "/business/lag-generative-ai-chatgpt/",
+    "canonical": "https://codecamp.jp/business/lag-generative-ai-chatgpt/",
+    "robots": "index,follow",
+    "status": "approved",
+    "type": "training-detail"
+  },
+  {
+    "route": "/business/lag-ai-chatgpt/",
+    "canonical": "https://codecamp.jp/business/lag-ai-chatgpt/",
+    "robots": "index,follow",
+    "status": "approved",
+    "type": "training-detail"
+  },
+  {
+    "route": "/business/claude/",
+    "canonical": "https://codecamp.jp/business/claude/",
+    "robots": "index,follow",
+    "status": "approved",
+    "type": "training-detail"
+  },
+  {
+    "route": "/business/thm-ai-literacy/",
+    "canonical": "https://codecamp.jp/business/thm-ai-literacy/",
+    "robots": "index,follow",
+    "status": "approved",
+    "type": "training-detail"
+  },
+  {
+    "route": "/business/occ-ai-engineer/",
+    "canonical": "https://codecamp.jp/business/occ-ai-engineer/",
+    "robots": "index,follow",
+    "status": "approved",
+    "type": "training-detail"
+  },
+  {
+    "route": "/business/ai-training/online/",
+    "canonical": "https://codecamp.jp/business/ai-training/online/",
+    "robots": "noindex,follow",
+    "status": "candidate",
+    "type": "static-facet"
+  },
+  {
+    "route": "/business/ai-training/for-engineers/",
+    "canonical": "https://codecamp.jp/business/ai-training/for-engineers/",
+    "robots": "noindex,follow",
+    "status": "candidate",
+    "type": "static-facet"
+  },
+  {
+    "route": "/business/ai-training/for-all-employees/",
+    "canonical": "https://codecamp.jp/business/ai-training/for-all-employees/",
+    "robots": "noindex,follow",
+    "status": "candidate",
+    "type": "static-facet"
+  },
+  {
+    "route": "/business/ai-training/for-new-employees/",
+    "canonical": "https://codecamp.jp/business/ai-training/for-new-employees/",
+    "robots": "noindex,follow",
+    "status": "candidate",
+    "type": "static-facet"
+  }
+]
